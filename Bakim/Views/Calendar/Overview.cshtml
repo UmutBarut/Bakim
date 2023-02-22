@@ -1,0 +1,613 @@
+@model RoutineMakineBakimPViewModel
+
+<link href="~/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="container">
+    <div class="card bg-white p-8">
+        <div id="kt_docs_fullcalendar_selectable"></div>
+    </div>
+
+    <form method="post" id="bakimForm">
+        <div class="modal fade" tabindex="-1" id="calendarmodal">
+            <div  class="modal-dialog modal-xl" > 
+                <div class="modal-content container" >
+                    <div style="justify-content:center; padding:13px ;" class="modal-header">
+                        <h3 class="modal-title">Bakım Planlayın</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+
+
+
+                                <div class="col-md-12 row">
+
+
+                                    <div class="mt-4 col-md-6">
+                                        <label for="" class="required form-label">Başlangıç Tarihi</label>
+                                        <input class="form-control form-control-solid form-control-sm clear"
+                                            name="BaslangicTarihi" placeholder="Bir Tarih Seçiniz" type="date" />
+                                    </div>
+
+                                    <div class="mb-0 mt-4 col-md-6">
+                                        <label for="" class="required form-label">Bitiş Tarihi</label>
+                                        <input class="form-control form-control-solid form-control-sm clear"
+                                            name="BitisTarihi" type="date" />
+                                    </div>
+
+                                    <!--begin::Input group-->
+                                    <div class=" mt-4 fv-row mb-4 col-md-12">
+                                        <!--begin::Label-->
+                                        <label class="required form-label">Bakım Adı</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input type="text" class="form-control form-control-solid form-control-sm clear"
+                                            id="bakimAdi" placeholder="" />
+                                        <!--end::Input-->
+                                    </div>
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row col-md-12">
+                                        <!--begin::Label-->
+                                        <label class="form-label">Bakım Açıklaması</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <textarea class="form-control form-control-solid form-control-sm clear" rows="3"
+                                            name="BakimAciklamasi" placeholder=""></textarea>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Input group-->
+
+
+                                    <div class=" col-md-12">
+
+                                        <!--begin::Input group-->
+                                        <div class="fv-row py-6">
+                                            <!--begin::Label-->
+                                            <label class="required form-label">Bakım Türü</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+
+                                            <select class="form-select form-select-solid form-select-sm clear"
+                                                id="bakimturusec" onchange="BakimTuruSec()" data-control="select2"
+                                                name="BakimTuruId" data-placeholder="Bakım Türü Seçiniz">
+                                                <option selected></option>
+                                                @foreach (var birim in Model.RoutineBakimTuruListele)
+                                                {
+                                                    <option value="@birim.RoutineBakimTuruId">
+                                                        @birim.RoutineBakimTurAdi</option>
+                                                }
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+
+                                        <div id="birimsecmeyeri"></div>
+
+
+
+                                        <!--end::Input group-->
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-4 mt-4">
+                                <!--begin::Label-->
+                                <label class="form-label">Tekrar</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+
+                                <select class="form-select form-select-solid form-select-sm clear" 
+                                    data-placeholder="Tekrar Seçiniz"  data-control="select2" name="">
+                                    <option selected>Günlük</option>
+                                    <option>Haftalık</option>
+                                    <option>Aylık</option>
+
+                                </select>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+
+
+                            <div class="row mb-10">
+                                <div class="col-md-6">
+                                    <label class="form-label">Aralık</label>
+                                    <input type="number" class="form-control form-control-solid clear"
+                                        placeholder="Aralık Seçiniz" />
+                                </div>
+
+                                <label class="form-label col-md-6 ">
+                                    <span
+                                        class="d-flex h-100 w-100 justify-content-center align-items-center mt-5">Gün(ler)
+                                    </span>
+                                </label>
+
+                            </div>
+
+                            <label class="form-label mt-2 mb-6">Tekrarı Sonlandır</label>
+                            <div class="form-group ">
+                                <div class="form-check">
+                                    <input class="form-check-input clear" type="radio" name="flexRadioDefault" id="kontrol">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Hiçbir Zaman
+                                    </label>
+                                </div>
+
+                                <div class="row  py-10 px-3">
+                                    <div class="form-check col-md-4 d-flex align-items-center">
+                                        <input class="form-check-input clear" type="radio" name="flexRadioDefault"
+                                            id="kontrol2" checked>
+                                        <label class="form-check-label " for="flexRadioDefault2">
+                                            Şu Tarihte
+                                        </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                            <input class="form-control form-control-solid form-control-sm clear"
+                                                 placeholder="Bir Tarih Seçiniz" type="date" />
+                                    </div>
+
+                                </div>
+
+                            
+
+                            <div class="row mb-10 px-3">
+
+                                 <div class="form-check col-md-4">
+                                    <input class="form-check-input clear" type="radio" name="flexRadioDefault" id="kontrol3"
+                                        checked>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Tekrardan Sonra
+                                    </label> 
+                                </div>
+
+                                <div class="col-md-5">
+                                   
+                                    <input type="number" class="form-control form-control-solid clear"
+                                        placeholder="Aralık Seçiniz" />
+                                </div>
+
+                                
+
+                                <label class="form-label col-md-3 ">
+                                    <span
+                                        class="d-flex h-100 w-100 justify-content-center align-items-center ">Gün(ler)
+                                    </span>
+                                </label>
+
+                            </div>
+
+                               
+
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
+
+                    <div style="padding:13px ;" class="modal-footer">
+                        <button type="button" class="btn btn-light" onclick="planlanmadi()"
+                            data-bs-dismiss="modal">Kapat</button>
+
+                        <button type="button" id="bakimPlanlaBtn" 
+                         class="btn btn-primary">Planı 
+                            Tamamla</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form> 
+</div>
+
+
+
+
+<script>
+
+
+    function BakimTuruSec() {
+        var x = document.getElementById("bakimturusec").value;
+
+        if (x == 0) {
+
+            let selectedDiv = $('<div class=" fv-row mb-10" id="vgsec"></div>');
+            let label2 = $('<label class="required form-label">Varlık Grubu </label>');
+            let select2 = $('<select class="form-select clear form-select-solid form-select-sm" onchange="vgGetir($(this).val())" data-placeholder="Varlık Grubu Seçiniz"  name="aa" id="vgselect"><option selected></option>');
+
+            let varliklar = '<!--begin::Input group-->\
+            <div class="">\
+                <div class="fv-row mt-10 id="varliksec">\
+                    <!--begin::Label-->\
+                    <label class="required form-label">Varlik</label>\
+                    <!--end::Label-->\
+                    <!--begin::Input-->\
+                    <select multiple="multiple" class="form-select clear form-select-solid form-select-sm "\
+                        data-placeholder="Varlik Seçiniz" name="varlikId" data-control="select2" id="varlikselect">\
+                    </select>\
+                    <!--end::Input-->\
+                </div>\
+            </div>\
+                <!--end::Input group-->'
+
+
+
+
+            selectedDiv.append(label2,select2,varliklar);
+            console.log(selectedDiv.html());
+             $('#birimsecmeyeri').html("");
+            $('#birimsecmeyeri').append(label2, select2, selectedDiv);
+            $.ajax({
+
+                type: "GET",
+                url: "/Describing/GetVarlikGroups",
+                success: function(result){
+                    vgolustur(result);
+                }
+            })
+
+
+            function vgolustur(model){
+                $('#vgselect').empty();
+
+                let option = $('<option disabled text-muted></option>')
+                $('#vgselect').append(option);
+                for(let i = 0; i <model.length; i++){
+                    let option = $('<option value="'+ model[i].VarlikGroupId + '">'+ model[i].VarlikGroupName +'</option>');
+                    $('#vgselect').append(option);
+                }
+                $('#vgselect').select2();
+                $('#varlikselect').select2();
+                
+            }
+
+
+
+
+
+            $('#birimsec').addClass("d-none");
+            $('#makinesec').addClass("d-none");
+
+
+        }
+        else {
+            let selectDiv = $('<div class=" fv-row mb-10 id="birimsec"></div>');
+            let label = $('<label class="required form-label">Birim </label>');
+            let select = $('<select class="form-select clear form-select-solid form-select-sm" data-placeholder="Birim Seçiniz" onchange="makinesec()" name="SectionId" id="birimSelect"><option selected></option>');
+
+            let makine = '<!--begin::Input group-->\
+            <div class="">\
+                <div class="fv-row mt-10 id="makinesec">\
+                    <!--begin::Label-->\
+                    <label class="required form-label">Makine</label>\
+                    <!--end::Label-->\
+                    <!--begin::Input-->\
+                    <select multiple="multiple" class="form-select clear form-select-solid form-select-sm "\
+                        data-placeholder="Makine Seçiniz" name="MachineId" data-control="select2" id="machineSelect">\
+                    </select>\
+                    <!--end::Input-->\
+                </div>\
+            </div>\
+                <!--end::Input group-->'
+
+         $('#birimsecmeyeri').html("");
+            selectDiv.append(label, select, makine);
+            $('#birimsecmeyeri').append(selectDiv);
+            $.ajax({
+                type: "GET",
+                url: "/RoutineBakim/BirimleriGetir",
+                data: { sectionId: x },
+                success: function (result) {
+                    birimOlustur(result);
+                }
+            });
+
+
+
+        }
+    }
+      function vgGetir(id){
+          console.log(id);
+            $.ajax({
+
+                type: "GET",
+                url: "/Describing/GetVarliks",
+                data: {varlikGroupId : id},
+
+
+            }).done(function(result){
+                 $('#varlikselect').html("");
+                console.log(result);
+                     let option = $('<option value="0">Tümünü Seçiniz</option>');
+                     $('#varlikselect').append(option);
+                     for(let i = 0; i < result.length; i++){
+                        let option2 = $('<option value = "' + result[i].VarlikId + '"> '+ result[i].VarlikName +'</option> ');
+                        $('#varlikselect').append(option2);
+                     }
+            });
+
+        }
+
+    function birimOlustur(birimler) {
+        $('#birimSelect').empty();
+
+        let option = $('<option disabled selected text-muted"></option>')
+        $('#birimSelect').append(option);
+        for (let i = 0; i < birimler.length; i++) {
+            let option = $('<option value="' + birimler[i].ProductionSectionId + '">' + birimler[i].ProductionSectionName + '</option>');
+            $('#birimSelect').append(option);
+        }
+        $('#birimSelect').select2();
+        $('#machineSelect').select2();
+
+
+    }
+
+    function makinesec() {
+        $('#machineSelect').empty();
+
+        let birimId = $('#birimSelect').val();
+        $.ajax({
+            type: "GET",
+            url: "/RoutineBakim/GetMachinesBySection",
+            data: { sectionId: birimId },
+            success: function (result) {
+                let option2 = $('<option value="0">Tümünü Seçiniz</option>');
+                $('#machineSelect').append(option2);
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].MachineName);
+                    let option = $('<option value="' + result[i].MachineId + '">' + result[i].MachineName + '</option>');
+                    $('#machineSelect').append(option);
+                }
+            }
+        });
+    }
+
+
+
+
+    function planlanmadi() {
+
+        Swal.fire({
+            text: "Plan Oluşturulmadı!",
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Tamam",
+            customClass: {
+                confirmButton: "btn btn-primary",
+            }
+        }).then(function(){
+        $('.clear').val("");
+        $(".clear").trigger("change");
+
+        });
+
+    }
+
+
+
+
+
+
+    $(document).ready(function () {
+
+
+
+
+
+        var calendarEl = document.getElementById("kt_docs_fullcalendar_selectable");
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: "prev,next today",
+                center: "title",
+                right: "dayGridMonth"
+            },
+            initialDate: "@DateTime.Now.ToString("yyyy-MM-dd")",
+            locale: "tr",
+            timeZone: 'local',
+            navLinks: true, // can click day/week names to navigate views
+            selectable: true,
+            selectMirror: true,
+
+            // Create new event
+            select: function (arg) {
+                $('#calendarmodal').modal("show");
+
+                $('#bakimPlanlaBtn').on("click", function (e) {
+        e.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "/calendar/PlaniTamamla",
+            data: $('#bakimForm').serialize(),
+            async: false
+        }).done(function (result) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Bakım Planlandı',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function(){
+                 let title2 = $('#bakimAdi').val();
+                 $('.clear').val("");
+                 $(".clear").trigger("change");
+                 $('#calendarmodal').modal("hide");
+                 console.log(arg.start);
+                 calendar.addEvent({
+                    title: title2,
+                     start: arg.start,
+                    
+                    });
+            });
+            console.log(result);    
+        });
+    })
+    @* Swal.fire({
+        html: '<div class="mb-7">Bakım Planı Oluştur?</div><div class="fw-bold mb-5">Event Name:</div><input type="text" class="form-control" name="event_name" />',
+        
+        buttonsStyling: false,
+        confirmButtonText: "Planı Tamamla",
+        cancelButtonText: "Kapat",
+        customClass: {
+        confirmButton: "btn btn-primary",
+        cancelButton: "btn btn-active-light"
+        }
+        }).then(function (result) {
+        if (result.value) {
+        var title = document.querySelector('input[name="BakımPlanlayın"]').value;
+        if (title) {
+        calendar.addEvent({
+        title: title,
+        start: arg.start,
+        end: arg.end,
+        
+        })
+        }
+        calendar.unselect()
+        } else if (result.dismiss === "cancel") {
+        Swal.fire({
+        text: "Plan Oluşturulmadı!",
+        icon: "error",
+        buttonsStyling: false,
+        confirmButtonText: "Tamam",
+        customClass: {
+        confirmButton: "btn btn-primary",
+        }
+        });
+        }
+        }); *@
+            },
+
+            // Delete event
+            eventClick: function (arg) {
+                Swal.fire({
+                    text: "Bakım Planı Silinsin Mi?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Evet",
+                    cancelButtonText: "Hayır",
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: "btn btn-active-light"
+                    }
+                }).then(function (result) {
+                    if (result.value) {
+
+                        arg.event.remove();
+                        Swal.fire({
+                            text: "Plan Silindi!",
+                            icon: "success",
+                            buttonsStyling: false,
+                            confirmButtonText: "Tamam",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        });
+                    } else if (result.dismiss === "cancel") {
+                        Swal.fire({
+                            text: "Plan Silinmedi!",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Tamam",
+                            customClass: {
+                                confirmButton: "btn btn-primary",
+                            }
+                        });
+                    }
+
+
+                });
+            },
+            editable: true,
+            dayMaxEvents: false, // allow "more" link when too many events
+            events: [
+                {
+                    title: "All Day Event",
+                    start: "2022-10-01"
+                },
+                {
+                    title: "Long Event",
+                    start: "2020-09-07",
+                    end: "2020-09-10"
+                },
+                {
+                    groupId: 999,
+                    title: "Repeating Event",
+                    start: "2020-09-09T16:00:00"
+                },
+                {
+                    groupId: 999,
+                    title: "Repeating Event",
+                    start: "2020-09-16T16:00:00"
+                },
+                {
+                    title: "Conference",
+                    start: "2020-09-11",
+                    end: "2020-09-13"
+                },
+                {
+                    title: "Meeting",
+                    start: "2020-09-12T10:30:00",
+                    end: "2020-09-12T12:30:00"
+                },
+                {
+                    title: "Lunch",
+                    start: "2020-09-12T12:00:00"
+                },
+                {
+                    title: "Meeting",
+                    start: "2020-09-12T14:30:00"
+                },
+                {
+                    title: "Happy Hour",
+                    start: "2020-09-12T17:30:00"
+                },
+                {
+                    title: "Dinner",
+                    start: "2020-09-12T20:00:00"
+                },
+                {
+                    title: "Birthday Party",
+                    start: "2020-09-13T07:00:00"
+                },
+                {
+                    title: "Click for Google",
+                    url: "http://google.com/",
+                    start: "2020-09-28"
+                }
+            ]
+        });
+
+        calendar.render();
+
+
+        
+    });
+
+
+    
+</script>
+
+<script src="~/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>

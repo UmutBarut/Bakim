@@ -1,0 +1,160 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.status-seen {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(0, 255, 76);
+}
+
+.status-notseen {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d9534f;
+}
+
+.stats a {
+  text-decoration: none;
+}
+
+.stats {
+  padding-top: 15px;
+  font-family: "Poppins", sans-serif;
+}
+.stat {
+  height: 150px;
+  width: 100%;
+  min-width: 100%;
+  margin-top: 10px;
+  position: relative;
+}
+.varlikStat {
+  background-color: #f9b113;
+  border: 2px solid #e9ac29;
+}
+.grupStat {
+  background-color: #e55251;
+  border: 2px solid #db4d4d;
+}
+.isemriStat {
+  background-color: #5a9ddb;
+  border: 2px solid #438acd;
+}
+.stokStat {
+  background-color: #59cf5d;
+  border: 2px solid #4bbb4f;
+}
+.statinfo {
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 3px;
+  z-index: 1;
+}
+.statsubinfo {
+  position: relative;
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 15px;
+  padding-bottom: 3px;
+  z-index: 1;
+}
+.varlikinfo {
+  color: #f3f3f3;
+}
+.varliksubinfo {
+  color: #ebebeb;
+}
+.varliksubinfo i {
+  color: #ebebeb;
+}
+.staticon {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  z-index: 0;
+}
+.staticon i {
+  font-size: 100px;
+}
+.varlikStat .staticon i {
+  color: #d69302;
+}
+.grupStat .staticon i {
+  color: #c44242;
+}
+.isemriStat .staticon i {
+  color: #2c82d3;
+}
+.stokStat .staticon i {
+  color: #48af4b;
+}
+
+.stats a:hover .staticon i {
+  font-size: 102px;
+  transition: all 0.1s ease;
+}
+.stats a:hover .statlink {
+  text-decoration: underline;
+}
+.statlink {
+  position: relative;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #ebebeb;
+  padding-left: 15px;
+  z-index: 1;
+}
+
+.photo-edit-div {
+  position: absolute;
+  z-index: 99;
+  border-radius: 50%;
+  background-color: black;
+  width: 150px;
+  height: 150px;
+}
+
+.photo-edit-icon {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+.photo-edit-link {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.photo-edit-link:hover {
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+#upload {
+  display: none;
+}
+
+

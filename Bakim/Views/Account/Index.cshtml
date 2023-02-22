@@ -1,0 +1,58 @@
+@model ApplicationUser
+@{
+    if (String.IsNullOrEmpty(Model.ImagePath))
+    {
+        Model.ImagePath = "blank.png";
+    }
+}
+
+<div class="container" style="height: 100%;">
+    <div class="row pb-10" style="height: max-content;">
+        <div class="container mt-10 pb-10 shadow"
+            style="height: max-content; width: 400px; min-height: fit-content; border: 1px solid #e0e0e0; border-radius:12px;">
+            <form method="post" asp-controller="Account" asp-action="UploadImage" enctype="multipart/form-data">
+                <div class="d-flex justify-content-center pt-10" style="position:relative">
+
+
+
+                    <label for="upload" class="photo-edit-link">
+                        <input type="file" name="file" id="upload" onchange="form.submit()" />
+                        <div class="text-center align-items-center photo-edit-div"><i
+                                class="fa-solid fa-pen photo-edit-icon"></i></div>
+                    </label>
+                    <img src="~/app/images/avatars/@Model.ImagePath" width="150px" height="150px" alt=""
+                        style="border-radius:50%; object-fit:cover;">
+                </div>
+                <div class="d-flex justify-content-center pt-10">
+                    <h1>@Model.UserName</h1>
+                </div>
+                <div class="d-flex justify-content-center pt-5">
+                    <h3 style="color:#333333">@Model.Email</h3>
+                </div>
+                @{
+                    if (Model.EmailConfirmed)
+                    {
+                        <div class="d-flex justify-content-center pt-1">
+                            <p style="color:#559953;">Mail adresi onaylanmış.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-center pt-1">
+                            <p style="color:#9e4444;">Mail adresi onaylanmamış.</p>
+                        </div>
+                    }
+                }
+                @* <button type="submit" class="btn btn-primary btn-lg w-100" >Kaydet</button>*@
+                <div class="d-flex justify-content-center pt-5">
+                    <a asp-controller="Account" asp-action="SifreDegistir" class="text text-primary"
+                        style="text-decoration: underline;">
+                        Şifremi Değiştir
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

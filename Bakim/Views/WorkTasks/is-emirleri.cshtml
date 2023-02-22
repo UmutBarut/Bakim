@@ -1,0 +1,414 @@
+@model WorkTaskViewModel
+@{
+    int i = 0;
+    int k = 0;
+}
+<div class="container">
+
+    <div class="row stats mt-3 mb-10">
+        <div class="col-md-6">
+            
+                <div class="stat isemriStat">
+                    <div class="staticon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Toplam Kayıt</div>
+                     <div class="statsubinfo varliksubinfo">Bu gün içindeki toplam kayıt</div>
+                     <div class="statlink">@Model.WorkTasks.Where(m=>m.CreatedDate.Day == DateTime.Now.Day).Count()</div>
+                </div>
+                    
+        </div>
+        
+        <div class="col-md-6">
+            <div class="stat stokStat">
+                    <div class="staticon"><i class="fa-solid fa-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Açık kayıtlar</div>
+                     <div class="statsubinfo varliksubinfo">Henüz kapanmamış kayıtlar</div>
+                     <div class="statlink">@Model.WorkTasks.Where(m=>m.IsCompleted == false).Count()</div>
+                </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stat varlikStat">
+                    <div class="staticon"><i class="fa-solid fa-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Bana Özel İş Emirleri</div>
+                     <div class="statsubinfo varliksubinfo">Size özel aktif iş emirleri</div>
+                     <div class="statlink">@Model.WorkTasks.Where(m=>m.Receiver ==  Model.User && m.IsCompleted == false).Count()</div>
+                </div>
+        </div>
+        <div class="col-md-6">
+            <div class="stat grupStat">
+                    <div class="staticon"><i class="fa-solid fa-wrench"></i></div>
+                     <div class="statinfo varlikinfo">İlgilenilen iş emirleri</div>
+                     <div class="statsubinfo varliksubinfo">İşlem esnasındaki iş emirleri sayısı</div>
+                     <div class="statlink">@Model.WorkTasks.Where(m=>m.InProcess == true).Count()</div>
+                </div>
+        </div>
+       
+    </div>
+   
+    <div class="border float-right "><button class="btn btn-active-light-primary" data-bs-toggle="modal" data-bs-target="#addTask"><i class="fa fa-plus" aria-hidden="true"></i> Yeni Kayıt Oluştur</button></div>
+    
+        <div class="modal fade" tabindex="-1" id="addTask">
+            <div class="modal-dialog">
+                <form method="post"  asp-action="AddTask">
+                    <div class="modal-content">
+            
+                        <div class="modal-header">
+                            <h5 class="modal-title">Yeni iş emri</h5>
+
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <span class="svg-icon svg-icon-2x"></span>
+                            </div>
+                            <!--end::Close-->
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Birim Seçiniz</label>
+                            <select class="form-select" asp-for="Task.SectionId" data-control="select2" data-placeholder="Select an option" required>
+                                <option value="">Lütfen birisini seçiniz</option>
+                                        @foreach(var item in Model.SectionDto.Sections)
+                                        {
+                                            <option value="@item.SectionId">@item.SectionName</option>
+                                        }
+                                    </select>
+                                    <a asp-controller="Sections" class="float-right pr-7 pt-3" asp-action="Index">Birim Ekle</a>
+                            </div>
+                            <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Arıza Seçiniz</label>
+                            <select class="form-select" asp-for="Task.SectionFaultId" data-control="select2" data-placeholder="Select an option" required>
+                                <option value="">Lütfen birisini seçiniz</option>
+                                        @foreach(var item in Model.SectionDto.SectionFaults)
+                                        {
+                                            <option value="@item.SectionFaultId">@item.SectionFaultName</option>
+                                        }
+                                    </select>
+                                    <a asp-controller="Sections" class="float-right pr-7 pt-3" asp-action="Index">Arıza Ekle</a>
+                            </div>
+
+                            <div class="mb-3 pt-5">
+                            <label for="exampleFormControlTextarea1" class="form-label">Açıklama (İsteğe bağlı)</label>
+                            <textarea asp-for="Task.TaskDescription" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                            <label class="form-label">Kullanıcı seçiniz.</label>
+                            <select class="form-select" asp-for="Task.ReceiverId" data-control="select2" data-placeholder="Select an option">
+                                <option value="@null">Hepsi</option>
+                                        @foreach(var item in Model.AllUsers)
+                                        {
+                                            <option value="@item.Id">@item.UserName</option>
+                                        }
+                                    </select>
+                                
+                                <div class="form-check form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" asp-for="Task.Acil" id="flexCheckDefault"/>
+                                    <label class="form-check-label py-7 px-8" for="flexCheckDefault">
+                                        Acil İş Emri
+                                    </label>
+                                </div>                    
+               
+                
+            </div>
+
+            <div class="modal-footer">
+           
+                <button type="submit" class="btn btn-primary">Oluştur</button>
+            </div>
+             
+        </div>
+       </form>
+    </div>
+    </div>
+</div>
+
+
+
+        <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
+    <thead>
+        <tr class="fw-bold fs-6 text-muted">
+            <th>Başlık</th>
+            <th>Oluşturma Tarihi</th>
+            <th>Tamamlandı</th>
+            <th>Atanan Kullanıcı</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+            @foreach(var item in Model.Dtos.OrderByDescending(d=>d.WorkTask.CreatedDate))
+            {
+              
+                
+            <tr>
+                <td>@item.WorkTask.TaskTitle
+                @if(item.WorkTask.Receiver != null)
+                    {
+                 
+                            if(item.WorkTask.Receiver == Model.User)
+                            {
+                                <span class="badge badge-danger">S</span>
+                            }
+                        }
+                </td>
+       
+                <td>@item.WorkTask.CreatedDate</td>
+                <td class="@(item.WorkTask.IsCompleted ? "text-success" :"text-danger")">@(item.WorkTask.IsCompleted ? "Tamamlandı" : item.WorkTask.InProcess ? item.WorkTaskUsers.Where(c=>c.InProcess==true && c.WorkTaskId == item.WorkTask.TaskId ).Count() > 1 ? item.WorkTaskUsers[0].User.UserName  + " ve diğer " + item.WorkTaskUsers.Where(c=>c.InProcess==true && c.WorkTaskId == item.WorkTask.TaskId && c.User != item.WorkTaskUsers[0].User).Count()+ " kişi ilgileniyor" : item.WorkTaskUsers.Where(c=>c.InProcess == true).First().User.UserName + " ilgileniyor" : "Tamamlanmadı")</td>
+                <td>
+                    @if(item.WorkTask.Receiver != null)
+                    {
+                            @item.WorkTask.Receiver.UserName
+                            if(item.WorkTask.Receiver == Model.User)
+                            {
+                                <span class="badge badge-warning">Size</span>
+                            }
+                        }
+                    </td>
+                <td >
+                       
+
+                    <button class=" btn btn-icon p-3 " data-bs-toggle="modal" data-bs-target="#kt_modal_@i">
+                        <span class="svg-icon svg-icon-dark svg-icon-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>
+                        <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/>
+                        <rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/>
+                        </svg>
+                        </span>
+                    </button>
+
+                        @if(item.WorkTask.InProcess &&item.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && item.WorkTask.ReceiverId == null)
+                        {
+                            <button class="btn btn-icon" data-bs-toggle="modal" data-bs-target="#transfer_modal_@i">
+                            <span class="svg-icon svg-icon-success svg-icon-2">
+                                    <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 13V13.5C21 16 19 18 16.5 18H5.6V16H16.5C17.9 16 19 14.9 19 13.5V13C19 12.4 19.4 12 20 12C20.6 12 21 12.4 21 13ZM18.4 6H7.5C5 6 3 8 3 10.5V11C3 11.6 3.4 12 4 12C4.6 12 5 11.6 5 11V10.5C5 9.1 6.1 8 7.5 8H18.4V6Z" fill="currentColor"/>
+                                    <path opacity="0.3" d="M21.7 6.29999C22.1 6.69999 22.1 7.30001 21.7 7.70001L18.4 11V3L21.7 6.29999ZM2.3 16.3C1.9 16.7 1.9 17.3 2.3 17.7L5.6 21V13L2.3 16.3Z" fill="currentColor"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        }
+
+
+                </td>
+            </tr>
+            
+            <div class="modal fade" tabindex="-1" id="transfer_modal_@i">
+                <div class="modal-dialog">
+                    <form method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+
+                            <!--begin::Close-->
+                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <span class="svg-icon svg-icon-2x"></span>
+                            </div>
+                            <!--end::Close-->
+                        </div>
+
+                        <div class="modal-body">
+                            <select class="form-select" asp-for="User.Id" data-control="select2" data-placeholder="Select an option" required>
+                            <option value="">Lütfen transfer edeceğiniz kişiyi seçiniz.</option>
+                                    @foreach(var user in Model.AllUsers)
+                                    {
+                                        if (item.WorkTaskUsers.Find(c=>c.UserId == user.Id) == null)
+                                        {
+                                           <option value="@user.Id">@user.UserName</option>
+                                        }
+                                        
+                                    }
+                              </select>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            
+                            <button type="submit" asp-action="TransferTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-primary">Transfer Et</button>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+
+            
+                        <div class="modal fade" tabindex="-1" id="kt_modal_@i">
+                            <div class="modal-dialog">
+                                
+                                <div class="modal-content">
+                                    
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">@item.WorkTask.TaskTitle - Detay</h5>
+
+                                        <!--begin::Close-->
+                                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                            <span class="svg-icon svg-icon-2x"><i class="fa-solid fa-xmark"></i></span>
+                                        </div>
+                                        <!--end::Close-->
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>@item.WorkTask.TaskDescription</p>
+                                        
+                                @foreach(var dto in Model.Dtos.Where(d=>d.WorkTask.TaskId == item.WorkTask.TaskId))
+                                {
+                                    if (dto.WorkTask.InProcess || dto.WorkTask.IsCompleted)
+                                    {
+                                        <p class="text-primary">@(dto.WorkTask.Starter.UserName + " tarafından " + dto.WorkTask.ProcessStartedDate.ToString() + " tarihinde başlandı.")</p>
+                                        if(dto.WorkTaskTransfers.Where(d=>d.WorkTaskId == dto.WorkTask.TaskId).ToList()!= null)
+                                        {
+                                            foreach (var transfer in dto.WorkTaskTransfers.Where(d=>d.WorkTaskId == dto.WorkTask.TaskId))
+                                            {
+                                                <p class="text-primary">@(transfer.TransferredDate.ToString() + " tarihinde " + transfer.TransferredUser.UserName + "'a transfer edildi.")</p>
+                                            }
+                                           @* if (dto.WorkTaskUsers.Count() > 1)
+                                            {
+                                                foreach(var involve in dto.WorkTaskUsers.Where(c=>c.WorkTaskId == dto.WorkTask.TaskId).OrderByDescending(c=>c.StartedDate))
+                                            {
+                                                if(involve.UserId != dto.WorkTask.StarterId){
+                                                    <p class="text-primary">@(involve.StartedDate + " tarihinde " + involve.User.UserName + " dahil oldu.")</p>
+                                                }
+                                                
+                                            }
+                                            }*@
+                                            
+                                            if (dto.WorkTask.IsCompleted)
+                                            {
+                                            <p class="text-danger">@(dto.WorkTask.CompletedDate +" tarihinde tamamlandı.")</p>
+                                            }
+                                        }
+                                        
+                                    }
+                                    else if(!dto.WorkTask.InProcess && !dto.WorkTask.IsCompleted)
+                                    {
+                                        <p class="text-warning">Henüz başlanmadı.</p>
+                                    }
+                                     <a asp-action="TaskDetails" asp-route-taskId="@item.WorkTask.TaskId">Detayları Gör</a>
+                                }
+                                
+                                        
+                                       
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
+                                @if (item.WorkTask.Receiver == null ? true : item.WorkTask.Receiver ==  Model.User )
+                                {
+                                    if (!item.WorkTask.IsCompleted && !item.WorkTask.InProcess)
+                                    {
+                                        <a asp-action="StartTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-primary">Başla</a>
+                                    }
+
+                                    else if( item.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !item.WorkTask.IsCompleted && item.WorkTask.InProcess)
+                                    {
+                                        if(item.WorkTaskUsers.Where(c=>c.InProcess == true && c.WorkTaskId == item.WorkTask.TaskId).Count() > 1)
+                                        {
+                                            <button data-bs-toggle="modal" data-bs-target="#End_Task_Modal@(i)" class="btn btn-warning">Kendi Kaydımı Sonlandır</button>
+                                        }
+                                        
+                                        <button data-bs-toggle="modal" data-bs-target="#Close_Task_Model@(i)" class="btn btn-danger">Tüm Kaydı Sonlandır</button>
+                                    }
+                                    
+                                    else if(!item.WorkTask.IsCompleted && item.WorkTask.InProcess && item.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id)== null)
+                                {
+                                    <a asp-action="AddUserToTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-primary">Dahil ol</a>
+                                }
+
+                                }
+                                
+                               
+                                
+                                    </div>
+                                  
+                                </div>
+                           
+                            </div>
+                         </div>
+               
+
+                    <div class="modal fade" tabindex="-1" id="End_Task_Modal@(i)">
+                        <div class="modal-dialog">
+                            <form method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">İşlem bitirme formu</h5>
+
+                                    <!--begin::Close-->
+                                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                        <span class="svg-icon svg-icon-2x"></span>
+                                    </div>
+                                    <!--end::Close-->
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea2" class="form-label">Açıklama</label>
+                                        <textarea name="Description" asp-for="@Model.EndTaskViewModel.Description" class="form-control" id="exampleFormControlTextarea2" rows="3" ></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                   
+                                    <button type="submit" asp-action="EndTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-warning">Kendi kaydımı sonlandır</button>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal fade" tabindex="-1" id="Close_Task_Model@(i)">
+                        <div class="modal-dialog">
+                            <form method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Kayıt kapatma formu</h5>
+
+                                    <!--begin::Close-->
+                                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                        <span class="svg-icon svg-icon-2x"></span>
+                                    </div>
+                                    <!--end::Close-->
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea2" class="form-label">Açıklama</label>
+                                        <textarea name="Description" asp-for="@Model.EndTaskViewModel.Description" class="form-control" id="exampleFormControlTextarea2" rows="3" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Vazgeç</button>
+                                    <button type="submit" asp-action="CloseTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-danger" >Tüm Kaydı Sonlandır</button>
+                                    
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                     i++;
+            }
+            
+       
+    </tbody>
+   
+</table>
+</div>
+
+        <script>
+            $("#kt_datatable_example_1").DataTable();
+        </script>
+
+
+
+
+
+
+
+
+
+

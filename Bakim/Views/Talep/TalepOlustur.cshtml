@@ -1,0 +1,61 @@
+@using Bakim.ViewModels;
+
+@model TalepViewModel;
+
+<div class="container">
+   <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Satın Alım Talebi Oluşturun</h3>
+        </div>
+        <form asp-controller="Talep" asp-action="TalepOlustur" method="post">
+            <div class="card-body py-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-10">
+                            <label for="exampleFormControlInput1" class="form-label">Talep</label>
+                            <input type="text" class="form-control form-control-sm form-control-solid" name="TalepAdi" placeholder="Talebi Yazınız"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleFormControlInput1" class="form-label">Varlık Seçiniz</label>
+                        <select class="form-select form-select-sm form-select-solid" data-control="select2"
+                            name="VarlikId" data-placeholder="Varlık Seçiniz">
+                            <option value=""></option>
+                            @foreach (var item in Model.varliklar)
+                            {
+                                <option value="@item.VarlikId">@item.VarlikName</option>
+                            }
+                        </select>
+                    </div>  
+                    <div class="col-md-6">
+                        <label for="exampleFormControlInput1" class="form-label">Stok Kalemi Seçiniz</label>
+                        <select class="form-select form-select-sm form-select-solid" data-control="select2"
+                            name="StockId" data-placeholder="Stok Seçiniz">
+                            <option value=""></option>
+                            @foreach (var item in Model.stoklar)
+                            {
+                                <option value="@item.StockId">@item.StockName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-10">
+                            <label for="exampleFormControlInput1" class="form-label">Miktar</label>
+                            <input type="number" class="form-control form-control-sm form-control-solid" name="Miktar" placeholder="Miktar Yazınız"/>
+                        </div>
+                    </div>     
+                    <div class="rounded border d-flex flex-column p-5 mt-10">
+                        <label for="" class="form-label">Açıklama</label>
+                        <textarea class="form-control form-control form-control-solid" rows="5" name="Aciklama"></textarea>  
+                    </div>
+               </div>
+            </div>
+            
+            <div class="card-footer d-flex justify-content-end">
+               <button type="submit" class="btn btn-primary">Talebi Oluştur</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+                    

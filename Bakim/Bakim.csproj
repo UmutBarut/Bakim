@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bakim.Business\Bakim.Business.csproj" />
+    <ProjectReference Include="..\Bakim.Entity\Bakim.Entity.csproj" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="21.2.6" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.2" />
+  </ItemGroup>
+</Project>

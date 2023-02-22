@@ -1,0 +1,62 @@
+@model List<AnnouncementViewModel>
+@{
+ int i = 0;   
+}
+<div class="container w-75">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Başlık</th>
+      <th scope="col">Tarih</th>
+      <th scope="col">Okundu</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (var item in Model)
+      {
+            <tr>
+            <td style="width: 45%;">@item.Title <span class="badge bg-danger">@(item.IsEmergency ? "Önemli" : "")</span></td>
+            <td style="width: 35%;">@item.PublishDate.ToString("D")</td>
+            <td style="width:10%">
+                @if (item.HasSeen)
+                {
+                            <div class="status-seen"></div>
+                        }
+                        else
+                        {
+                            <div class="status-notseen"></div>
+                        }
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@("#staticBackdrop" + @i)">
+                Detay
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="@("staticBackdrop" + @i)" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">@item.Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @item.Body
+                        <p class="text-disabled pt-2" style="font-size: .9rem;">@item.PublishDate.ToString("T") tarihinde @item.PublisherName tarafından yayınlandı.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a role="button" class="btn btn-danger" asp-controller="UserAnnouncements" asp-action="Update" asp-route-announcementId="@item.AnnouncementId" >Okudum</a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </td>
+          
+
+        </tr>
+        i++;
+      }
+  
+  </tbody>
+</table>
+</div>

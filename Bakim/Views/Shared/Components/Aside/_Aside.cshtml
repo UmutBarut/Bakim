@@ -1,0 +1,683 @@
+﻿@model ApplicationUser
+<!--begin::Aside menu-->
+
+<div class="aside-menu aside-menu-active flex-column-fluid">
+	<!--begin::Aside Menu-->
+	<div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
+		data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto"
+		data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu"
+		data-kt-scroll-offset="0">
+		<!--begin::Menu-->
+		<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
+			id="#kt_aside_menu" data-kt-menu="true">
+			<div class="menu-item">
+				<div class="menu-content pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Gösterge Paneli</span>
+				</div>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link " asp-controller="Home" asp-action="Index" onclick="setmenu('anasayfa')"
+					id="anasayfa">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+						<span class="svg-icon svg-icon-2">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+								fill="none">
+								<rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+								<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+								<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+								<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+							</svg>
+						</span>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Anasayfa</span>
+				</a>
+			</div>
+
+
+
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="UserAnnouncements" asp-action="Index"
+					onclick="setmenu('duyurular')" id="duyurular">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
+						<i class="fa fa-bullhorn" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Duyurular</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="" asp-action="" onclick="setmenu('istatistikselveriler')"
+					id="istatistikselveriler">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+						<i class="fa fa-signal" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">İstatistiksel Veriler</span>
+				</a>
+			</div>
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="WorkTasks" asp-action="is-emirleri" onclick="setmenu('isemirleri')"
+					id="isemirleri">
+					<span class="menu-icon">
+						<i style="font-size:1.4rem ;" class='bx bxs-hand-right'></i>
+						
+						
+					</span>
+					<span class="menu-title">İş Emirleri</span>
+				</a>
+			</div>
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="Talep" asp-action="SatinAlimTalepleri" onclick="setmenu('satinalimtalepleri')"
+					id="isemirleri">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/ecommerce/ecm001.svg-->
+						<span class="svg-icon svg-icon-muted svg-icon-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path opacity="0.3" d="M18.041 22.041C18.5932 22.041 19.041 21.5932 19.041 21.041C19.041 20.4887 18.5932 20.041 18.041 20.041C17.4887 20.041 17.041 20.4887 17.041 21.041C17.041 21.5932 17.4887 22.041 18.041 22.041Z" fill="currentColor"/>
+							<path opacity="0.3" d="M6.04095 22.041C6.59324 22.041 7.04095 21.5932 7.04095 21.041C7.04095 20.4887 6.59324 20.041 6.04095 20.041C5.48867 20.041 5.04095 20.4887 5.04095 21.041C5.04095 21.5932 5.48867 22.041 6.04095 22.041Z" fill="currentColor"/>
+							<path opacity="0.3" d="M7.04095 16.041L19.1409 15.1409C19.7409 15.1409 20.141 14.7409 20.341 14.1409L21.7409 8.34094C21.9409 7.64094 21.4409 7.04095 20.7409 7.04095H5.44095L7.04095 16.041Z" fill="currentColor"/>
+							<path d="M19.041 20.041H5.04096C4.74096 20.041 4.34095 19.841 4.14095 19.541C3.94095 19.241 3.94095 18.841 4.14095 18.541L6.04096 14.841L4.14095 4.64095L2.54096 3.84096C2.04096 3.64096 1.84095 3.04097 2.14095 2.54097C2.34095 2.04097 2.94096 1.84095 3.44096 2.14095L5.44096 3.14095C5.74096 3.24095 5.94096 3.54096 5.94096 3.84096L7.94096 14.841C7.94096 15.041 7.94095 15.241 7.84095 15.441L6.54096 18.041H19.041C19.641 18.041 20.041 18.441 20.041 19.041C20.041 19.641 19.641 20.041 19.041 20.041Z" fill="currentColor"/>
+							</svg>
+						</span>
+					</span>
+					<span class="menu-title">Satın Alım Talepleri</span>
+				</a>
+			</div>
+
+
+
+			<div class="menu-item">
+				<div class="menu-content pt-8 pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Listeler</span>
+				</div>
+			</div>
+
+
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="Varlik" asp-action="VarlikListe" onclick="setmenu('varlikliste')"
+					id="isemirleri">
+					<span class="menu-icon">
+						<span class="bullet bullet-dot"></span>
+					</span>
+					<span class="menu-title">Varlık Listesi</span>
+				</a>
+			</div>
+
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="Varlik" asp-action="StokListe" onclick="setmenu('stokliste')"
+					id="isemirleri">
+					<span class="menu-icon">
+						<span class="bullet bullet-dot"></span>
+					</span>
+					<span class="menu-title">Stok Listesi</span>
+				</a>
+			</div>
+			
+			
+
+
+
+
+			<div class="menu-item">
+				<div class="menu-content pt-8 pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Tanımlamalar</span>
+				</div>
+			</div>
+
+
+
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="tanimlamaBase">
+				<span class="menu-link">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+						<i class="fa fa-cube" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Tanımlama</span>
+					<span class="menu-arrow"></span>
+				</span>
+
+				<div class="menu-sub menu-sub-accordion menu-active-bg" id="basesub">
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="BirimTanimlama"
+									onclick="setacordionmenu('birimtanimlama','tanimlamaBase','birimtanimlama')"
+									id="birimtanimlama">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Birim Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="ProductionSection"
+									onclick="setacordionmenu('productionsection','tanimlamaBase','productionsection')"
+									id="productionsection">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Üretim Bölümü Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="TedarikciFirma"
+									onclick="setacordionmenu('tedarikcifirma','tanimlamaBase','basesub')"
+									id="tedarikcifirma">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Tedarikçi Firma Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="VarlikGroup"
+									onclick="setacordionmenu('varlikgrubu','tanimlamaBase','basesub')" id="varlikgrubu">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Varlık Grubu Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="DetayGroup"
+									onclick="setacordionmenu('detaygroup','tanimlamaBase','basesub')" id="detaygroup">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Varlık Kategorisi Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="Varlik"
+									onclick="setacordionmenu('varliktanimlama','tanimlamaBase','basesub')"
+									id="varliktanimlama">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Varlık Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="StockGroup"
+									onclick="setacordionmenu('stockgrubu','tanimlamaBase','basesub')" id="stockgrubu">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Stok Grubu Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="StokKategori"
+									onclick="setacordionmenu('stokkategori','tanimlamaBase','basesub')"
+									id="stokkategori">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Stok Kategorisi Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="Stock"
+									onclick="setacordionmenu('stock','tanimlamaBase','basesub')" id="stock">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Stok Tanımlama</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="menu-item">
+				<div class="menu-content pt-8 pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Raporlamalar</span>
+				</div>
+			</div>
+
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="raporlamabase">
+
+				<span class="menu-link">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+						<i class="fa fa-folder-open" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Raporlama</span>
+					<span class="menu-arrow"></span>
+				</span>
+
+				<div class="menu-sub menu-sub-accordion menu-active-bg" id="raporlamasubmenu">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<div class="menu-item">
+							<a class="menu-link" asp-controller="" asp-action="">
+								<span class="menu-bullet">
+									<span class="bullet bullet-dot"></span>
+								</span>
+								<span class="menu-title">Varlık Raporlama</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="menu-sub menu-sub-accordion menu-active-bg">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="kullaniciraporlama"
+						onclick="setacordionmenu('kullaniciraporlama','raporlamabase','raporlamasubmenu')">
+						<div class="menu-item">
+							<a class="menu-link" asp-controller="" asp-action="">
+								<span class="menu-bullet">
+									<span class="bullet bullet-dot"></span>
+								</span>
+								<span class="menu-title">Kullanıcı Raporlama</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="menu-sub menu-sub-accordion menu-active-bg">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="veriraporlama"
+						onclick="setacordionmenu('veriraporlama','raporlamabase','raporlamasubmenu')">
+						<div class="menu-item">
+							<a class="menu-link" asp-controller="" asp-action="">
+								<span class="menu-bullet">
+									<span class="bullet bullet-dot"></span>
+								</span>
+								<span class="menu-title">Veri Raporlama</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="menu-sub menu-sub-accordion menu-active-bg">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="bakimraporlama"
+						onclick="setacordionmenu('bakimraporlama','raporlamabase','raporlamasubmenu')">
+						<div class="menu-item">
+							<a class="menu-link" asp-controller="" asp-action="">
+								<span class="menu-bullet">
+									<span class="bullet bullet-dot"></span>
+								</span>
+								<span class="menu-title">Bakım Raporlama</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="menu-sub menu-sub-accordion menu-active-bg">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="makinearizarapor"
+						onclick="setacordionmenu('makinearizarapor','raporlamabase','raporlamasubmenu')">
+						<div class="menu-item">
+							<a class="menu-link" asp-controller="" asp-action="">
+								<span class="menu-bullet">
+									<span class="bullet bullet-dot"></span>
+								</span>
+								<span class="menu-title">Makine Arıza Raporlama</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="menu-item">
+				<div class="menu-content pt-8 pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Kullanıcılar</span>
+				</div>
+			</div>
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="Users" asp-action="KullaniciListele" id="kullanicilar"
+					onclick="setmenu('kullanicilar')">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
+						<i class="fa fa-bars" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Kullanıcı Listele</span>
+				</a>
+			</div>
+
+
+			<div class="menu-item">
+				<div class="menu-content pt-8 pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Bakım & Onarım</span>
+				</div>
+			</div>
+
+			<div data-kt-menu-trigger="click" class="menu-item  menu-accordion">
+				<span class="menu-link">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+						<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Makine Arızaları</span>
+					<span class="menu-arrow"></span>
+				</span>
+				<div class="menu-sub menu-sub-accordion menu-active-bg">
+
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Search</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/search/horizontal.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Horizontal</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/search/vertical.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Vertical</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Blog</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/blog/home.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Blog Home</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/blog/post.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Blog Post</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/company/about.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">About Us</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/company/pricing.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Pricing</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/company/contact.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Contact Us</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/company/team.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Our Team</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/company/licenses.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Licenses</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/company/sitemap.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Sitemap</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">Careers</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/careers/list.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Careers List</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/careers/apply.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Careers Apply</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span class="menu-title">FAQ</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/faq/classic.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Classic</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" href="../../demo1/dist/pages/faq/extended.html">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Extended</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="planlamabase">
+				<span class="menu-link">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+						<i class="fa fa-wrench" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Rutin Bakım</span>
+					<span class="menu-arrow"></span>
+				</span>
+				<div class="menu-sub menu-sub-accordion menu-active-bg" id="planlamasub">
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<div class="menu-item">
+							<a class="menu-link" asp-controller="RoutineBakim" asp-action="BakimListele"
+								onclick="setacordionmenu('rutinbakimlistele','planlamaBase','planlamasub')"
+								id="rutinbakimlistele">
+								<span class="menu-bullet">
+									<span class="bullet bullet-dot"></span>
+								</span>
+								<span class="menu-title">Rutin Bakım Listele</span>
+							</a>
+						</div>
+					</div>
+
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="RoutineBakim" asp-action="BakimPlanla"
+									onclick="setacordionmenu('rutinbakimplanla','planlamaBase','planlamasub')"
+									id="rutinbakimplanla">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span class="menu-title">Rutin Bakım Planla</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="menu-item">
+				<div class="menu-content pt-8 pb-2">
+					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Kişiselleştir</span>
+				</div>
+			</div>
+
+			<div class="menu-item">
+				<a class="menu-link" asp-controller="Account" asp-action="Index" onclick="setmenu('profil')"
+					id="profil">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
+						<img width="30" height="30" style="object-fit:cover;border-radius:5px;"
+							src="~/app/images/avatars/@Model.ImagePath" alt="" />
+						<!--end::Svg Icon-->
+					</span>
+					<span class="pl-2 menu-title">@Model.UserName</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a class="menu-link" href="../../demo1/dist/dashboards/no-toolbar.html">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/art/art002.svg-->
+						<i class="fa fa-cog" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Ayarlar</span>
+				</a>
+			</div>
+
+
+		</div>
+		<!--end::Menu-->
+	</div>
+	<!--end::Aside Menu-->
+</div>
+<!--end::Aside menu-->
+
+<script>
+	$(document).ready(function () {
+		if (window.location.pathname === "/Calendar/Overview") {
+
+			localStorage.removeItem("menu");
+			localStorage.removeItem("basemenu");
+			localStorage.removeItem("basesub");
+		}
+
+
+		let id = localStorage.getItem("menu");
+		let baseid = localStorage.getItem("basemenu");
+		let basesubid = localStorage.getItem("basesub");
+		$('#' + baseid).addClass("here");
+		$('#' + baseid).addClass("show");
+		$('#' + basesubid).addClass("show");
+
+
+		$('#' + id).addClass("active");
+	});
+	function setmenu(id) {
+		localStorage.removeItem("basemenu");
+		localStorage.removeItem("basesub");
+		localStorage.setItem("menu", id);
+	}
+
+	function setacordionmenu(menu, basemenu, basesub) {
+		localStorage.setItem("menu", menu);
+		localStorage.setItem("basesub", basesub);
+		localStorage.setItem("basemenu", basemenu);
+	}
+</script>

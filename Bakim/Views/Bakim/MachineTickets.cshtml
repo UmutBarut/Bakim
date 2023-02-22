@@ -1,0 +1,158 @@
+@model List<CallDto>
+<div class="container">
+
+
+     <div class="row stats mt-3 mb-10">
+        <div class="col-md-6">
+            
+                <div class="stat varlikStat">
+                    <div class="staticon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Toplam Kayıt</div>
+                     <div class="statsubinfo varliksubinfo">Bu gün içindeki toplam kayıt</div>
+                     <div class="statlink">@Model.Where(m=>m.CreatedDate.Day == DateTime.Now.Day).Count()</div>
+                </div>
+                    
+        </div>
+        
+        <div class="col-md-6">
+            <div class="stat grupStat">
+                    <div class="staticon"><i class="fa-solid fa-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Açık kayıtlar</div>
+                     <div class="statsubinfo varliksubinfo">Henüz kapanmamış kayıtlar</div>
+                     <div class="statlink">@Model.Where(m=>m.IsActive == true).Count()</div>
+                </div>
+        </div>
+       
+    </div>
+
+
+
+@(Html.DevExtreme().DataGrid<CallDto>()
+    .ID("gridContainer")
+    .Visible(true)
+    .DataSource(d=>d.Mvc()
+    .Controller("Bakim")
+    .LoadAction("GetCalls")
+    .UpdateAction("UpdateCall")
+    .Key("CallId")
+
+    )
+    .NoDataText("Kayıt Bulunamadı")
+    
+    .RemoteOperations(true)
+    .ShowBorders(true)
+    .DataSourceOptions(o => o.ReshapeOnPush(true))
+    .RepaintChangesOnly(true)
+    .HighlightChanges(true)
+    .Columns(columns => {
+        columns.AddFor(m=>m.CallId).AllowEditing(false).Visible(false).Caption("Çağrı Kodu").HidingPriority(8);
+        columns.AddFor(m=>m.User.UserName).AllowEditing(false).AllowHiding(true).Caption("Kullanıcı Adı").HidingPriority(6);
+         columns.AddFor(m=>m.Machine.MachineName).AllowEditing(false).AllowHiding(true).Caption("Makine Adı").HidingPriority(7);
+        columns.AddFor(m=>m.CreatedDate).AllowEditing(false).AllowHiding(true).Caption("Oluşturulma Tarihi").HidingPriority(5).AllowSorting(false).SortOrder(SortOrder.Desc);      
+        columns.AddFor(m=>m.IsEmergency).AllowEditing(false).AllowHiding(true).Caption("Aciliyet").HidingPriority(4)
+           .CellTemplate(@<text>
+             
+            <span class="<%-  data.IsEmergency == true ? 'text-danger' : 'd-none' %>">
+                 Acil
+            </span>
+            <span class="<%-  data.IsEmergency != true ? 'text-secondary' : 'd-none' %>">
+                 Acil değil
+            </span>
+        </text>);
+        columns.AddFor(m=>m.IsActive).AllowEditing(true).AllowHiding(true).Caption("Aktiflik").HidingPriority(3)
+        .CellTemplate(@<text>
+             
+            <span class="<%-  data.IsActive != true ? 'text-success' : 'd-none' %>">
+                 Tamamlandı
+            </span>
+            <span class="<%-  data.IsActive == true ? 'text-danger' : 'd-none' %>">
+                 Tamamlanmadı
+            </span>
+        </text>);
+
+         columns.AddFor(m=>m.Description).AllowEditing(true).AllowHiding(true).HidingPriority(1).Caption("Bakım Personeli Açıklaması");
+         columns.AddFor(m=>m.ComplationDate).AllowEditing(false).AllowHiding(true).HidingPriority(2).Caption("Çağrı Kapanış Tarihi");
+         
+
+       
+    })
+    .SearchPanel(s=>s.Visible(true).HighlightCaseSensitive(true).Placeholder("Arama yap"))
+    .FilterRow(f=>f.Visible(true)) 
+    .GroupPanel(p => p.Visible(true).EmptyPanelText("Çağrılar"))
+    .Height(600)
+    .Pager(p=>
+    p.AllowedPageSizes(new List<int>{25})   
+    .ShowNavigationButtons(true)
+    .ShowPageSizeSelector(false)
+    .Visible(true)
+    .ShowNavigationButtons(true)
+    )
+    .Paging(p=>p.PageSize(25))
+    .Editing(e => 
+    e.AllowAdding(false)
+    
+    .AllowDeleting(false)
+    .AllowUpdating(true)
+    .UseIcons(true)
+    .Mode(GridEditMode.Popup)
+    .Popup(p=>
+        p.Title("Çağrı")
+        .ShowTitle(true)
+        .Width(700)
+        .Height(500)  
+        .CloseOnOutsideClick(true)
+        
+        )
+        .Form(f=>f.Items(items=> {
+            items.AddGroup()
+                    .ColCount(2)
+                    .ColSpan(2)
+                    .Items(groupItems => {
+                        groupItems.AddSimpleFor(m => m.Description);
+                        groupItems.AddSimpleFor(m => m.IsActive);
+                     
+                    });
+        })) 
+    )
+    .Grouping(g => g.AutoExpandAll(false))
+)
+</div>
+
+<script src="~/js/signalr.min.js"></script>
+
+
+<script>  
+var connection = new signalR.HubConnectionBuilder()
+    .withUrl("@Url.Content("~/callhub")")
+    .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+
+$(function() {
+    connection.start()
+        .then(function () {
+            var store = new DevExpress.data.CustomStore({
+
+                load: () => this.connection.invoke("getCalls"),
+                 key: "callId"
+            
+            });
+             var store2 = $("#gridContainer").dxDataGrid("getDataSource").store();
+            connection.on("updateCalls", function (data){
+                    console.log(data);
+                    data.forEach(function (item){
+                        store2.push([{ type: "insert", data: item, key: item.callId, index: 0 }]); 
+                        store2.push([{ type: "update", data: item, key: item.callId}]); 
+                    });
+                     
+            });
+           
+        });
+})
+    
+
+
+
+</script>
+
+

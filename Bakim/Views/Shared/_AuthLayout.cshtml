@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.bundle.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/css/style.bundle.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="main">
+
+   @RenderBody()
+      
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/scripts.bundle.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+		<script src="/plugins/global/plugins.bundle.js"></script>
+		<script src="/js/scripts.bundle.js"></script>
+		<script src="/js/custom/authentication/sign-in/general.js"></script>
+		<script src="/js/custom/authentication/sign-in/i18n.js"></script>
+	
+</body>
+</html>

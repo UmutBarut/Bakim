@@ -1,0 +1,149 @@
+﻿@model List<WorkTask>
+<div class="container">
+
+    <div class="row stats mt-3 mb-10">
+        <div class="col-md-6">
+            
+                <div class="stat isemriStat">
+                    <div class="staticon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Toplam Kayıt</div>
+                     <div class="statsubinfo varliksubinfo">Bu gün içindeki toplam kayıt</div>
+                     <div class="statlink">@Model.Where(m=>m.CreatedDate.Day == DateTime.Now.Day).Count()</div>
+                </div>
+                    
+        </div>
+        
+        <div class="col-md-6">
+            <div class="stat stokStat">
+                    <div class="staticon"><i class="fa-solid fa-wrench"></i></div>
+                     <div class="statinfo varlikinfo">Açık kayıtlar</div>
+                     <div class="statsubinfo varliksubinfo">Henüz kapanmamış kayıtlar</div>
+                     <div class="statlink">@Model.Where(m=>m.IsCompleted == false).Count()</div>
+                </div>
+        </div>
+       
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+@(Html.DevExtreme().DataGrid<WorkTask>()
+    .DataSource(d => d.Mvc()
+        .Controller("Bakim")
+        .LoadAction("GetTasks")
+        .InsertAction("InsertTask")
+        .Key("TaskId")
+        
+    )
+    
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .NoDataText("Kayıt Bulunamadı")
+    .RemoteOperations(true) 
+    .OnExporting("exporting")
+    .Columns(columns => {
+        
+        columns.AddFor(m => m.TaskTitle).Alignment(HorizontalAlignment.Left).AllowHiding(false).Caption("Başlık").AllowExporting(true);
+        columns.AddFor(m => m.TaskDescription).Alignment(HorizontalAlignment.Left).AllowHiding(false).Caption("Açıklama").AllowExporting(true);
+
+        columns.AddFor(m => m.CreatedDate).AllowEditing(false).Alignment(HorizontalAlignment.Left).AllowHiding(true).HidingPriority(1).Caption("Açılma tarihi").AllowExporting(true);
+        columns.AddFor(m => m.CompletedDate).AllowEditing(false).Alignment(HorizontalAlignment.Left).AllowHiding(true).HidingPriority(3).Caption("Kapanma tarihi").AllowExporting(true);
+        columns.AddFor(m=>m.IsCompleted).AllowEditing(true).AllowHiding(true).Caption("Tamamlandı").HidingPriority(2).AllowExporting(true)
+        .CellTemplate(@<text>
+             
+            <span class="<%-  data.IsCompleted == true ? 'text-success' : 'd-none' %>">
+                 Tamamlandı
+            </span>
+            <span class="<%-  data.IsCompleted != true ? 'text-danger' : 'd-none' %>">
+                 Tamamlanmadı
+            </span>
+        </text>);
+        columns.Add().CellTemplate(@<text>
+            <a asp-action="StartTask" asp-route-id="m => m.TaskId" class="text-primary text-center <%-  data.IsCompleted == true ? 'd-none' : '' %>"><span class="svg-icon svg-icon-1 text-center"><svg><i class="fa-solid fa-play text-success"></i></svg></span></a>
+            <a href="#" class="text-primary text-center <%-  data.IsCompleted == true ? 'd-none' : '' %>"><span class="svg-icon svg-icon-1 text-center"><svg><i class="fa-solid fa-pen text-primary"></i></svg></span></a>
+        </text>);
+        
+
+        
+    })
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .GroupPanel(p => p.Visible(true).EmptyPanelText("İş Emirleri"))
+    .Height(600)
+    .ShowBorders(true)
+    .Pager(p=>
+    p.AllowedPageSizes(new List<int>{10,15,20,25})
+    .ShowNavigationButtons(true)
+    .ShowPageSizeSelector(false)
+    .Visible(true)
+    .ShowNavigationButtons(true)
+    )
+    
+    
+    @*.MasterDetail(md => md
+        .Enabled(true)
+        .Template(@<text>
+
+            @(Html.DevExtreme().DataGrid()
+                .DataSource(d => d.Mvc()
+                    .Controller("VGrup")
+                    .LoadAction("OrderDetails")
+                    .LoadParams(new { vGrupId = new JS("data.VGrupId") })
+                )
+                .ShowBorders(true)
+            )
+
+        </text>)
+    )*@
+    .Editing(e => 
+    e.AllowAdding(true)
+    .AllowDeleting(false)
+    .AllowUpdating(false)
+    .UseIcons(true)
+    .Mode(GridEditMode.Popup)
+    .Popup(p=>
+        p.Title("İş Emri Ekle & Düzenle")
+        .ShowTitle(true)
+        .Width(700)
+        .Height(500)
+        
+        )
+     .Form(f=>f.Items(items=> {
+            items.AddGroup()
+                    .ColCount(2)
+                    .ColSpan(2)
+                    .Items(groupItems => {
+                        groupItems.AddSimpleFor(m => m.TaskTitle);
+                        groupItems.AddSimpleFor(m => m.TaskDescription);
+                        groupItems.AddSimpleFor(m => m.IsCompleted);
+                    });
+        })) 
+    )
+
+    .Grouping(g => g.AutoExpandAll(false))
+    
+    )
+
+
+</div>
+
+
+
+     <script>
+    function exporting(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('İş Emirleri');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'IsEmirleri.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>

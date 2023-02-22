@@ -1,0 +1,387 @@
+@model DenemeViewModel
+@* @{
+    int i = 0;
+    int k = 0;
+} *@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
+            <div class="card bg-primary hoverable mt-6">
+                <div class="card-header border-0">
+                        <span class="svg-icon svg-icon-white svg-icon-4x mt-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="currentColor"/>
+                        <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor"/>
+                        </svg>
+                        </span>
+                    <div class="fw-bold text-white d-flex mt-4 fs-3">sdjfhgsgsdf</div>
+                </div>
+                <div class="card-body">
+                    <div class="text-white fw-bolder fs-1">Toplam Kayıt</div>
+                    <div class="fw-bold text-white">Bu gün içerisindeki Toplam Kayıt</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
+            <div  class="card bg-warning hoverable mt-6">
+                <div class="card-header border-0">
+                        <span class="svg-icon svg-icon-white svg-icon-4x mt-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.3" d="M12 22C13.6569 22 15 20.6569 15 19C15 17.3431 13.6569 16 12 16C10.3431 16 9 17.3431 9 19C9 20.6569 10.3431 22 12 22Z" fill="currentColor"/>
+                        <path d="M19 15V18C19 18.6 18.6 19 18 19H6C5.4 19 5 18.6 5 18V15C6.1 15 7 14.1 7 13V10C7 7.6 8.7 5.6 11 5.1V3C11 2.4 11.4 2 12 2C12.6 2 13 2.4 13 3V5.1C15.3 5.6 17 7.6 17 10V13C17 14.1 17.9 15 19 15ZM11 10C11 9.4 11.4 9 12 9C12.6 9 13 8.6 13 8C13 7.4 12.6 7 12 7C10.3 7 9 8.3 9 10C9 10.6 9.4 11 10 11C10.6 11 11 10.6 11 10Z" fill="currentColor"/>
+                        </svg>
+                        </span>
+                    <div class="fw-bold text-white d-flex mt-4 fs-3">sdjfhgsgsdf</div>
+                </div>
+                <div class="card-body">
+                    <div class="text-white fw-bolder fs-1">Açık Kayıtlar</div>
+                    <div class="fw-bold text-white">Henüz Kapatılmamış Kayıtlar</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
+            <div  class="card bg-success hoverable mt-6">
+                <div class="card-header border-0">
+                         <span class="svg-icon svg-icon-white svg-icon-4x mt-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.3" d="M12.9 10.7L3 5V19L12.9 13.3C13.9 12.7 13.9 11.3 12.9 10.7Z" fill="currentColor"/>
+                        <path d="M21 10.7L11.1 5V19L21 13.3C22 12.7 22 11.3 21 10.7Z" fill="currentColor"/>
+                        </svg>
+                        </span>
+                     <div class="fw-bold text-white d-flex mt-4 fs-3">sdjfhgsgsdf</div>
+                </div>
+                <div class="card-body">
+                    <div class="text-white fw-bolder fs-1">Devam Eden Kayıtlar</div>
+                    <div class="fw-bold text-white">İşlemde olan iş emirleri</div>
+                </div>  
+            </div> 
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
+            <div  class="card bg-danger hoverable mt-6">
+                <div class="card-header border-0">
+                        <span class="svg-icon svg-icon-white svg-icon-4x mt-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.28548 15.0861C7.34369 13.1814 9.35142 12 11.5304 12H12.4696C14.6486 12 16.6563 13.1814 17.7145 15.0861L19.3493 18.0287C20.0899 19.3618 19.1259 21 17.601 21H6.39903C4.87406 21 3.91012 19.3618 4.65071 18.0287L6.28548 15.0861Z" fill="currentColor"/>
+                        <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor"/>
+                        </svg>
+                        </span>
+                      <div class="fw-bold text-white d-flex mt-4 fs-3">sdjfhgsgsdf</div>
+                </div>
+                <div class="card-body">
+                    <div class="text-white fw-bolder fs-1">Bana Özel İş Emirleri</div>
+                    <div class="fw-bold text-white">Size özel iş emirleri</div>
+                </div>
+            </div>
+        </div>
+            <div class="d-flex justify-content-end mb-4"><button class="btn bg-primary btn-active-light-secondary text-white" data-bs-toggle="modal" data-bs-target="#addTask"><i class="fa fa-plus" style="color: white" aria-hidden="true"></i> Yeni İş Emri Oluştur</button></div>
+    </div>
+
+    
+    <div class="modal fade" tabindex="-1" id="addTask">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <form  asp-controller="WorkTasks" asp-action="AddTask" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Yeni İş Emri</h3>
+
+                        <!--begin::Close-->
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                            <span class="svg-icon svg-icon-1"></span>
+                        </div>
+                        <!--end::Close-->
+                    </div>
+
+                    <div class="modal-body">   
+                        <div class="row">
+                            <div class="col-md-6 mb-10">
+                                <label for="exampleFormControlInput1" class="form-label">Resim</label>
+                                <br>
+                                <br>
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-outline" data-kt-image-input="true"
+                                    style="background-image: url(/app/images/worktasks)">
+                                    <!--begin::Image preview wrapper-->
+                                    <div class="image-input-wrapper w-125px h-125px"
+                                        style="background-image: url()"></div>
+                                    <!--end::Image preview wrapper-->
+
+                                    <!--begin::Edit button-->
+                                    <label
+                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                        title="Change avatar">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="file" accept=".png, .jpg, .jpeg" style="object-fit:cover;"/>
+                                        <input type="hidden" name="avatar_remove"/>
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Edit button-->
+
+                                    <!--begin::Cancel button-->
+                                    <span
+                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                        title="Cancel avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel button-->
+
+                                    <!--begin::Remove button-->
+                                    <span
+                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                        title="Remove avatar">
+                                        <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove button-->
+                                </div>
+                                <!--end::Image input-->
+                            </div>
+                            <div class="col-md-6 row">
+                                <div class="col-md-12">
+                                    <label for="exampleFormControlInput1" class="required form-label">Birim</label>
+                                    <select class="form-select form-select-sm form-select-solid" asp-for="Task.SectionId" data-control="select2"
+                                       data-placeholder="Birim Seçiniz">
+                                        <option value=""></option>
+                                        @foreach (var item in Model.SectionDto.Sections)
+                                        {
+                                            <option value="@item.SectionId">@item.SectionName</option>
+                                        }
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="exampleFormControlInput1" class="required form-label">Arıza</label>
+                                    <select class="form-select form-select-sm form-select-solid"  asp-for="Task.SectionFaultId"
+                                        data-control="select2" data-placeholder="Arıza Seçiniz">
+                                        <option value=""></option>
+                                        @foreach(var item in Model.SectionDto.SectionFaults)
+                                        {
+                                            <option value="@item.SectionFaultId">@item.SectionFaultName</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column mt-4">
+                                <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+                                <textarea asp-for="Task.TaskDescription" class="form-control form-control-sm form-control-solid" rows="5"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-6 mt-8">
+                                <label for="exampleFormControlInput1" class="form-label">Atanacak Kullanıcı</label>
+                                <select asp-for="Task.ReceiverId" class="form-select form-select-sm form-select-solid col-12 hht-select-2" data-control="select2" id="" 
+                                data-placeholder="Kullanıcı Seçiniz" >
+                                    <option value="@null">Hepsi</option>
+                                    @foreach (var item in Model.AllUsers)
+                                    {
+                                        <option value="@item.Id">@item.UserName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6  mt-10 d-flex align-items-center justify-content-center">
+                                <div class="form-check form-switch"> 
+                                    <input class="form-check-input" type="checkbox" asp-for="Task.Acil" id="flexCheckDefault"/>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Acil İş Emri
+                                    </label>
+                                </div>  
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit"  class="btn btn-primary">Oluştur</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+           
+
+            <div class="modal fade" tabindex="-1" id="starttaskmodal">
+                <div class="modal-dialog modal-xl"> 
+                    <div class="modal-content">
+                        <form asp-controller="WorkTasks" asp-action="StartTask" method="POST">
+                            <div class="modal-header">
+                                <h2 class="modal-title">asda</h2>
+
+                                  <a asp-controller="" asp-action="" class="btn btn-icon btn-warning">
+                                    <span class="svg-icon svg-icon-white svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/><rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/>
+                                    <rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>
+                                </a>
+                               
+                            </div>
+
+                            <div class="modal-body">
+                                <input type="hidden" id="taskidd" name="TaskId">
+                                    <div class="d-flex justify-content-center">
+                                        <h3>Durum</h3>
+                                    </div>
+                                    
+                                <div class=" d-flex flex-column mt-10 mb-10">
+                                    <label for="" class="form-label">İş Açıklaması</label>
+                                    <textarea class="form-control form-control-sm form-control-solid" rows="5"></textarea>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
+                                <button type="submit" class="btn btn-primary">Başla</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+   
+
+     @(Html.DevExtreme().DataGrid<WorkTask>()
+        
+        .ID("taleplistesi")
+        .ShowBorders(true)
+        .DataSource(d => d.Mvc().LoadAction("GetIsEmri").Controller("WorkTasks"))
+        .FilterRow(filterRow => filterRow
+        .Visible(true)
+        .ApplyFilter(GridApplyFilterMode.Auto)
+        )
+        .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
+        .Paging(paging => paging.PageSize(5))
+        .Pager(p=>
+        p.AllowedPageSizes(new JS("[5, 10, 20]"))
+        .ShowNavigationButtons(true)
+        .ShowPageSizeSelector(true)
+        .Visible(true)
+        .ShowNavigationButtons(true)
+        .ShowInfo(true)
+        .DisplayMode(GridPagerDisplayMode.Full)
+        )
+        .KeyExpr("TaskId")
+        
+        .Columns(columns => {
+            @* columns.AddFor(m => m.ImagePath).CellTemplate(@<text>
+                <div>
+                <img style="max-width:100%; height:auto;" src="/app/images/worktasks/<%- data.ImagePath %>" alt="" />
+                </div>
+                </text>).Caption("IsEmri Resmi"); *@
+
+        columns.AddFor(m => m.TaskTitle).Caption("İş Emri").Alignment(HorizontalAlignment.Left);
+
+        columns.AddFor(m => m.CreatedDate).SortOrder(SortOrder.Desc).Caption("Oluşturma Tarihi").Alignment(HorizontalAlignment.Left);
+
+
+
+        columns.AddFor(m=>m.ReceiverId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("usergetir").Key("Id")).DisplayExpr("UserName").ValueExpr("Id")).Caption("Atanan Kullanıcı").Alignment(HorizontalAlignment.Left);
+
+        columns.AddFor(m=>m.TaskId).Alignment(HorizontalAlignment.Center).Caption("").AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detailbutton")); 
+
+        })
+            .Selection(s=> s.Mode(SelectionMode.Multiple))
+            .Export(e=> e.Enabled(true)
+            .AllowExportSelectedData(true)
+            )
+            .OnExporting("selectExport")
+        ) 
+</div>
+
+<script>
+
+    function detailbutton(container, options)
+    {
+        if(options.data.IsActive == true && options.data.InProcess == false && options.data.IsCompleted == false)
+        {
+            $('<button class="btn btn-icon btn-primary ms-4" onclick="starttaskmodal('+options.data.TaskId+')">\
+                    <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
+                    <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
+                </button>').appendTo(container);
+        }
+
+         if(options.data.IsActive == true && options.data.InProcess ==  true && options.data.IsCompleted == false)
+        {
+            $('<button class="btn btn-icon btn-warning ms-4"  onclick="openfirstmodal('+options.data.TaskId+')">\
+                    <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
+                    <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
+                </button>').appendTo(container);
+        }
+
+        if(options.data.IsActive == false && options.data.InProcess ==  false && options.data.IsCompleted == true)
+        {
+            $('<button class="btn btn-icon btn-success ms-4"  onclick="openfirstmodal('+options.data.TaskId+')">\
+                    <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
+                    <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
+                </button>').appendTo(container);
+        }
+    }
+
+
+
+     function starttaskmodal(id)
+    {
+        $('#taskidd').val(id);
+        $.ajax({
+            url: "/WorkTasks/StartTask",
+            async: true,
+            method: "POST",
+            data: {id : id}
+        }).then(function(result){ 
+            $('#starttaskmodal').modal("show");
+        });
+    } 
+
+
+
+
+    function selectExport(e){
+         Swal.fire({
+        text: "Format Seçiniz",
+        icon: "success",
+        buttonsStyling: false,
+        confirmButtonText: "PDF Olarak Çıkar",
+        cancelButtonText:"Excel Olarak Çıkar",
+        showCancelButton : true,
+        customClass: {
+            confirmButton: "btn btn-danger",
+            cancelButton: "btn btn-success"
+        }
+        }).then(function(result){
+            if(result.isConfirmed){
+                exportToPDF(e);
+            }
+            else{
+                exporting(e);
+            }
+        });
+    }
+
+     function exportToPDF(e) {
+        var doc = new jsPDF();
+
+        DevExpress.pdfExporter.exportDataGrid({
+            jsPDFDocument: doc,
+            component: e.component,
+            indent: 5,
+        }).then(function () {
+            doc.save("IsEmri @DateTime.Now .pdf");
+        });
+    }
+
+    function exporting(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('IsEmirleri');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'IsEmri.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+</script>
+
+

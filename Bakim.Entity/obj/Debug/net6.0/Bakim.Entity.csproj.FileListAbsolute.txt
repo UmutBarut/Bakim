@@ -1,0 +1,45 @@
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.deps.json
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.dll
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.pdb
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.AssemblyInfo.cs
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.dll
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\refint\Bakim.Entity.dll
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.pdb
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\ref\Bakim.Entity.dll
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Core.dll
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Core.pdb
+C:\Users\Acer\Desktop\UMUT VS\Bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.CopyComplete
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.deps.json
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.pdb
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Core.dll
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Core.pdb
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.AssemblyInfo.cs
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.CopyComplete
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\refint\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.pdb
+C:\Users\Acer\Desktop\Bakim\mes-bakim\Bakim.Entity\obj\Debug\net6.0\ref\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.deps.json
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Entity.pdb
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Core.dll
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\bin\Debug\net6.0\Bakim.Core.pdb
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.AssemblyReference.cache
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.AssemblyInfo.cs
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.csproj.CopyComplete
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\refint\Bakim.Entity.dll
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\Bakim.Entity.pdb
+C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Entity\obj\Debug\net6.0\ref\Bakim.Entity.dll

@@ -1,0 +1,428 @@
+@using Bakim.ViewModels;
+
+@model TalepViewModel;
+ <script src="/js/jsPDF/jspdf.plugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" integrity="sha512-03CCNkeosDFN2zCCu4vLpu3pJfZcrL48F3yB8k87ejT+OVMwco7IH3FW02vtbGhdncS6gyYZ/duYaC/K62xQPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+<script>
+    window.jsPDF = window.jspdf.jsPDF;
+</script>
+
+<div class="modal fade" tabindex="-1" id="BirimDescribingConfirmationModal">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down"><div class="modal-content">
+        <div class="modal-header" id="modalim">
+            <div class="d-flex"><h3 class="modal-title" id="talepAdiTitle"></h3></div>
+            <div class="d-block">
+                <h2 class="text-center" id="username"></h2>
+
+                <h2 id="tarih"></h2>
+            </div>
+           <div class="d-flex justify-content-end"><button id="deleteButton" type="submit" class="btn btn-danger">Talebi Sil</button></div>
+        </div> 
+            <div class="modal-body">
+                <form asp-controller="Talep" asp-action="Confirmation"  method="POST">
+                    <input type="hidden" id="talepidd" name="TalepId">
+                    <div class="card-body py-5">
+                        <div class="row">
+                            <div class="col-md-6 row p-0 m-0">
+                                <div class="">
+                                    <label for="exampleFormControlInput1" class="form-label">Talep</label>
+                                    <input type="text" class="form-control form-control-sm form-control-solid" name="TalepAdi" value="" id="talepadi" placeholder="Talebi Yazınız"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 row p-0 m-0 mb-2">
+                                <label for="exampleFormControlInput1" class="form-label">Stok Kalemi Seçiniz</label>
+                                <select class="form-select form-select-sm form-select-solid col-12 hht-select-2" data-control="select2" id="stok"
+                                    name="StockId" data-placeholder="Stok Seçiniz">
+                                    <option></option>
+                                    @foreach(var item in Model.stoklar)
+                                    {
+                                        <option value="@item.StockId">@item.StockName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6 row p-0 m-0">
+                                <div class="mt-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Miktar</label>
+                                    <input type="text" class="form-control form-control-sm form-control-solid" name="Miktar" value="" id="miktar" placeholder="Miktar Yazınız"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 row p-0 m-0 mt-6">
+                                <label for="exampleFormControlInput1" class="form-label">Varlık Seçiniz</label>
+                                <select class="form-select form-select-sm form-select-solid col-12 hht-select-2" data-control="select2" id="varlik"
+                                    name="VarlikId"  data-placeholder="Varlık Seçiniz">
+                                    <option></option>
+                                    @foreach(var item in Model.varliklar){
+                                        <option value="@item.VarlikId">@item.VarlikName</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6 row p-0 m-0">
+                                <div class="mb-6 mt-6">
+                                    <label for="exampleFormControlInput1" class="form-label">Ölçü</label>
+                                    <input type="text" class="form-control form-control-sm form-control-solid" name="Olcu" value="" id="olcu" placeholder="Ölçü Yazınız"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 row p-0 m-0 mb-6 mt-6">
+                                <label for="exampleFormControlInput1" class="form-label">Birim Seçiniz</label>
+                                <select class="form-select form-select-sm form-select-solid col-12 hht-select-2" data-control="select2" id="birim" 
+                                name="BirimId" data-placeholder="Birim Seçiniz" >
+                                    <option></option>
+                                    @foreach(var item in Model.birimler){
+                                        <option value="@item.BirimId">@item.BirimAdi</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-12 row p-0 m-0 mb-8">
+                                <label for="exampleFormControlInput1" class="form-label">Tedarikçi Firma</label>
+                                <select class="form-select form-select-sm form-select-solid col-12 hht-select-2" data-control="select2" id="firma"
+                                    name="FirmaId" data-placeholder="Tedarikçi Firma Seçiniz">
+                                    <option></option>
+                                    @foreach(var item in Model.firmalar){
+                                        <option value="@item.FirmaId">@item.FirmaAdi</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class=" d-flex flex-column">
+                                <label for="" class="form-label">Açıklama</label>
+                                <textarea class="form-control form-control-sm form-control-solid" rows="5" name="Aciklama" id="aciklama"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex float-right">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
+                            <button type="submit" class="btn btn-primary ms-4">Onayla</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </div>
+
+<div class="modal fade" tabindex="-1" id="CloseModal">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down"><div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="talepAdiTitle"></h3>
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close"><span class="svg-icon svg-icon-1"></span>
+                    </div>
+                </div>
+            <div class="modal-body">
+                <form asp-controller="Talep" asp-action="TalebiSonlandir"  method="POST">
+                    <input type="hidden" id="talepids" name="TalepId">
+                    <div class="card-body py-5">
+                        <div class="row">
+                            
+                            <h1>Mal Elime Ulaştı</h1>
+                            
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex float-right">
+                            <button type="submit" class="btn btn-primary ms-4">Talebi Sonlandır</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+   </div>
+
+<div class="container">
+    <div class="d-flex justify-content-between mb-4">
+           <div class="d-flex align-items-center">
+                <h4>- @ViewData["Name"]</h4>
+            </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtre 
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="2">Tümü</a></li>
+                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="1">Onaylananlar</a></li>
+                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="10">Onay Bekleyenler</a></li>
+                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="5">Tamamlananlar</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card border-0 card-p">
+        @(Html.DevExtreme().DataGrid<Talep>()
+        
+        .ID("taleplistesi")
+        .ShowBorders(true)
+        .DataSource(d => d.Mvc().LoadAction("Talepler").Controller("Talep").LoadParams(new{id = Model.Filter})
+        )
+        .FilterRow(filterRow => filterRow
+        .Visible(true)
+        .ApplyFilter(GridApplyFilterMode.Auto)
+        )
+        .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
+        .Paging(paging => paging.PageSize(5))
+        .Pager(p=>
+        p.AllowedPageSizes(new JS("[5, 10, 20]"))
+        .ShowNavigationButtons(true)
+        .ShowPageSizeSelector(true)
+        .Visible(true)
+        .ShowNavigationButtons(true)
+        .ShowInfo(true)
+        .DisplayMode(GridPagerDisplayMode.Full)
+        )
+        .KeyExpr("TalepId")
+        
+        .Columns(columns => {
+            @* columns.AddFor(m => m.ImagePath).CellTemplate(@<text>
+                <div>
+                <img style="max-width:100%; height:auto;" src="/app/images/varliks/<%- data.ImagePath %>" alt="" />
+                </div>
+                </text>).Caption("Varlık Resmi"); *@
+
+        columns.AddFor(m => m.TalepAdi).Caption("Talep").Alignment(HorizontalAlignment.Left);
+
+        columns.AddFor(m => m.StockId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepStok").Key("StockId")).DisplayExpr("StockName").ValueExpr("StockId")).Alignment(HorizontalAlignment.Left).Caption("Stok Kalemi");
+
+        columns.AddFor(m=> m.VarlikId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepVarlik").Key("VarlikId")).DisplayExpr("VarlikName").ValueExpr("VarlikId")).Alignment(HorizontalAlignment.Left).Caption("Varlık Kalemi");
+
+        columns.AddFor(m => m.Miktar).Caption("Talep Miktarı").Alignment(HorizontalAlignment.Left);
+
+        columns.AddFor(m => m.Olcu).Caption("Ölçü").Alignment(HorizontalAlignment.Left);
+
+        columns.AddFor(m => m.BirimId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepBirim").Key("BirimId")).DisplayExpr("BirimAdi").ValueExpr("BirimId")).Alignment(HorizontalAlignment.Left).Caption("Birim");
+
+        columns.AddFor(m => m.Aciklama).Caption("Açıklama").Alignment(HorizontalAlignment.Left);
+
+        columns.AddFor(m=>m.IsApproved).Alignment(HorizontalAlignment.Center).AllowEditing(false).AllowFiltering(false).AllowSearch(false).Caption("İlerleme").CellTemplate(@<text>
+           
+            <div class=""><%- (data.IsApproved == false) ? 'Onay bekliyor' : (data.IsApproved == true && data.IsFinished == false) ?  'Ürün bekliyor' : 'Tamamlandı' %></div>
+        </text>);
+
+        columns.AddFor(m=>m.TalepId).Alignment(HorizontalAlignment.Left).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("onaybutton")).Caption("").Width(150);  
+
+       
+
+        })
+            .Selection(s=> s.Mode(SelectionMode.Multiple))
+            .Export(e=> e.Enabled(true)
+            .AllowExportSelectedData(true)
+            )
+            .OnExporting("selectExport")
+        ) 
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <a asp-controller="Talep" asp-action="TalepOlustur" class="btn btn-primary mt-4">Talep Oluştur</a>
+    </div>
+</div>
+
+<script>
+    var degisken = '@User.IsInRole("Admin")';
+
+    function onaybutton(container, options) 
+    {
+       
+
+        if(degisken != "True")
+        {
+                if(options.data.IsApproved == true && options.data.IsFinished == false)
+            {
+                    $('<button class="btn btn-icon btn-warning ms-4"  onclick="closeModal('+options.data.TalepId+','+options.data.IsApproved+')">\
+                <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
+                <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
+                <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
+                <!--end::Svg Icon--></button>').appendTo(container);
+            } 
+                return;
+        }
+        
+        $('<button class="btn btn-icon btn-primary"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+')">\
+        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-12-26-231111/core/html/src/media/icons/duotune/art/art005.svg-->\
+        <span class="svg-icon svg-icon-muted svg-icon- 2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
+        <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.08251.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.99626.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.0639920.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.79342.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"/>\
+        <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.378921.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.69618.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"/></svg></span></button>\
+        ').appendTo(container);
+
+
+         if(options.data.IsApproved == true && options.data.IsFinished == false)
+       {
+            $('<button class="btn btn-icon btn-warning ms-4"  onclick="closeModal('+options.data.TalepId+','+options.data.IsApproved+')">\
+        <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
+        <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
+        <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
+        <!--end::Svg Icon--></button>').appendTo(container);
+       } 
+       
+        if(options.data.IsApproved == false && options.data.IsFinished == false)
+       {
+             $('<button class="btn btn-icon btn-primary ms-4"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+' )">\
+        <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
+        <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
+        <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
+        <!--end::Svg Icon--></button>').appendTo(container);
+       }
+        if(options.data.IsFinished == true)
+       {
+        
+            $('<button class="btn btn-icon btn-success ms-4"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+' )">\
+        <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
+        <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
+        <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
+        <!--end::Svg Icon--></button>').appendTo(container);
+       }
+
+    }
+
+    $(document).ready(function(){
+     $('.hht-select-2').select2();
+    })
+    
+    $('#stok').trigger("change");
+       
+    function setModal(id,isApproved){
+        if(!isApproved){
+            $('#deleteButton').removeClass("opacity-0");
+        }
+        else{
+            $('#deleteButton').addClass("opacity-0");
+        }
+        $('#talepidd').val(id);
+        $('#ttalepid').val(id);
+        $.ajax({
+            url: "/Talep/TalepGetir",
+            async: true,
+            method: "GET",
+            data: {id: id}
+        }).then(function(result){
+
+             var iso = result.talep.CreatedDate;
+            var date = iso.split("T")[0];
+            var gun = date.split("-")[2]; 
+            var ay = date.split("-")[1];
+            var yil = date.split("-")[0];
+            var time = iso.split("T")[1].split(".")[0];
+            var tarihformated = gun + "." + ay + "." + yil + " " + time;
+           
+            $('#tarih').html(tarihformated);
+
+            if(result.IsApproved == true)
+            {
+                var iso = result.talep.ApproveDate;
+            var date = iso.split("T")[0];
+            var gun = date.split("-")[2];
+            var ay = date.split("-")[1];
+            var yil = date.split("-")[0];
+            var time = iso.split("T")[1].split(".")[0];
+            var tarihformated = gun + "." + ay + "." + yil + " " + time;
+            $('#tarih').html(tarihformated);
+            }
+
+            else if(result.IsFinished == true)
+            {
+                var iso = result.talep.FinishDate;
+            var date = iso.split("T")[0];
+            var gun = date.split("-")[2];
+            var ay = date.split("-")[1];
+            var yil = date.split("-")[0];
+            var time = iso.split("T")[1].split(".")[0];
+            var tarihformated = gun + "." + ay + "." + yil + " " + time;
+            $('#tarih').html(tarihformated);
+            }
+           
+            $('#talepAdiTitle').html(result.talep.TalepAdi);
+            $('#talepadi').val(result.talep.TalepAdi);
+            $('#miktar').val(result.talep.Miktar);
+            $('#olcu').val(result.talep.Olcu);
+            $('#aciklama').html(result.talep.Aciklama);
+            $('#stok').val(result.talep.StockId).trigger("change");
+            $('#varlik').val(result.talep.VarlikId).trigger("change");
+            $('#birim').val(result.talep.BirimId).trigger("change");
+            $('#firma').val(result.talep.FirmaId).trigger("change");
+            $('#username').html(result.user.UserName);
+            $('#BirimDescribingConfirmationModal').modal("show");
+        });
+    }
+
+     function closeModal(id){
+        $('#talepids').val(id);
+        $.ajax({
+            url: "/Talep/TalebiSonlandir",
+            async: true,
+            method: "POST",
+            data: {id: id}
+        }).then(function(result){
+            $('#CloseModal').modal("show");
+        });
+    }
+
+    function silmeyiKaldir(id){
+        $('#ttalepid').val(id);
+        $.ajax({
+            url: "/Talep/TalebiSil",
+            async: true,
+            method: "GET",
+             data: {id: id}
+        }).then(function(result){
+            $('#deleteButton').addClass("opacity-0");
+
+        });
+    }
+
+
+    function selectExport(e){
+         Swal.fire({
+        text: "Format Seçiniz",
+        icon: "success",
+        buttonsStyling: false,
+        confirmButtonText: "PDF Olarak Çıkar",
+        cancelButtonText:"Excel Olarak Çıkar",
+        showCancelButton : true,
+        customClass: {
+            confirmButton: "btn btn-danger",
+            cancelButton: "btn btn-success"
+        }
+        }).then(function(result){
+            if(result.isConfirmed){
+                exportToPDF(e);
+            }
+            else{
+                exporting(e);
+            }
+        });
+    }
+
+     function exportToPDF(e) {
+        var doc = new jsPDF();
+
+        DevExpress.pdfExporter.exportDataGrid({
+            jsPDFDocument: doc,
+            component: e.component,
+            indent: 5,
+        }).then(function () {
+            doc.save("Talep @DateTime.Now .pdf");
+        });
+    }
+
+    function exporting(e) {
+        var workbook = new ExcelJS.Workbook();
+        var worksheet = workbook.addWorksheet('Talepler');
+
+        DevExpress.excelExporter.exportDataGrid({
+            component: e.component,
+            worksheet: worksheet,
+            autoFilterEnabled: true
+        }).then(function () {
+            workbook.xlsx.writeBuffer().then(function (buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Talep.xlsx');
+            });
+        });
+        e.cancel = true;
+    }
+
+</script> 
+
+
+

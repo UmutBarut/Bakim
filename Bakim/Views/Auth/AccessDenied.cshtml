@@ -1,0 +1,28 @@
+﻿@{Layout = "_authlayout";}
+
+
+<div class="container" style="height: 100%;">
+    <div class="row pb-10" style="height: max-content;">
+        <div class="container mt-10 pb-10 shadow" style="height: max-content; width: 400px; min-height: fit-content; border: 1px solid #e0e0e0; border-radius:12px;">
+            <div class="d-flex justify-content-center pt-10">
+                <img src="~/app/images/adenied.svg" width="400px" style="padding:25px;" alt="">
+            </div>
+            <div class="container pt-10">
+              <h2 class="text-center pb-5">Erişim Reddedildi</h2>
+              <h6 class="text-center pb-5">Yetkiniz yok!</h6>
+
+
+          <!-- Submit button -->
+          <a asp-controller="Home" asp-action="Index" class="btn btn-danger btn-lg w-100" >Geri Dön</a>
+
+          <div class="container text-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">HHT Yazılım</p>
+            <p class="text-center mx-3 mb-0 text-muted">Tüm Hakları Saklıdır.</p>
+          </div>
+
+
+        </div>
+            
+        </div>         
+    </div>
+</div>

@@ -1,0 +1,57 @@
+
+
+<div class="container">
+    @(Html.DevExtreme().DataGrid<Birim>()
+    .ID("dxContainer")
+    .DataSource(d => d.Mvc()
+    .Controller("Describing")
+    .LoadAction("GetAllBirimler")
+    .UpdateAction("UpdateBirim")
+    .DeleteAction("DeleteBirim")
+    .InsertAction("AddBirim")
+    .Key("BirimId")
+
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+    columns.AddFor(m => m.BirimAdi).Alignment(HorizontalAlignment.Left).Caption("Birim").AllowFiltering(true);
+
+    })
+    .SearchPanel(s => s
+    .Visible(true)
+    .HighlightCaseSensitive(true)
+    .Placeholder("Ara")
+    .Width(200)
+    )
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .GroupPanel(p => p.Visible(true).EmptyPanelText("Birim Tanımlayın"))
+    .Height(600)
+    .ShowBorders(true)
+    .Pager(p=>
+    p.AllowedPageSizes(new List<int>{10})
+    .ShowNavigationButtons(true)
+    .ShowPageSizeSelector(false)
+    .Visible(true)
+    .ShowNavigationButtons(true)
+
+    )
+    .Paging(p=>p.PageSize(25))
+    .Editing(e =>
+    e.AllowAdding(true)
+    .AllowDeleting(true)
+    .AllowUpdating(true)
+    .UseIcons(true)
+    .Mode(GridEditMode.Batch)
+    .Popup(p=>
+    p.Title("Birim Ekle & Düzenle")
+    .ShowTitle(true)
+    .Width(700)
+    .Height(500)
+    )
+    )
+    .Grouping(g => g.AutoExpandAll(false))
+
+    )
+</div>

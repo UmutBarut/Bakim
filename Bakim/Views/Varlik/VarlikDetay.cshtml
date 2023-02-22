@@ -1,0 +1,65 @@
+@using Bakim.ViewModels;
+
+@model VarlikDetayViewModel;
+
+
+<div class="container">
+    <div class="card ">
+        <div class="card-header card-header-stretch">
+            <h3 id="baslik" class="card-title">@Model.varlik.VarlikName</h3>
+        </div>
+        <div class="card-body"> 
+            <div class="row">
+                <div class="col-md-6 mb-10">
+                    <label for="exampleFormControlInput1" class="form-label">Varlık Fotoğrafı</label> 
+                    <br>
+                    @if(Model.varlik.ImagePath == null)
+                    {
+                        <img src="/media/avatars/blank.png" height="150" width="150" class="img-responsive object-fit-cover border border-5">   
+
+                    }
+                    else
+                    {
+                     <img src="/app/images/varliks/@Model.varlik.ImagePath" height="150" width="150" class="img-responsive object-fit-cover border border-5">   
+                    }
+
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-10">
+                        <label for="exampleFormControlInput1" class="form-label">Üretim Bölümü</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid mb-4" disabled value="@Model.UretimBolumu.ProductionSectionName "
+                            name="ProductionSectionName" />
+                    </div>
+                </div>
+                 <div class="col-md-6">
+                    <div class="mb-10">
+                        <label for="exampleFormControlInput1" class="form-label">Varlık Grubu</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid mb-4" disabled value="@Model.varlikGrubu.VarlikGroupName"
+                            name="VarlikGroupName" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-10">
+                        <label for="exampleFormControlInput1" class="form-label">Varlık Kategorisi</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid mb-4" disabled value="@Model.DetayGrubu.DetayGroupName"
+                            name="DetayGroupName" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-10">
+                        <label for="exampleFormControlInput1" class="form-label">Varlık Adı</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid mb-4" disabled value="@Model.varlik.VarlikName"
+                            name="VarlikName" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-10">
+                        <label for="exampleFormControlInput1" class="form-label">Varlık Kodu</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid mb-4" disabled value="@Model.varlik.VarlikCode"
+                             name="VarlikCode" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,200 @@
+@using Bakim.ViewModels;
+
+@model EditStockViewModel;
+
+
+<div class="container">
+    <div class="card card-flush shadow-sm">
+        <form asp-controller="Varlik" asp-route-id="@Model.stok.StockId" asp-action="EditStock" method="post" enctype="multipart/form-data">
+            <div class="card-header">
+                <h3 class="card-title">@Model.stok.StockName ' i Düzenliyorsunuz</h3>
+            </div>
+            <div class="card-body py-5">
+                <div class="row">
+                    <div class="col-md-6 mb-10">
+                        <label for="exampleFormControlInput1" class="form-label">Stok Resmi</label>
+                        <br>
+                        <br>
+                        <!--begin::Image input-->
+                        <div class="image-input image-input-outline" data-kt-image-input="true"
+                            style="background-image: url(/app/images/stocks)">
+                            <!--begin::Image preview wrapper-->
+                            <div class="image-input-wrapper w-125px h-125px"
+                                style="background-image: url(/app/images/stocks)"></div>
+                            <!--end::Image preview wrapper-->
+
+                            <!--begin::Edit button-->
+                            <label
+                                class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                title="Change avatar">
+                                <i class="bi bi-pencil-fill fs-7"></i>
+
+                                <!--begin::Inputs-->
+                                <input type="file" name="file" accept=".png, .jpg, .jpeg" style="object-fit:cover;" />
+                                <input type="hidden" name="avatar_remove" />
+                                <!--end::Inputs-->
+                            </label>
+                            <!--end::Edit button-->
+
+                            <!--begin::Cancel button-->
+                            <span
+                                class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                title="Cancel avatar">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Cancel button-->
+
+                            <!--begin::Remove button-->
+                            <span
+                                class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click"
+                                title="Remove avatar">
+                                <i class="bi bi-x fs-2"></i>
+                            </span>
+                            <!--end::Remove button-->
+                        </div>
+                        <!--end::Image input-->
+                    </div>
+
+                    <div class="col-md-6 row">
+                        <div class="col-md-12">
+                            <label for="StockGroupId" class="required form-label">Stok Grubu</label>
+                            <select id="stokgrup" onchange="kategorigetir($(this).val())"
+                                class="form-select form-select-sm form-select-solid" data-control="select2" name="StockGroupId"
+                                value="@Model.stok.StockGroupId" data-placeholder="Stok Grubu Seçiniz">
+                                <option></option>
+                                @foreach (var item in Model.stokGruplari)
+                                {
+                                    if(item.StockGroupId == Model.stok.StockGroupId)
+                                    {
+                                    <option selected value="@item.StockGroupId">@item.StockGroupName</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.StockGroupId">@item.StockGroupName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="StokKategoriId" class="required form-label">Stok Kategorisi</label>
+                            <select id="skategoriselect" class="form-select form-select-sm form-select-solid"
+                                data-control="select2" name="StokKategoriId" value="@Model.stok.StokKategoriId" data-placeholder="Kategori Seçiniz">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-10">
+                            <label for="StockCode" class="required form-label">Stok Kodu</label>
+                            <input type="text" class="form-control form-control-sm form-control-solid"
+                                placeholder="Stok Kodu Yazınız" name="StockCode" value="@Model.stok.StockCode"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-10">
+                            <label for="StockName" class="required form-label">Stok Adı</label>
+                            <input type="text" class="form-control form-control-sm form-control-solid"
+                                placeholder="Stok Adı Yazınız" name="StockName" value="@Model.stok.StockName"/>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="mb-10">
+                            <label for="Barcode" class="form-label">Barkod</label>
+                            <input type="text" class="form-control form-control-sm form-control-solid"
+                                placeholder="Barkod Yazınız" name="Barcode" value="@Model.stok.Barcode"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-10">
+                            <label for="Price" class="required form-label">Fiyat</label>
+                            <input type="number" class="form-control form-control-sm form-control-solid"
+                                placeholder="Fiyat Yazınız" name="Price" value="@Model.stok.Price"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-10">
+                            <label for="StockAmount" class="required form-label">Miktar</label>
+                            <input type="number" class="form-control form-control-sm form-control-solid"
+                                placeholder="Stok Miktarı Yazınız" name="StockAmount" value="@Model.stok.StockAmount"/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-10">
+                            <label for="MinStock" class="required form-label">Minimum Stok</label>
+                            <input type="number" class="form-control form-control-sm form-control-solid"
+                                placeholder="Min Stok Yazınız" name="MinStock" value="@Model.stok.MinStock" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-10">
+                            <label for="MaxStock" class="required form-label">Maksimum Stok</label>
+                            <input type="number" class="form-control form-control-sm form-control-solid"
+                                placeholder="Max Stok Yazınız" name="MaxStock" value="@Model.stok.MaxStock" />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="FirmaId" class="form-label">Tedarikçi Firma</label>
+                        <select class="form-select form-select-sm form-select-solid" data-control="select2" multiple name="FirmaIds[]"
+                            data-placeholder="Tedarikçi Firma Seçiniz">
+                            @foreach (var item in Model.firmalar)
+                            {
+                                if(Model.stokfirma.Where(c=>c.FirmaId == item.FirmaId).Any())
+                                {                                
+                                    <option selected value="@item.FirmaId">@item.FirmaAdi</option>
+                                } 
+                                else
+                                {                           
+                                    <option value="@item.FirmaId">@item.FirmaAdi</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4 mt-10 d-flex align-items-center justify-content-center">
+                           <div class="form-check form-switch">
+                                <input asp-for="@Model.stok.Pasif" name="Pasif" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Pasif</label>
+                            </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mb-4" style="float: right;">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function()
+    {
+        $('#stokgrup').trigger("change");
+    })
+    function kategorigetir(value) {
+        $('#skategoriselect').html("");
+        $.ajax({
+            url: "/Describing/KategoriGetir",
+            method: "GET",  // istek türü (GET veya POST)
+            data: { getiren: value },  // gönderilecek veriler
+            async: true,
+            success: function (result) {
+                let option = $('<option></option>');
+                $('#skategoriselect').append(option);
+                console.log(result);
+                for (let item of result) {
+                    if(item.StokKategoriId == @Model.stok.StokKategoriId)
+                    {
+                        $('#skategoriselect').append("<option selected value=" + item.StokKategoriId + ">" + item.StokKategoriName + "</option>");
+                    }
+                    else
+                    {
+                        $('#skategoriselect').append("<option value=" + item.StokKategoriId + ">" + item.StokKategoriName + "</option>");
+
+                    }
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,73 @@
+
+
+<div class="container">
+
+@(Html.DevExtreme().DataGrid<RoutineBakimMakineViewModel>()
+    .ID("dxContainer")
+    .DataSource(d => d.Mvc()
+    .Controller("RoutineBakim")
+    .LoadAction("BakimlariGetir")
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+    columns.AddFor(m => m.BakimAdi).Alignment(HorizontalAlignment.Left).AllowFiltering(false).Caption("Bakım Adı");
+    columns.AddFor(m => m.MachineId).AllowEditing(false).Alignment(HorizontalAlignment.Left).Caption("Bakım Yapılan Makine").AllowFiltering(true).Lookup(l=>l.DataSource(d=>d.Mvc().Controller("RoutineBakim").LoadAction("MakineListele").Key("MachineId")).ValueExpr("MachineId").DisplayExpr("MachineName"));
+    columns.AddFor(m => m.BakimAciklamasi).Alignment(HorizontalAlignment.Left).AllowFiltering(false).Caption("Açıklama");
+    columns.AddFor(m => m.PlanlamaTarihi).Alignment(HorizontalAlignment.Left).AllowFiltering(false).Caption("Planlama Tarihi");
+    columns.AddFor(m => m.UserId).Alignment(HorizontalAlignment.Left).AllowFiltering(false).Caption("Kullanıcı").Lookup(l=>l.DataSource(d=>d.Mvc().Controller("RoutineBakim").LoadAction("UserList").Key("Id")).ValueExpr("Id").DisplayExpr("UserName"));
+
+    })
+    .SearchPanel(s => s
+    .Visible(true)
+    .HighlightCaseSensitive(true)
+    .Placeholder("Ara")
+    )
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .GroupPanel(p => p.Visible(true).EmptyPanelText("Birimler"))
+    .Height(600)
+    .ShowBorders(true)
+    .Pager(p=>
+    p.AllowedPageSizes(new List<int>{25})
+    .ShowNavigationButtons(true)
+    .ShowPageSizeSelector(false)
+    .Visible(true)
+    .ShowNavigationButtons(true)
+
+    )
+    .Paging(p=>p.PageSize(25))
+
+                @*.MasterDetail(md => md
+    .Enabled(true)
+    .Template(@<text>
+
+    @(Html.DevExtreme().DataGrid()
+    .DataSource(d => d.Mvc()
+    .Controller("VGrup")
+    .LoadAction("OrderDetails")
+    .LoadParams(new { vGrupId = new JS("data.VGrupId") })
+    )
+    .ShowBorders(true)
+    )
+
+    </text>)
+    )*@
+    .Editing(e =>
+    e.AllowAdding(true)
+    .AllowDeleting(true)
+    .AllowUpdating(true)
+    .UseIcons(true)
+    .Mode(GridEditMode.Batch)
+    .Popup(p=>
+    p.Title("Birim Ekle & Düzenle")
+    .ShowTitle(true)
+    .Width(700)
+    .Height(500)
+    )
+    )
+    .Grouping(g => g.AutoExpandAll(false))
+
+    )
+
+</div>
+

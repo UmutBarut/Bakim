@@ -1,0 +1,71 @@
+﻿@model WorkTaskDto
+<div class="container">
+    <h5>İş emri detay</h5>
+    <div class="row pb-10" style="height: max-content;">
+
+            
+            <div class="border text-dark p-5 mt-5 text-center">
+             @Model.WorkTask.TaskTitle
+            @if(!String.IsNullOrEmpty(@Model.WorkTask.ReceiverId))
+            {
+            <span class="text-danger">@Model.WorkTask.Receiver.UserName 'e atandı.</span>
+                
+            }
+            </div>
+            <div class="mt-5">
+                <fieldset disabled>
+                <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+                @if(Model.WorkTask.TaskDescription != null)
+                {
+                <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">@Model.WorkTask.TaskDescription</textarea>
+                    
+                }
+                else{
+                    <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">Açıklama Girilmemiş.</textarea>
+                }
+                </fieldset>
+            </div>
+           
+            <div class="mt-5">
+                <p class="text-primary text-center" style="text-decoration:underline;">İşlem geçmişi   <i class="fa-solid fa-arrow-down text-primary"></i></p>
+
+                <p class="text-primary">Transferler</p>
+                @if (Model.WorkTaskTransfers.Count == 0)
+                {
+                    <p class=text-center text-dark>Transfer kaydı bulunamadı.</p>
+                }
+                @foreach (var transfer in Model.WorkTaskTransfers)
+                {
+                    <p class="text-warning">@transfer.TransferredDate tarihinde @transfer.TransferredUser.UserName 'e transfer edildi.</p>
+                }
+            </div>
+            <div class="mt-5">
+                <p class="text-primary">Kullanıcı işlemleri</p>
+                <div class="mt-5 p-5" style="background-color:#eff2f5; border-radius:.3rem;">
+                @foreach (var taskUser in Model.WorkTaskUsers.OrderBy(d=>d.StartedDate))
+                {
+                   
+                    <p class="text-warning"><i class="status-notseen text-danger" style="font-size:.8rem;"></i> <b>@taskUser.User.UserName</b> ,<span class="text-dark"> @taskUser.StartedDate tarihinde başladı.</span></p>
+                    if (!taskUser.InProcess){    
+                         <p class="text-danger">@taskUser.CompletedDate <span class="text-dark">tarihinde tamamladı.</span></p>
+                    }
+                    else{
+                        <p class="text-danger">Devam ediyor.</p>
+                    }
+                    if (!taskUser.InProcess)
+                    {
+                    <fieldset disabled>
+                    <label for="exampleFormControlTextarea1" class="form-label">Kullanıcı açıklaması</label>
+                    <textarea  class="form-control mb-10" id="exampleFormControlTextarea1" rows="3">@taskUser.Description</textarea>
+                    </fieldset>
+                        
+                    }
+                   
+                }
+                </div>
+            </div>
+
+           
+      
+    </div>
+</div>

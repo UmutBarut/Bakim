@@ -1,0 +1,63 @@
+﻿@model UserSignUpViewModel
+
+@{Layout = "Layout";}
+
+
+<div class="container" style="height: 100%;">
+    <div class="row pb-10" style="height: max-content;">
+        <div class="container mt-10 pb-10 shadow" style="height: max-content; width: 400px; min-height: fit-content; border: 1px solid #e0e0e0; border-radius:12px;">
+            <div class="d-flex justify-content-center pt-10">
+                <img src="~/app/images/register.svg" width="350px" style="padding:25px;" alt="">
+            </div>
+            <div class="container pt-10">
+              <h2 class="text-center pb-5">Yeni Kullanıcı Oluştur</h2>
+          <form method="post" >
+           
+          
+           <div class="text-danger" asp-validation-summary="ModelOnly">
+
+          </div>         
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="text" class="form-control " asp-for="@Model.Username"/>
+            <label class="form-label pt-2" for="form1Example13">Kullanıcı adı</label>
+          </div>
+
+           <div class="form-outline mb-4">
+              <span asp-validation-for="@Model.Mail" class="text-danger"></span>
+            <input type="text" class="form-control " asp-for="@Model.Mail" placeholder="name@example.com"/>
+            <label class="form-label pt-2" for="form1Example13">Email</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+              <span asp-validation-for="@Model.Password" class="text-danger"></span>
+            <input type="password" class="form-control" asp-for="@Model.Password" placeholder="..........."/>
+            <label class="form-label pt-2" for="form1Example23">Parola (Min. 5 haneli)</label>
+          </div>
+
+          <div class="form-outline mb-4">
+              <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+            <input type="password" class="form-control" asp-for="@Model.ConfirmPassword" placeholder="..........."/>
+            <label class="form-label pt-2" for="form1Example23">Parola Tekrar</label>
+          </div>
+
+          
+            <!-- Checkbox -->
+         
+
+          <!-- Submit button -->
+          <button type="submit"  class="btn btn-primary btn-lg w-100">Kayıt Et</button>
+
+          <div class="container text-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">HHT Yazılım</p>
+            <p class="text-center mx-3 mb-0 text-muted">Tüm Hakları Saklıdır.</p>
+          </div>
+
+          
+        </form>
+        </div>
+            
+        </div>         
+    </div>
+</div>
