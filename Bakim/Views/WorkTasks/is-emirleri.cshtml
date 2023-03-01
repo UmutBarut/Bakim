@@ -139,31 +139,31 @@
             {
               
                 
-            <tr>
-                <td>@item.WorkTask.TaskTitle
-                @if(item.WorkTask.Receiver != null)
-                    {
-                 
-                            if(item.WorkTask.Receiver == Model.User)
-                            {
-                                <span class="badge badge-danger">S</span>
-                            }
-                        }
-                </td>
-       
-                <td>@item.WorkTask.CreatedDate</td>
-                <td class="@(item.WorkTask.IsCompleted ? "text-success" :"text-danger")">@(item.WorkTask.IsCompleted ? "Tamamlandı" : item.WorkTask.InProcess ? item.WorkTaskUsers.Where(c=>c.InProcess==true && c.WorkTaskId == item.WorkTask.TaskId ).Count() > 1 ? item.WorkTaskUsers[0].User.UserName  + " ve diğer " + item.WorkTaskUsers.Where(c=>c.InProcess==true && c.WorkTaskId == item.WorkTask.TaskId && c.User != item.WorkTaskUsers[0].User).Count()+ " kişi ilgileniyor" : item.WorkTaskUsers.Where(c=>c.InProcess == true).First().User.UserName + " ilgileniyor" : "Tamamlanmadı")</td>
-                <td>
+                <tr>
+                    <td>@item.WorkTask.TaskTitle
                     @if(item.WorkTask.Receiver != null)
-                    {
-                            @item.WorkTask.Receiver.UserName
-                            if(item.WorkTask.Receiver == Model.User)
-                            {
-                                <span class="badge badge-warning">Size</span>
+                        {
+                    
+                                if(item.WorkTask.Receiver == Model.User)
+                                {
+                                    <span class="badge badge-danger">S</span>
+                                }
                             }
-                        }
                     </td>
-                <td >
+        
+                    <td>@item.WorkTask.CreatedDate</td>
+                    <td class="@(item.WorkTask.IsCompleted ? "text-success" :"text-danger")">@(item.WorkTask.IsCompleted ? "Tamamlandı" : item.WorkTask.InProcess ? item.WorkTaskUsers.Where(c=>c.InProcess==true && c.WorkTaskId == item.WorkTask.TaskId ).Count() > 1 ? item.WorkTaskUsers[0].User.UserName  + " ve diğer " + item.WorkTaskUsers.Where(c=>c.InProcess==true && c.WorkTaskId == item.WorkTask.TaskId && c.User != item.WorkTaskUsers[0].User).Count()+ " kişi ilgileniyor" : item.WorkTaskUsers.Where(c=>c.InProcess == true).First().User.UserName + " ilgileniyor" : "Tamamlanmadı")</td>
+                    <td>
+                        @if(item.WorkTask.Receiver != null)
+                        {
+                                @item.WorkTask.Receiver.UserName
+                                if(item.WorkTask.Receiver == Model.User)
+                                {
+                                    <span class="badge badge-warning">Size</span>
+                                }
+                            }
+                        </td>
+                    <td >
                        
 
                     <button class=" btn btn-icon p-3 " data-bs-toggle="modal" data-bs-target="#kt_modal_@i">
@@ -188,47 +188,47 @@
                         }
 
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
             
-            <div class="modal fade" tabindex="-1" id="transfer_modal_@i">
-                <div class="modal-dialog">
-                    <form method="post">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                    <div class="modal fade" tabindex="-1" id="transfer_modal_@i">
+                        <div class="modal-dialog">
+                            <form method="post">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Modal title</h5>
 
-                            <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                                <span class="svg-icon svg-icon-2x"></span>
+                                    <!--begin::Close-->
+                                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                        <span class="svg-icon svg-icon-2x"></span>
+                                    </div>
+                                    <!--end::Close-->
+                                </div>
+
+                                <div class="modal-body">
+                                    <select class="form-select" asp-for="User.Id" data-control="select2" data-placeholder="Select an option" required>
+                                    <option value="">Lütfen transfer edeceğiniz kişiyi seçiniz.</option>
+                                            @foreach(var user in Model.AllUsers)
+                                            {
+                                                if (item.WorkTaskUsers.Find(c=>c.UserId == user.Id) == null)
+                                                {
+                                                <option value="@user.Id">@user.UserName</option>
+                                                }
+                                                
+                                            }
+                                    </select>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    
+                                    <button type="submit" asp-action="TransferTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-primary">Transfer Et</button>
+                                </div>
+
                             </div>
-                            <!--end::Close-->
+                            </form>
                         </div>
-
-                        <div class="modal-body">
-                            <select class="form-select" asp-for="User.Id" data-control="select2" data-placeholder="Select an option" required>
-                            <option value="">Lütfen transfer edeceğiniz kişiyi seçiniz.</option>
-                                    @foreach(var user in Model.AllUsers)
-                                    {
-                                        if (item.WorkTaskUsers.Find(c=>c.UserId == user.Id) == null)
-                                        {
-                                           <option value="@user.Id">@user.UserName</option>
-                                        }
-                                        
-                                    }
-                              </select>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            
-                            <button type="submit" asp-action="TransferTask" asp-route-taskId="@item.WorkTask.TaskId" class="btn btn-primary">Transfer Et</button>
-                        </div>
-
                     </div>
-                    </form>
-                </div>
-            </div>
 
 
             

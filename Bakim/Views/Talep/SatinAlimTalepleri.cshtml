@@ -1,16 +1,7 @@
 @using Bakim.ViewModels;
 
 @model TalepViewModel;
- <script src="/js/jsPDF/jspdf.plugin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" integrity="sha512-03CCNkeosDFN2zCCu4vLpu3pJfZcrL48F3yB8k87ejT+OVMwco7IH3FW02vtbGhdncS6gyYZ/duYaC/K62xQPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-
-<script>
-    window.jsPDF = window.jspdf.jsPDF;
-</script>
 
 <div class="modal fade" tabindex="-1" id="BirimDescribingConfirmationModal">
     <div class="modal-dialog modal-xl modal-fullscreen-lg-down"><div class="modal-content">
@@ -291,6 +282,7 @@
         }
         $('#talepidd').val(id);
         $('#ttalepid').val(id);
+        
         $.ajax({
             url: "/Talep/TalepGetir",
             async: true,

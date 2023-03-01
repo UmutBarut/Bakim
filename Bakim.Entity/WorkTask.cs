@@ -28,6 +28,7 @@ namespace Bakim.Entity
         public int SectionFaultId { get; set; }
         public bool Acil { get; set; }
         public string? ImagePath { get; set; }
+        public int? VarlikId { get; set; }
 
         public SectionFault SectionFault { get; set; }
         public Section Section { get; set; }

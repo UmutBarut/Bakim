@@ -191,12 +191,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFybGlrXFZhcmxpa0xpc3RlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/Acer/Desktop/Bakim/mes-bakim/Bakim/Views/WorkTasks/AddTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ya1Rhc2tzXEFkZFRhc2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/Acer/Desktop/Bakim/mes-bakim/Bakim/Views/WorkTasks/deneme.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ya1Rhc2tzXGRlbmVtZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/Acer/Desktop/Bakim/mes-bakim/Bakim/Views/WorkTasks/EndTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ya1Rhc2tzXEVuZFRhc2suY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/Acer/Desktop/Bakim/mes-bakim/Bakim/Views/WorkTasks/is-emirleri.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ya1Rhc2tzXGlzLWVtaXJsZXJpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/Acer/Desktop/Bakim/mes-bakim/Bakim/Views/WorkTasks/StartTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV29ya1Rhc2tzXFN0YXJ0VGFzay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/Acer/Desktop/Bakim/mes-bakim/Bakim/Views/WorkTasks/TaskDetails.cshtml]

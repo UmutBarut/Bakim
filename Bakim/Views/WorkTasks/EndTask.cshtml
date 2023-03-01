@@ -1,0 +1,184 @@
+@using Bakim.Entity.Views;
+
+@model DenemeViewModel
+
+
+
+<div class="container">
+    <div class="card card-flush shadow-sm">
+        <form asp-controller="WorkTasks" asp-action="EndTask" asp-route-id="@Model.Task.TaskId" method="POST">
+            <div class="card-header">
+                <h3 class="card-title">@Model.Task.TaskTitle</h3>
+
+                <a asp-controller="WorkTasks" asp-action="TaskDetails" asp-route-id="@Model.Task.TaskId" class="btn btn-icon btn-warning mt-4">
+                    <span class="svg-icon svg-icon-white svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/><rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/>
+                    <rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>
+                </a>
+            </div>  
+            <div class="card-body py-5">
+                <div class="row">
+                    <div class="d-flex justify-content-center mt-4 mb-10"><h4>İş Emrini Kapatıyorsunuz</h4></div>         
+
+                    <div class="col-md-4">
+                        <div class="mt-10 mb-10">
+                                <label for="exampleFormControlInput1" class="form-label">Stok</label>
+                                <select id="stockselect" class="form-select form-select-sm form-select-solid"
+                                    data-control="select2" name="StokKategoriId" data-placeholder="Stok Seçiniz">
+                                    <option value=""></option>
+                                    @foreach (var item in Model.stock)
+                                    {
+                                        <option value="@item.StockId">@item.StockName</option>
+                                    }
+                                </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mt-10 mb-10">
+                            <label for="exampleFormControlInput1" class="form-label">Miktar</label>
+                            <input id="miktar" type="number" class="form-control form-control-sm form-control-solid"
+                                placeholder="Stok Miktarı Yazınız" name="StockAmount" />
+                        </div>   
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-center">
+                        <div class="mt-auto mb-10">
+                            <button  id="addbutton" class="btn btn-primary btn-sm" type="button">Stok Ekle</button>
+                        </div>
+                    </div>
+                
+                    <div class="d-flex mt-10">
+                            
+                        @(Html.DevExtreme().DataGrid<Task_Stock>()
+                            .ID("dxContainer")
+                            .DataSource(d => d.Mvc()
+                            .Controller("WorkTasks")
+                            .LoadAction("GetAllStockForTask")
+                            .UpdateAction("UpdateStockForTask")
+                            .DeleteAction("DeleteStockForTask")
+                            .InsertAction("AddStockForTask")
+                            .Key("Task_StockId")
+
+                            )
+                            .RemoteOperations(true)
+                            .Columns(columns => {
+
+                            columns.AddFor(m => m.StockId).AllowEditing(true).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("StokGetir").Key("StockId")).DisplayExpr("StockName").ValueExpr("StockId")).Alignment(HorizontalAlignment.Left).Caption("Stok").AllowFiltering(true);
+
+                            columns.AddFor(m => m.StockAmount).Alignment(HorizontalAlignment.Left).Caption("Miktar").AllowFiltering(true);
+
+                            })
+                            .SearchPanel(s => s
+                            .Visible(true)
+                            .HighlightCaseSensitive(true)
+                            .Placeholder("Ara")
+                            .Width(300)
+                            )
+                            .FilterRow(f => f.Visible(true))
+                            .HeaderFilter(f => f.Visible(true))
+                            .GroupPanel(p => p.Visible(true).EmptyPanelText("Kullanılan Stoklar"))
+                            .Height(600)
+                            .ShowBorders(true)
+                            .Pager(p=>
+                            p.AllowedPageSizes(new List<int>{25})
+                            .ShowNavigationButtons(true)
+                            .ShowPageSizeSelector(false)
+                            .Visible(true)
+                            .ShowNavigationButtons(true)
+
+                            )
+                             .Editing(e =>
+                            e.AllowAdding(false) 
+                            .AllowDeleting(true)
+                            .AllowUpdating(true)
+                            .UseIcons(true)
+                            )
+                            .Paging(p=>p.PageSize(5))
+                            .Pager(p=>
+                            p.AllowedPageSizes(new JS("[5, 10, 20]"))
+                            .ShowNavigationButtons(true)
+                            .ShowPageSizeSelector(true)
+                            .Visible(true)
+                            .ShowNavigationButtons(true)
+                            .ShowInfo(true)
+                            .DisplayMode(GridPagerDisplayMode.Full)
+                            )
+                            .Grouping(g => g.AutoExpandAll(false))
+                            )
+                    </div>
+
+                    <div class="d-flex flex-column mt-10 mb-10">
+                        <label for="exampleFormControlTextarea1" class="form-label">Yapılan İş Açıklaması</label>
+                        <textarea class="form-control form-control-sm form-control-solid"  id="exampleFormControlTextarea1" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit">Kaydı Kapat</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+
+    
+
+    
+
+     $(document).ready(function(){
+
+        $("#addbutton").click(function()
+        {          
+            var stok =   $("#stockselect").val();
+            var miktar =   $("#miktar").val();
+
+            let element = document.getElementById("dxContainer");
+            let instance = DevExpress.ui.dxDataGrid.getInstance(element);
+           
+            instance.refresh();
+
+            $.ajax({
+            url: "/WorkTasks/AddStockForTask",
+            async: true,
+            method: "POST",
+            data:{stockId: stok, stockAmount: miktar,taskId: @Model.Task.TaskId},
+            success: function (result) {
+                if(stok !== null && miktar !== null)
+                {
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Stok Başarıyla Eklendi',
+                showConfirmButton: false,
+                timer: 1100
+                })
+                $("#stockselect").val("").trigger("change");
+                $("#miktar").val("");
+                }
+              
+            },
+             error: function () {
+                if(stok === null && miktar === null)
+                {
+                    Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Stok Ekleme Başarısız',
+                showConfirmButton: false,
+                timer: 1100
+                })
+                }
+                
+            }
+        })
+        })
+
+    })
+    
+
+
+</script>

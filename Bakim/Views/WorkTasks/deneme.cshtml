@@ -1,8 +1,12 @@
+@using Bakim.Entity.Views;
+
 @model DenemeViewModel
 @* @{
     int i = 0;
     int k = 0;
 } *@
+
+
 
 
 <div class="container">
@@ -71,219 +75,70 @@
                 </div>
             </div>
         </div>
-            <div class="d-flex justify-content-end mb-4"><button class="btn bg-primary btn-active-light-secondary text-white" data-bs-toggle="modal" data-bs-target="#addTask"><i class="fa fa-plus" style="color: white" aria-hidden="true"></i> Yeni İş Emri Oluştur</button></div>
+    </div>
+   
+    <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">İş Emirleri</h3>
+            <div class="card-toolbar">
+                    <div class="d-flex justify-content-end mt-3"><a asp-controller="Worktasks" asp-action="AddTask" class="btn bg-primary btn-active-light-secondary text-white"><i class="fa fa-plus" style="color: white" aria-hidden="true"></i> Yeni İş Emri Oluştur</a></div>
+            </div>
+        </div>
+        <div class="card-body py-5">
+            @(Html.DevExtreme().DataGrid<atanankullanicilar>()
+            
+            .ID("taleplistesi")
+            .ShowBorders(true)
+            .DataSource(d => d.Mvc().LoadAction("NaletTablo").Controller("WorkTasks"))
+            .FilterRow(filterRow => filterRow
+            .Visible(true)
+            .ApplyFilter(GridApplyFilterMode.Auto)
+            )
+            .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
+            .Paging(paging => paging.PageSize(5))
+            .Pager(p=>
+            p.AllowedPageSizes(new JS("[5, 10, 20]"))
+            .ShowNavigationButtons(true)
+            .ShowPageSizeSelector(true)
+            .Visible(true)
+            .ShowNavigationButtons(true)
+            .ShowInfo(true)
+            .DisplayMode(GridPagerDisplayMode.Full)
+            )
+            .KeyExpr("TaskId")
+            
+            .Columns(columns => {
+                @* columns.AddFor(m => m.ImagePath).CellTemplate(@<text>
+                    <div>
+                    <img style="max-width:100%; height:auto;" src="/app/images/worktasks/<%- data.ImagePath %>" alt="" />
+                    </div>
+                    </text>).Caption("IsEmri Resmi"); *@
+
+            columns.AddFor(m => m.TaskTitle).Caption("İş Emri").Alignment(HorizontalAlignment.Left).Width(250);
+
+            columns.AddFor(m=> m.TaskDescription).Caption("Açıklama").Alignment(HorizontalAlignment.Center);
+
+            columns.AddFor(m => m.CreatedDate).SortOrder(SortOrder.Desc).Caption("Oluşturma Tarihi").Alignment(HorizontalAlignment.Center).Width(200);
+
+            columns.AddFor(m=>m.Durum).Alignment(HorizontalAlignment.Center).Caption("Durum").AllowEditing(false).AllowFiltering(false).AllowSearch(false).Width(200);
+
+            columns.AddFor(m=>m.ReceiverId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("usergetir").Key("Id")).DisplayExpr("UserName").ValueExpr("Id")).Caption("Atanan Kullanıcı").Alignment(HorizontalAlignment.Center);
+
+            columns.AddFor(m=>m.TaskId).Alignment(HorizontalAlignment.Center).Caption("").AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detailbutton")); 
+
+            })
+                .Selection(s=> s.Mode(SelectionMode.Multiple))
+                .Export(e=> e.Enabled(true)
+                .AllowExportSelectedData(true)
+                )
+                .OnExporting("selectExport")
+            ) 
+        </div>
+        <div class="card-footer">
+        </div>    
     </div>
 
     
-    <div class="modal fade" tabindex="-1" id="addTask">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <form  asp-controller="WorkTasks" asp-action="AddTask" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Yeni İş Emri</h3>
-
-                        <!--begin::Close-->
-                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                            <span class="svg-icon svg-icon-1"></span>
-                        </div>
-                        <!--end::Close-->
-                    </div>
-
-                    <div class="modal-body">   
-                        <div class="row">
-                            <div class="col-md-6 mb-10">
-                                <label for="exampleFormControlInput1" class="form-label">Resim</label>
-                                <br>
-                                <br>
-                                <!--begin::Image input-->
-                                <div class="image-input image-input-outline" data-kt-image-input="true"
-                                    style="background-image: url(/app/images/worktasks)">
-                                    <!--begin::Image preview wrapper-->
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url()"></div>
-                                    <!--end::Image preview wrapper-->
-
-                                    <!--begin::Edit button-->
-                                    <label
-                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="change" data-bs-toggle="tooltip" data-bs-dismiss="click"
-                                        title="Change avatar">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
-
-                                        <!--begin::Inputs-->
-                                        <input type="file" name="file" accept=".png, .jpg, .jpeg" style="object-fit:cover;"/>
-                                        <input type="hidden" name="avatar_remove"/>
-                                        <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Edit button-->
-
-                                    <!--begin::Cancel button-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click"
-                                        title="Cancel avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Cancel button-->
-
-                                    <!--begin::Remove button-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip" data-bs-dismiss="click"
-                                        title="Remove avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Remove button-->
-                                </div>
-                                <!--end::Image input-->
-                            </div>
-                            <div class="col-md-6 row">
-                                <div class="col-md-12">
-                                    <label for="exampleFormControlInput1" class="required form-label">Birim</label>
-                                    <select class="form-select form-select-sm form-select-solid" asp-for="Task.SectionId" data-control="select2"
-                                       data-placeholder="Birim Seçiniz">
-                                        <option value=""></option>
-                                        @foreach (var item in Model.SectionDto.Sections)
-                                        {
-                                            <option value="@item.SectionId">@item.SectionName</option>
-                                        }
-                                        
-                                    </select>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="exampleFormControlInput1" class="required form-label">Arıza</label>
-                                    <select class="form-select form-select-sm form-select-solid"  asp-for="Task.SectionFaultId"
-                                        data-control="select2" data-placeholder="Arıza Seçiniz">
-                                        <option value=""></option>
-                                        @foreach(var item in Model.SectionDto.SectionFaults)
-                                        {
-                                            <option value="@item.SectionFaultId">@item.SectionFaultName</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column mt-4">
-                                <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
-                                <textarea asp-for="Task.TaskDescription" class="form-control form-control-sm form-control-solid" rows="5"></textarea>
-                            </div>
-                            <div class="col-md-6 mb-6 mt-8">
-                                <label for="exampleFormControlInput1" class="form-label">Atanacak Kullanıcı</label>
-                                <select asp-for="Task.ReceiverId" class="form-select form-select-sm form-select-solid col-12 hht-select-2" data-control="select2" id="" 
-                                data-placeholder="Kullanıcı Seçiniz" >
-                                    <option value="@null">Hepsi</option>
-                                    @foreach (var item in Model.AllUsers)
-                                    {
-                                        <option value="@item.Id">@item.UserName</option>
-                                    }
-                                </select>
-                            </div>
-                            <div class="col-md-6  mt-10 d-flex align-items-center justify-content-center">
-                                <div class="form-check form-switch"> 
-                                    <input class="form-check-input" type="checkbox" asp-for="Task.Acil" id="flexCheckDefault"/>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Acil İş Emri
-                                    </label>
-                                </div>  
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
-                        <button type="submit"  class="btn btn-primary">Oluştur</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-           
-
-            <div class="modal fade" tabindex="-1" id="starttaskmodal">
-                <div class="modal-dialog modal-xl"> 
-                    <div class="modal-content">
-                        <form asp-controller="WorkTasks" asp-action="StartTask" method="POST">
-                            <div class="modal-header">
-                                <h2 class="modal-title">asda</h2>
-
-                                  <a asp-controller="" asp-action="" class="btn btn-icon btn-warning">
-                                    <span class="svg-icon svg-icon-white svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/><rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/>
-                                    <rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>
-                                </a>
-                               
-                            </div>
-
-                            <div class="modal-body">
-                                <input type="hidden" id="taskidd" name="TaskId">
-                                    <div class="d-flex justify-content-center">
-                                        <h3>Durum</h3>
-                                    </div>
-                                    
-                                <div class=" d-flex flex-column mt-10 mb-10">
-                                    <label for="" class="form-label">İş Açıklaması</label>
-                                    <textarea class="form-control form-control-sm form-control-solid" rows="5"></textarea>
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
-                                <button type="submit" class="btn btn-primary">Başla</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-   
-
-     @(Html.DevExtreme().DataGrid<WorkTask>()
-        
-        .ID("taleplistesi")
-        .ShowBorders(true)
-        .DataSource(d => d.Mvc().LoadAction("GetIsEmri").Controller("WorkTasks"))
-        .FilterRow(filterRow => filterRow
-        .Visible(true)
-        .ApplyFilter(GridApplyFilterMode.Auto)
-        )
-        .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
-        .Paging(paging => paging.PageSize(5))
-        .Pager(p=>
-        p.AllowedPageSizes(new JS("[5, 10, 20]"))
-        .ShowNavigationButtons(true)
-        .ShowPageSizeSelector(true)
-        .Visible(true)
-        .ShowNavigationButtons(true)
-        .ShowInfo(true)
-        .DisplayMode(GridPagerDisplayMode.Full)
-        )
-        .KeyExpr("TaskId")
-        
-        .Columns(columns => {
-            @* columns.AddFor(m => m.ImagePath).CellTemplate(@<text>
-                <div>
-                <img style="max-width:100%; height:auto;" src="/app/images/worktasks/<%- data.ImagePath %>" alt="" />
-                </div>
-                </text>).Caption("IsEmri Resmi"); *@
-
-        columns.AddFor(m => m.TaskTitle).Caption("İş Emri").Alignment(HorizontalAlignment.Left);
-
-        columns.AddFor(m => m.CreatedDate).SortOrder(SortOrder.Desc).Caption("Oluşturma Tarihi").Alignment(HorizontalAlignment.Left);
-
-
-
-        columns.AddFor(m=>m.ReceiverId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("usergetir").Key("Id")).DisplayExpr("UserName").ValueExpr("Id")).Caption("Atanan Kullanıcı").Alignment(HorizontalAlignment.Left);
-
-        columns.AddFor(m=>m.TaskId).Alignment(HorizontalAlignment.Center).Caption("").AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detailbutton")); 
-
-        })
-            .Selection(s=> s.Mode(SelectionMode.Multiple))
-            .Export(e=> e.Enabled(true)
-            .AllowExportSelectedData(true)
-            )
-            .OnExporting("selectExport")
-        ) 
 </div>
 
 <script>
@@ -292,44 +147,32 @@
     {
         if(options.data.IsActive == true && options.data.InProcess == false && options.data.IsCompleted == false)
         {
-            $('<button class="btn btn-icon btn-primary ms-4" onclick="starttaskmodal('+options.data.TaskId+')">\
+            $('<a href="/Worktasks/StartTask?id=' + options.data.TaskId + '"  class="btn btn-icon btn-primary ms-4">\
                     <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
                     <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
-                </button>').appendTo(container);
+                </a>').appendTo(container);
         }
 
          if(options.data.IsActive == true && options.data.InProcess ==  true && options.data.IsCompleted == false)
         {
-            $('<button class="btn btn-icon btn-warning ms-4"  onclick="openfirstmodal('+options.data.TaskId+')">\
+            $('<a href="/WorkTasks/EndTask?id=' + options.data.TaskId + '" class="btn btn-icon btn-warning ms-4" >\
                     <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
                     <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
-                </button>').appendTo(container);
+                </a>').appendTo(container);
         }
 
         if(options.data.IsActive == false && options.data.InProcess ==  false && options.data.IsCompleted == true)
         {
-            $('<button class="btn btn-icon btn-success ms-4"  onclick="openfirstmodal('+options.data.TaskId+')">\
+            $('<a href="" class="btn btn-icon btn-success ms-4">\
                     <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
                     <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
-                </button>').appendTo(container);
+                </a>').appendTo(container);
         }
     }
 
+   
 
-
-     function starttaskmodal(id)
-    {
-        $('#taskidd').val(id);
-        $.ajax({
-            url: "/WorkTasks/StartTask",
-            async: true,
-            method: "POST",
-            data: {id : id}
-        }).then(function(result){ 
-            $('#starttaskmodal').modal("show");
-        });
-    } 
-
+   
 
 
 

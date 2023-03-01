@@ -41,6 +41,7 @@ namespace Bakim.Dataaccess.Concrete.Contexts
         public DbSet<Birim> Birimler { get; set; }
         public DbSet<Talep> Talepler { get; set; }
         public DbSet<atanankullanicilar> atanankullanicilars { get; set; }
+        public DbSet<Task_Stock> Task_Stock { get; set; }
         
 
         

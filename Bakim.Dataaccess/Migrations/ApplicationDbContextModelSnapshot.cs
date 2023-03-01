@@ -611,6 +611,26 @@ namespace Bakim.Dataaccess.Migrations
                     b.ToTable("Talepler");
                 });
 
+            modelBuilder.Entity("Bakim.Entity.Task_Stock", b =>
+                {
+                    b.Property<int>("Task_StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockAmount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Task_StockId");
+
+                    b.ToTable("Task_Stock");
+                });
+
             modelBuilder.Entity("Bakim.Entity.TedarikciFirma", b =>
                 {
                     b.Property<int>("FirmaId")
@@ -719,6 +739,43 @@ namespace Bakim.Dataaccess.Migrations
                     b.ToTable("VarlikGroups");
                 });
 
+            modelBuilder.Entity("Bakim.Entity.Views.atanankullanicilar", b =>
+                {
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Durum")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("InProcess")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StarterId")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("TaskDescription")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TaskTitle")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.ToView("atanankullanicilar");
+                });
+
             modelBuilder.Entity("Bakim.Entity.WorkTask", b =>
                 {
                     b.Property<int>("TaskId")
@@ -771,6 +828,9 @@ namespace Bakim.Dataaccess.Migrations
                     b.Property<string>("TaskTitle")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("VarlikId")
+                        .HasColumnType("int");
 
                     b.HasKey("TaskId");
 

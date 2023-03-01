@@ -104,7 +104,9 @@ namespace Bakim.Business.DependencyResolvers.Autofac
             builder.RegisterType<TalepDal>().As<ITalepDal>().SingleInstance();
             builder.RegisterType<TalepManager>().As<ITalepService>().SingleInstance();
 
-            
+            builder.RegisterType<Task_StockDal>().As<ITask_StockDal>().SingleInstance();
+            builder.RegisterType<Task_StockManager>().As<ITask_StockService>().SingleInstance();
+        
                         
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces().EnableInterfaceInterceptors(new ProxyGenerationOptions()

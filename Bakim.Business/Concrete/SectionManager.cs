@@ -35,7 +35,7 @@ namespace Bakim.Business.Concrete
 
         public IDataResult<Section> GetById(int sectionId)
         {
-            return new SuccessDataResult<Section>(_sectionDal.GetAll(c => c.SectionId == sectionId).First());
+            return new SuccessDataResult<Section>(_sectionDal.GetAll(c => c.SectionId == sectionId).FirstOrDefault());
         }
 
         public IResult Update(Section section)
