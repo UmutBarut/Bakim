@@ -49,9 +49,8 @@ namespace Bakim.Controllers
             
         }
 
-        public async Task<IActionResult> deneme(int id)
+        public async Task<IActionResult> WorkTasks(int id)
         {
-
             var tasks = _workTaskService.GetTasks().Data;
             List<WorkTaskDto> dtos = new();
             var sections = _sectionService.GetAll().Data;
@@ -63,7 +62,6 @@ namespace Bakim.Controllers
                 Sections = sections,
                 SectionFaults = sectionFaults
             };
-
 
             // foreach(var item in tasks)
             // {
@@ -91,12 +89,13 @@ namespace Bakim.Controllers
             //     }
             // }
 
-            DenemeViewModel model = new()
+            TaskViewModel model = new()
             {
                 AllUsers = users,
                 SectionDto = sectionDto,
                 Task = task,
-                Dtos = dtos
+                Dtos = dtos,
+                WorkTasks = tasks
             };
 
             using( var Contexts = new ApplicationDbContext())
@@ -132,7 +131,7 @@ namespace Bakim.Controllers
            var Contexts = new ApplicationDbContext();
              
 
-            var result = new DenemeViewModel()
+            var result = new TaskViewModel()
             {
 
                 User = user,
@@ -147,7 +146,7 @@ namespace Bakim.Controllers
         }
 
 
-        public object NaletTablo(DataSourceLoadOptions loadOptions)
+        public object WorkTaskTable(DataSourceLoadOptions loadOptions)
         {
             using(var Contexts = new ApplicationDbContext())
             {
@@ -230,9 +229,6 @@ namespace Bakim.Controllers
                 };
             return View("is-emirleri",result);
         }
-
-
-
 
 
          public IActionResult Index()
@@ -328,7 +324,7 @@ namespace Bakim.Controllers
                 SectionFaults = sectionFaults
            };
             
-           DenemeViewModel model = new DenemeViewModel()
+           TaskViewModel model = new TaskViewModel()
            {
                 User = await _userManager.GetUserAsync(HttpContext.User),
                 Section = _sectionService.GetAll().Data.FirstOrDefault(),
@@ -363,7 +359,7 @@ namespace Bakim.Controllers
             _workTaskService.Add(task);
             _fileService.AddForIsEmri(file,task);
 
-            return RedirectToAction("deneme");
+            return RedirectToAction("WorkTasks");
         }
         
 
@@ -377,14 +373,14 @@ namespace Bakim.Controllers
             var sectionFaults = _sectionFaultService.GetAll().Data;
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            // var worktaskusers = _workTaskUserService.GetTaskUsers(task.TaskId).Data;
-            // var WorkTaskTransfer = _workTaskTransferService.GetAll(task.TaskId).Data;
+            var worktaskusers = _workTaskUserService.GetTaskUsers(task.TaskId).Data;
+            var WorkTaskTransfer = _workTaskTransferService.GetAll(task.TaskId).Data;
 
-            // WorkTaskDto workTaskDto = new WorkTaskDto()
-            // {
-            //     WorkTaskUsers = worktaskusers,
-            //     WorkTask = task
-            // };
+             WorkTaskDto workTaskDto = new WorkTaskDto()
+            {
+                 WorkTaskUsers = worktaskusers,
+                 WorkTask = task
+            };
            
             SectionDto sectionDto = new SectionDto()
             {
@@ -392,11 +388,12 @@ namespace Bakim.Controllers
                 SectionFaults = sectionFaults
             };
 
-            DenemeViewModel model = new()
+            TaskViewModel model = new()
             {
                 Task = task,
                 SectionDto = sectionDto,
-                Dtos = dtos  
+                Dtos = dtos,
+                User = user
                 
             };
             
@@ -428,23 +425,28 @@ namespace Bakim.Controllers
             _workTaskUserService.Add(workTaskUser);
             _workTaskService.Update(task);
 
-            return RedirectToAction("deneme");
+            return RedirectToAction("WorkTasks");
         }
 
         [HttpGet]
         public async Task<IActionResult> EndTask(int? id)
         {
             var task = _workTaskService.GetTasks(c=>c.TaskId == id).Data.FirstOrDefault();
+            List<WorkTaskDto> dtos = new();  
             var user = await _userManager.GetUserAsync(HttpContext.User);
-                
+            var worktaskusers = _workTaskUserService.GetTaskUsers(task.TaskId).Data;
+
+             
             var stoklar = _stockService.StockList().Data;
 
 
-            DenemeViewModel model = new()
+            TaskViewModel model = new()
             {
                 Task = task,
                 User = user,
                 stock = stoklar,
+                Dtos = dtos,
+                WorkTaskUsers = worktaskusers
                
             };
            
@@ -461,11 +463,12 @@ namespace Bakim.Controllers
         
 
         [HttpGet]
-        public object GetAllStockForTask(DataSourceLoadOptions loadOptions)
+        public object GetAllStockForTask(DataSourceLoadOptions loadOptions,int id)
         {
-            var result = _task_StockService.GetAll().Data;
+            
+            var result = _task_StockService.GetAll(c=>c.TaskId == id).Data;
             return DataSourceLoader.Load(result, loadOptions);
-        }
+        } 
 
         [HttpPost]
         public async Task<bool> AddStockForTask(int stockId,int stockAmount,int taskId)
@@ -492,15 +495,8 @@ namespace Bakim.Controllers
             return Ok(result);
         }
 
-
-
-
-
-       
-        
-
         [HttpPost]
-        public async Task<IActionResult> EndTask(DenemeViewModel p, int id){
+        public async Task<IActionResult> EndTask(TaskViewModel p, int id){
             var task = _workTaskService.GetSingle(c => c.TaskId == id).Data;
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var userTask = _workTaskUserService.GetTaskUsers(task.TaskId).Data.Where(c => c.UserId == user.Id).FirstOrDefault();
@@ -515,10 +511,10 @@ namespace Bakim.Controllers
             _workTaskUserService.Update(userTask);
             
             
-            return RedirectToAction("deneme");
+            return RedirectToAction("WorkTasks");
         }
 
-        public async Task<IActionResult> CloseTask(int id, DenemeViewModel p)
+        public async Task<IActionResult> CloseTask(int id, TaskViewModel p)
         {
             var task = _workTaskService.GetSingle(t => t.TaskId == id).Data;
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -535,7 +531,7 @@ namespace Bakim.Controllers
             task.CompletedDate = DateTime.Now;
             task.IsActive = false;
             _workTaskService.Update(task);
-            return RedirectToAction("deneme");
+            return RedirectToAction("WorkTasks");
         }
 
 
@@ -546,7 +542,7 @@ namespace Bakim.Controllers
             var task = _workTaskService.GetSingle(c => c.TaskId == taskId).Data;
             var userToTransfer = await _userManager.FindByIdAsync(user.Id);
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            WorkTaskUser workTaskUser = _workTaskUserService.GetTaskUsers(taskId).Data.Where(c=>c.UserId == currentUser.Id).First();
+            WorkTaskUser workTaskUser = _workTaskUserService.GetTaskUsers(taskId).Data.Where(c=>c.UserId == currentUser.Id).FirstOrDefault();
             workTaskUser.UserId = userToTransfer.Id;
             workTaskUser.User = userToTransfer;
             _workTaskUserService.Update(workTaskUser);
@@ -563,7 +559,7 @@ namespace Bakim.Controllers
             _workTaskService.Update(task);
             _workTaskTransferService.Add(transfer);
 
-            return RedirectToAction("IsEmirleri","Worktasks");
+            return RedirectToAction("WorkTasks");
         }
 
         public async Task<IActionResult> AddUserToTask(int taskId)
@@ -578,15 +574,22 @@ namespace Bakim.Controllers
                 WorkTaskId = task.TaskId,
                 InProcess = true,
                 StartedDate = DateTime.Now
-                
             };
             _workTaskUserService.Add(user);
-            return RedirectToAction("IsEmirleri","Worktasks");
+            return RedirectToAction("Worktasks");
         }
 
+        [HttpGet]
         public async Task<IActionResult> TaskDetails(int id)
         {
-            var task = _workTaskService.GetSingle(c => c.TaskId == id).Data;
+            var task = _workTaskService.GetSingle(c=>c.TaskId == id).Data;
+            var section = _sectionService.GetAll().Data.FirstOrDefault();
+            var sectionFault = _sectionFaultService.GetAll().Data.FirstOrDefault();
+            var varlik = _varlikService.GetAll().Data.FirstOrDefault();
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var users = _userManager.Users.ToList();
+            
+
             if (task.ReceiverId != null)
             {
                 task.Receiver = await _userManager.FindByIdAsync(task.ReceiverId);
@@ -595,7 +598,6 @@ namespace Bakim.Controllers
             var taskTransfers = _workTaskTransferService.GetAll(id).Data;
             foreach (var taskUser in taskUsers)
             {
-                
                 taskUser.User = await _userManager.FindByIdAsync(taskUser.UserId);
                 taskUser.WorkTask = task;
             }
@@ -603,13 +605,19 @@ namespace Bakim.Controllers
             {
                 taskTransfer.TransferredUser = await _userManager.FindByIdAsync(taskTransfer.TransferredUserId);
             }
-            WorkTaskDto dto = new WorkTaskDto()
+            TaskViewModel model = new TaskViewModel()
             {
-                WorkTask = task,
+                Task = task,
                 WorkTaskTransfers = taskTransfers,
-                WorkTaskUsers = taskUsers
+                WorkTaskUsers = taskUsers,
+                Section = section,
+                SectionFault = sectionFault,
+                varlik = varlik,
+                User = currentUser,
+                AllUsers = users
+               
             };
-            return View(dto);
+            return View(model);
         }
     }
 }

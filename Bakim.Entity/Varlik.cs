@@ -20,6 +20,7 @@ namespace Bakim.Entity
         public int ProductionSectionId { get; set; }
         public bool InUse { get; set; }
         public bool Pasif { get; set; }
+        public DateTime? UploadDate { get; set; }
         public DetayGroup DetayGroup { get; set; }
         public VarlikGroup VarlikGroup { get; set; }
 

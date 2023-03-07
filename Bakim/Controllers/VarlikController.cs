@@ -176,17 +176,17 @@ namespace Bakim.Controllers
             List<Varlik> model = new List<Varlik>();
             if(id == 2 || id ==  null)
             {
-            model = _varlikService.GetAll().Data;
+            model = _varlikService.GetAll().Data.OrderByDescending(d=>d.UploadDate).ToList();
             }
 
             if(id == 1)
             {
-            model = _varlikService.GetAll(c=> c.Pasif == false).Data;
+            model = _varlikService.GetAll(c=> c.Pasif == false).Data.OrderByDescending(d=>d.UploadDate).ToList();
             }
 
             if(id == 0)
             {
-            model = _varlikService.GetAll(c=> c.Pasif == true).Data;
+            model = _varlikService.GetAll(c=> c.Pasif == true).Data.OrderByDescending(d=>d.UploadDate).ToList();
             }
             
             model.ForEach(c => c.DetayGroup = _detayGroupService.GetAll(k => k.DetayGroupId == c.DetayGroupId).Data.FirstOrDefault());
@@ -278,15 +278,15 @@ namespace Bakim.Controllers
             List<Stock> model = new List<Stock>();
             if(id == 2 || id == null || id == 0)
             {
-                model = _stockService.StockList().Data;
+                model = _stockService.StockList().Data.OrderByDescending(d=>d.UploadDate).ToList();
             }
             else if(id == 1)
             {
-                model = _stockService.StockList(c=> c.Pasif == false).Data;
+                model = _stockService.StockList(c=> c.Pasif == false).Data.OrderByDescending(d=>d.UploadDate).ToList();
             }
             else if(id == 10)
             {
-                model = _stockService.StockList(c=> c.Pasif == true).Data;
+                model = _stockService.StockList(c=> c.Pasif == true).Data.OrderByDescending(d=>d.UploadDate).ToList();
             }
 
             model.ForEach(c => c.stokKategori = _stokKategoriService.GetAll(k => k.StokKategoriId == c.StokKategoriId).Data.FirstOrDefault());

@@ -1,6 +1,6 @@
 @using Bakim.Entity.Views;
 
-@model DenemeViewModel
+@model TaskViewModel
 
 
 
@@ -57,6 +57,7 @@
                             .DeleteAction("DeleteStockForTask")
                             .InsertAction("AddStockForTask")
                             .Key("Task_StockId")
+                            .LoadParams(new{id = Model.Task.TaskId })
 
                             )
                             .RemoteOperations(true)
@@ -108,13 +109,26 @@
 
                     <div class="d-flex flex-column mt-10 mb-10">
                         <label for="exampleFormControlTextarea1" class="form-label">Yapılan İş Açıklaması</label>
-                        <textarea class="form-control form-control-sm form-control-solid"  id="exampleFormControlTextarea1" rows="5"></textarea>
+                        <textarea asp-for="taskuser.Description" name="Description" class="form-control form-control-sm form-control-solid"  id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary" type="submit">Kaydı Kapat</button>
+                  
+                        @if(Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !Model.Task.IsCompleted && Model.Task.InProcess)
+                        {
+                            if(Model.WorkTaskUsers.Where(c=>c.InProcess == true && c.WorkTaskId == Model.Task.TaskId).Count() > 1)
+                            {
+                                <button class="btn btn-danger" type="submit">Kendi Kaydını Sonlandır</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger" type="submit">Tüm Kaydı Sonlandır</button>
+                            }
+                        }
+                   
+                   
                 </div>
             </div>
         </form>

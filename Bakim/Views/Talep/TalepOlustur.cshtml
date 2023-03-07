@@ -21,6 +21,7 @@
                         <select class="form-select form-select-sm form-select-solid" data-control="select2"
                             name="VarlikId" data-placeholder="Varlık Seçiniz">
                             <option value=""></option>
+                            <option>Genel</option>
                             @foreach (var item in Model.varliklar)
                             {
                                 <option value="@item.VarlikId">@item.VarlikName</option>

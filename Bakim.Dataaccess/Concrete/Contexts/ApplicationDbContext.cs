@@ -42,6 +42,9 @@ namespace Bakim.Dataaccess.Concrete.Contexts
         public DbSet<Talep> Talepler { get; set; }
         public DbSet<atanankullanicilar> atanankullanicilars { get; set; }
         public DbSet<Task_Stock> Task_Stock { get; set; }
+        public DbSet<Marka> markalar { get; set; }
+        public DbSet<MarkaGrup> markaGrup { get; set; }
+        public DbSet<MarkaKalem> markaKalem { get; set; }
         
 
         

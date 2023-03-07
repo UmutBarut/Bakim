@@ -1,71 +1,159 @@
-﻿@model WorkTaskDto
+@model TaskViewModel;
+
 <div class="container">
-    <h5>İş emri detay</h5>
-    <div class="row pb-10" style="height: max-content;">
+    <div class="d-flex justify-content-between mb-4">
+        <h2 class="d-flex align-items-center"> - İş Emri Detay</h2>
+        <div class="align-items-center align-items-middle">
+            <div class="mt-4">
+                @if(Model.Task.InProcess && Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && Model.Task.ReceiverId == null)
+                {
+                    <button class="btn btn-success me-4"  data-bs-toggle="modal" data-bs-target="#transfer_modal">Transfer Et</button>
+                }
 
-            
-            <div class="border text-dark p-5 mt-5 text-center">
-             @Model.WorkTask.TaskTitle
-            @if(!String.IsNullOrEmpty(@Model.WorkTask.ReceiverId))
+                @if(Model.Task.InProcess && !Model.Task.IsCompleted && Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id)== null)
+                {
+                    <a asp-action="AddUserToTask" asp-route-taskId="@Model.Task.TaskId" class="btn btn-primary">Dahil ol</a>
+                } 
+            </div>
+        </div>    
+    </div>
+    <div class="card card-bordered shadow-sm">
+        <div class="card-header d-flex justify-content-center">
+                @if(!String.IsNullOrEmpty(@Model.Task.ReceiverId))
+                {
+                <h1 class="mt-6">@Model.Task.TaskTitle - @Model.Task.Receiver.UserName ' e Atandı</h1>
+                }
+        </div> 
+        <div class="card-body mt-4 py-5">
+            @if(Model.Task.Acil == true)
             {
-            <span class="text-danger">@Model.WorkTask.Receiver.UserName 'e atandı.</span>
-                
+                <div class="d-flex justify-content-center align-items-center mb-4"><h2 class="text-danger">Acil İş Emri</h2></div>
             }
-            </div>
-            <div class="mt-5">
-                <fieldset disabled>
-                <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
-                @if(Model.WorkTask.TaskDescription != null)
-                {
-                <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">@Model.WorkTask.TaskDescription</textarea>
-                    
-                }
-                else{
-                    <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">Açıklama Girilmemiş.</textarea>
-                }
-                </fieldset>
-            </div>
            
-            <div class="mt-5">
-                <p class="text-primary text-center" style="text-decoration:underline;">İşlem geçmişi   <i class="fa-solid fa-arrow-down text-primary"></i></p>
-
-                <p class="text-primary">Transferler</p>
-                @if (Model.WorkTaskTransfers.Count == 0)
-                {
-                    <p class=text-center text-dark>Transfer kaydı bulunamadı.</p>
-                }
-                @foreach (var transfer in Model.WorkTaskTransfers)
-                {
-                    <p class="text-warning">@transfer.TransferredDate tarihinde @transfer.TransferredUser.UserName 'e transfer edildi.</p>
-                }
-            </div>
-            <div class="mt-5">
-                <p class="text-primary">Kullanıcı işlemleri</p>
-                <div class="mt-5 p-5" style="background-color:#eff2f5; border-radius:.3rem;">
-                @foreach (var taskUser in Model.WorkTaskUsers.OrderBy(d=>d.StartedDate))
-                {
-                   
-                    <p class="text-warning"><i class="status-notseen text-danger" style="font-size:.8rem;"></i> <b>@taskUser.User.UserName</b> ,<span class="text-dark"> @taskUser.StartedDate tarihinde başladı.</span></p>
-                    if (!taskUser.InProcess){    
-                         <p class="text-danger">@taskUser.CompletedDate <span class="text-dark">tarihinde tamamladı.</span></p>
-                    }
-                    else{
-                        <p class="text-danger">Devam ediyor.</p>
-                    }
-                    if (!taskUser.InProcess)
+            <div class="row">
+                <div class="col-md-6">
+                    @if(Model.Task.ImagePath != null)
                     {
-                    <fieldset disabled>
-                    <label for="exampleFormControlTextarea1" class="form-label">Kullanıcı açıklaması</label>
-                    <textarea  class="form-control mb-10" id="exampleFormControlTextarea1" rows="3">@taskUser.Description</textarea>
-                    </fieldset>
-                        
+                        <img src="/app/images/worktasks/@Model.Task.ImagePath" height="200" width="200" class="img-responsive object-fit-cover border border-5">
                     }
-                   
-                }
+                    else
+                    {
+                        <img src="/media/avatars/blank.png" height="200" width="200" class="img-responsive object-fit-cover border border-5">
+                    }
+                </div>
+
+                <div class="col-md-6 row">
+                    <div class="col-md-12">
+                        <label for="SectionId" class="form-label">Birim</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid"
+                            name="SectionName" value="@Model.Section.SectionName" disabled/>
+                    </div>        
+                    <div class="col-md-12">
+                        <label for="VarlikName" class="form-label">Varlık</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid"
+                            name="VarlikName" value="@Model.varlik.VarlikName" disabled/>
+                    </div>
+                </div>   
+                
+                    <div class="mt-10 mb-10">
+                        <fieldset disabled>
+                        <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+                        @if(Model.Task.TaskDescription != null)
+                        {
+                        <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">@Model.Task.TaskDescription</textarea>
+                            
+                        }
+                        else{
+                            <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">Açıklama Girilmemiş.</textarea>
+                        }
+                        </fieldset>
+                    </div>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center mt-6 mb-10"><h1 class="text-decoration-underline text-primary">İşlem Geçmişi</h1></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-dashed shadow-sm h-100">
+                        <div class="card-header"> 
+                            <h3 class="card-title">Kullanıcı İşlemleri</h3>
+                        </div>
+                        <div class="card-body mt-6 py-5">
+                            @foreach (var taskUser in Model.WorkTaskUsers.OrderBy(d=>d.StartedDate))
+                            {
+                                <h3 class="text-primary"><i class="status-notseen text-warning" style="font-size:.8rem;"></i> <b>@taskUser.User.UserName</b> - <span class="text-dark"> @taskUser.StartedDate tarihinde başladı.</span></h3>
+                                if (!taskUser.InProcess){    
+                                    <h3 class="text-danger">@taskUser.CompletedDate <span class="text-dark">tarihinde tamamladı.</span></h3>
+                                }
+                                else{
+                                    <h3 class="text-danger mt-4">Devam ediyor.</h3>
+                                }
+                                if (!taskUser.InProcess)
+                                {
+                                    <fieldset disabled>
+                                    <label for="exampleFormControlTextarea1" class="form-label">Kullanıcı açıklaması</label>
+                                    <textarea  class="form-control mb-10" id="exampleFormControlTextarea1" rows="3">@taskUser.Description</textarea>
+                                    </fieldset>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card card-dashed shadow-sm h-100">
+                        <div class="card-header">
+                            <h3 class="card-title">Transferler</h3>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.WorkTaskTransfers.Count == 0)
+                            { 
+                                <h3 class="text-center text-dark mt-8">Transfer kaydı bulunamadı.</h3>
+                            }
+                            @foreach (var transfer in Model.WorkTaskTransfers)
+                            {
+                                <h3 class="text-warning mt-8">@transfer.TransferredDate tarihinde @transfer.TransferredUser.UserName 'e transfer edildi.</h3>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 
-           
-      
+            <div class="card-footer">
+               
+            </div>
+        </div>
+    </div> 
+
+
+     <div class="modal fade" tabindex="-1" id="transfer_modal">
+        <div class="modal-dialog">
+            <form method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">İş Emrini Transfer Edin</h5>
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                        <span class="svg-icon svg-icon-2x"></span>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select" asp-for="User.Id" data-control="select2" data-placeholder="Lütfen Transfer Edeceğiniz Kişiyi Seçiniz" required>
+                    <option value=""></option>
+                            @foreach(var user in Model.AllUsers)
+                            {
+                                if (Model.WorkTaskUsers.Find(c=>c.UserId == user.Id) == null)
+                                {
+                                    <option value="@user.Id">@user.UserName</option>
+                                }  
+                            }
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" asp-action="TransferTask" asp-route-taskId="@Model.Task.TaskId" class="btn btn-primary">Transfer Et</button>
+                </div>
+            </div>
+            </form>
+        </div>
     </div>
+
 </div>

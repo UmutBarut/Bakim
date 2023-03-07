@@ -97,6 +97,7 @@ namespace Bakim.Controllers
         public async Task<IActionResult> Varlik(IFormFile file, Varlik varlik)
         {
             varlik.CorporationId = 1;
+            varlik.UploadDate = DateTime.Now;
 
             _varlikService.Add(varlik);
             _fileService.AddForVarlik(file, varlik);
@@ -141,6 +142,7 @@ namespace Bakim.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             stock.CorporationId = user.CorporationId;
+            stock.UploadDate = DateTime.Now;
             _stockService.Add(stock);
             _fileService.AddForStock(file, stock);
             foreach (var item in firmalar)

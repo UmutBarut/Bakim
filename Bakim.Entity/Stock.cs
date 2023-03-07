@@ -25,6 +25,7 @@ namespace Bakim.Entity
         public int StockAmount { get; set; }
         public int CorporationId { get; set; }
         public bool Pasif { get; set; }
+        public DateTime? UploadDate { get; set; }
         public StokKategori stokKategori { get; set; }
         public StockGroup stokGrubu { get; set; }
         

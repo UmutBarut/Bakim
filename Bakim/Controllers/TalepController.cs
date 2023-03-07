@@ -76,24 +76,24 @@ namespace Bakim.Controllers
 
             if(id == 2 || id == null || id == 0)
             {   
-                model = _talepService.GetAll().Data;
-            }
+                model = _talepService.GetAll().Data.OrderByDescending(d=>d.CreatedDate).ToList();
+            } 
 
             if(id == 1)
             {
-                model = _talepService.GetAll(c=> c.IsApproved == true && c.IsFinished == false).Data;
+                model = _talepService.GetAll(c=> c.IsApproved == true && c.IsFinished == false).Data.OrderByDescending(d=> d.CreatedDate).ToList();
             }
 
             if(id == 10)
             {
-                model = _talepService.GetAll(c=> c.IsApproved == false).Data;
+                model = _talepService.GetAll(c=> c.IsApproved == false).Data.OrderByDescending(d=>d.CreatedDate).ToList();;
             }
             if(id == 5)
             {
-                model = _talepService.GetAll(c=> c.IsFinished == true).Data;
+                model = _talepService.GetAll(c=> c.IsFinished == true).Data.OrderByDescending(d=>d.CreatedDate).ToList();
             }
 
-            return DataSourceLoader.Load(model, loadOptions);
+            return DataSourceLoader.Load(model.OrderByDescending(d=>d.CreatedDate).ToList(), loadOptions);
         }
 
         [Authorize(Roles = "Admin")]
@@ -189,6 +189,7 @@ namespace Bakim.Controllers
 
            talep.CreatorId = user.Id; 
            talep.CreatedDate = DateTime.Now;
+            
 
             _talepService.Add(talep);
             

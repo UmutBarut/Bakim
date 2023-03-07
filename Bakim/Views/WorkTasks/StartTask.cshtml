@@ -1,6 +1,6 @@
 @using Bakim.Entity.Views;
 
-@model DenemeViewModel
+@model TaskViewModel
 
 
 <div class="container">
@@ -70,24 +70,30 @@
                         <label for="exampleFormControlTextarea1" class="form-label">İş Açıklaması</label>
                         <textarea asp-for="Task.TaskDescription" class="form-control form-control-sm form-control-solid"  id="exampleFormControlTextarea1" rows="5" disabled></textarea>
                     </div>
-                    <div class="col-md-4  mt-10 d-flex align-items-center justify-content-center">
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="d-flex justify-content-end align-items-center">
+                    <div class="me-10">
                         <div class="form-check form-switch"> 
                             <input class="form-check-input" type="checkbox" asp-for="Task.Acil" id="flexCheckDefault" disabled/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 Acil İş Emri
                             </label>
-                        </div>  
-                    </div>
-                </div>
+                        </div>
+                    </div>  
+               
+                    @if (Model.Task.ReceiverId == null ? true : Model.Task.ReceiverId == Model.User.Id)
+                    {
+                        <button type="submit" class="btn btn-primary">Başla</button>
+                    }
 
-            </div>
-
-            <div class="card-footer">
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Başla</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-              
+               
+                        
+                   

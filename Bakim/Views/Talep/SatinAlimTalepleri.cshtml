@@ -129,16 +129,19 @@
            <div class="d-flex align-items-center">
                 <h4>- @ViewData["Name"]</h4>
             </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtre 
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="2">Tümü</a></li>
-                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="1">Onaylananlar</a></li>
-                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="10">Onay Bekleyenler</a></li>
-                <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="5">Tamamlananlar</a></li>
-            </ul>
+        <div class="align-items-center align-items-middle">
+            <a asp-controller="Talep" asp-action="TalepOlustur" class="btn btn-success me-10">Talep Oluştur</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtreler 
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="2">Tümü</a></li>
+                    <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="1">Onaylananlar</a></li>
+                    <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="10">Onay Bekleyenler</a></li>
+                    <li><a class="dropdown-item" asp-controller="Talep" asp-action="SatinAlimTalepleri" asp-route-filter="5">Tamamlananlar</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -152,7 +155,9 @@
         .FilterRow(filterRow => filterRow
         .Visible(true)
         .ApplyFilter(GridApplyFilterMode.Auto)
+        
         )
+        .Sorting(s=>s.DescendingText("CreatedDate"))
         .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
         .Paging(paging => paging.PageSize(5))
         .Pager(p=>
@@ -177,7 +182,7 @@
 
         columns.AddFor(m => m.StockId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepStok").Key("StockId")).DisplayExpr("StockName").ValueExpr("StockId")).Alignment(HorizontalAlignment.Left).Caption("Stok Kalemi");
 
-        columns.AddFor(m=> m.VarlikId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepVarlik").Key("VarlikId")).DisplayExpr("VarlikName").ValueExpr("VarlikId")).Alignment(HorizontalAlignment.Left).Caption("Varlık Kalemi");
+        columns.AddFor(m=> m.VarlikId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepVarlik").Key("VarlikId")).DisplayExpr("VarlikName").ValueExpr("VarlikId")).Alignment(HorizontalAlignment.Left).Caption("Varlık Kalemi").CellTemplate(@<text><%- displayValue == null ? "Genel" : displayValue %></text>);
 
         columns.AddFor(m => m.Miktar).Caption("Talep Miktarı").Alignment(HorizontalAlignment.Left);
 
@@ -185,7 +190,7 @@
 
         columns.AddFor(m => m.BirimId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepBirim").Key("BirimId")).DisplayExpr("BirimAdi").ValueExpr("BirimId")).Alignment(HorizontalAlignment.Left).Caption("Birim");
 
-        columns.AddFor(m => m.Aciklama).Caption("Açıklama").Alignment(HorizontalAlignment.Left);
+        columns.AddFor(m => m.CreatedDate).Caption("Talep Tarihi").DataType(GridColumnDataType.DateTime).Format("dd.MM.yyyy HH:mm").SortOrder(SortOrder.Desc).Alignment(HorizontalAlignment.Left);
 
         columns.AddFor(m=>m.IsApproved).Alignment(HorizontalAlignment.Center).AllowEditing(false).AllowFiltering(false).AllowSearch(false).Caption("İlerleme").CellTemplate(@<text>
            
@@ -197,6 +202,7 @@
        
 
         })
+            
             .Selection(s=> s.Mode(SelectionMode.Multiple))
             .Export(e=> e.Enabled(true)
             .AllowExportSelectedData(true)

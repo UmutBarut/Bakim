@@ -39,8 +39,6 @@ namespace Bakim.Business.Concrete
 
         public IDataResult<Stock> GetById(Expression<Func<Stock, bool>> expression = null)
         {
-           
-           
             return new SuccessDataResult<Stock>(_stockDal.GetAll(expression).FirstOrDefault());
         }
 
@@ -48,7 +46,6 @@ namespace Bakim.Business.Concrete
         {
             if (expression == null)
             {
-
                 return new SuccessDataResult<List<Stock>>(_stockDal.GetAll());
             }
             return new SuccessDataResult<List<Stock>>(_stockDal.GetAll(expression));

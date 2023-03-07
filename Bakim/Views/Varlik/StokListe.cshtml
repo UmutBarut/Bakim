@@ -1,23 +1,24 @@
 @model int;
 
 <div class="container">
-        <div class="d-flex justify-content-between mb-4">
-
-                <div class="d-flex align-items-center">
-                <h4>- @ViewData["Name"]</h4>
-                </div>
-
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filtre
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" asp-controller="Varlik" asp-action="StokListe" asp-route-filter="2">Tümü</a></li>
-                        <li><a class="dropdown-item" asp-controller="Varlik" asp-action="StokListe" asp-route-filter="1">Aktifler</a></li>
-                        <li><a class="dropdown-item" asp-controller="Varlik" asp-action="StokListe" asp-route-filter="10">Pasifler</a></li>
-                    </ul>
-                </div>
+    <div class="d-flex justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <h4>- @ViewData["Name"]</h4>
         </div>
+        <div class="align-items-center align-items-middle">
+           <a asp-controller="Describing" asp-action="Stock" class="btn btn-success me-10">Stok Ekle</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtreler
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Varlik" asp-action="StokListe" asp-route-filter="2">Tümü</a></li>
+                    <li><a class="dropdown-item" asp-controller="Varlik" asp-action="StokListe" asp-route-filter="1">Aktifler</a></li>
+                    <li><a class="dropdown-item" asp-controller="Varlik" asp-action="StokListe" asp-route-filter="10">Pasifler</a></li>
+                </ul>
+            </div>
+        </div>        
+    </div>
    
     <div class="card border-0 card-p">
         @(Html.DevExtreme().DataGrid<StokListe>()
@@ -58,6 +59,7 @@
         
         columns.AddFor(m=> m.tedarikciFirmalar).CellTemplate(new JS("tedarikfirmalar")).Caption("Tedarikçiler");
 
+        columns.AddFor(m=>m.stock.UploadDate).DataType(GridColumnDataType.DateTime).Format("dd-MM-yyyy HH:mm").Caption("Eklenme Tarihi").SortOrder(SortOrder.Desc);
  
         columns.AddFor(m=>m.stock.StockId).Alignment(HorizontalAlignment.Center).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("editbutton")).Caption("").Alignment(HorizontalAlignment.Center).Width(90);
 
@@ -68,10 +70,9 @@
 
 
     </div>
-     <div class="d-flex justify-content-end">
-        <a asp-controller="Describing" asp-action="Stock" class="btn btn-primary mt-4">Stok Ekle</a>
+    
 
-    </div>
+   
 
 </div>
 <script>

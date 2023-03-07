@@ -308,6 +308,66 @@ namespace Bakim.Dataaccess.Migrations
                     b.ToTable("Machines");
                 });
 
+            modelBuilder.Entity("Bakim.Entity.Marka", b =>
+                {
+                    b.Property<int>("MarkaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("MarkaAdi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("MarkaId");
+
+                    b.ToTable("markalar");
+                });
+
+            modelBuilder.Entity("Bakim.Entity.MarkaGrup", b =>
+                {
+                    b.Property<int>("MarkaGrupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("MarkaGrupAdi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MarkaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VarlikId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MarkaGrupId");
+
+                    b.ToTable("markaGrup");
+                });
+
+            modelBuilder.Entity("Bakim.Entity.MarkaKalem", b =>
+                {
+                    b.Property<int>("KalemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("KalemAdi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("MarkaGrupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MarkaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VarlikId")
+                        .HasColumnType("int");
+
+                    b.HasKey("KalemId");
+
+                    b.ToTable("markaKalem");
+                });
+
             modelBuilder.Entity("Bakim.Entity.ProductionSection", b =>
                 {
                     b.Property<int>("ProductionSectionId")
@@ -488,6 +548,9 @@ namespace Bakim.Dataaccess.Migrations
 
                     b.Property<int>("StokKategoriId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UploadDate")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("StockId");
 
@@ -700,6 +763,9 @@ namespace Bakim.Dataaccess.Migrations
 
                     b.Property<int>("ProductionSectionId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UploadDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("VarlikCode")
                         .IsRequired()

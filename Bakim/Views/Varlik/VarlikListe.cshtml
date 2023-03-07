@@ -1,21 +1,22 @@
 @model int
 <div class="container">
 
-    <div class="d-flex justify-content-between mb-4">
-           
-           <div class="d-flex align-items-center">
-                <h4>- @ViewData["Name"]</h4>
+    <div class="d-flex justify-content-between mb-4">  
+        <div class="d-flex align-items-center">
+            <h4>- @ViewData["Name"]</h4>
+        </div>
+        <div class="align-items-center align-items-middle">
+            <a asp-controller="Describing" asp-action="Varlik" class="btn btn-success me-10">Varlık Ekle</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtreler
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Varlik" asp-action="VarlikListe" asp-route-filter="2">Tümü</a></li>
+                    <li><a class="dropdown-item" asp-controller="Varlik" asp-action="VarlikListe" asp-route-filter="1">Aktifler</a></li>
+                    <li><a class="dropdown-item" asp-controller="Varlik" asp-action="VarlikListe" asp-route-filter="0">Pasifler</a></li>
+                </ul>
             </div>
-
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtre 
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" asp-controller="Varlik" asp-action="VarlikListe" asp-route-filter="2">Tümü</a></li>
-                <li><a class="dropdown-item" asp-controller="Varlik" asp-action="VarlikListe" asp-route-filter="1">Aktifler</a></li>
-                <li><a class="dropdown-item" asp-controller="Varlik" asp-action="VarlikListe" asp-route-filter="0">Pasifler</a></li>
-            </ul>
         </div>
     </div>
    
@@ -42,32 +43,29 @@
         )
         .KeyExpr("VarlikId")
         .Columns(columns => {
+           
             @* columns.AddFor(m => m.ImagePath).CellTemplate(@<text>
                 <div>
                 <img style="max-width:100%; height:auto;" src="/app/images/varliks/<%- data.ImagePath %>" alt="" />
                 </div>
                 </text>).Caption("Varlık Resmi"); *@
 
-        columns.AddFor(m => m.VarlikGroup.VarlikGroupName).Caption("Varlık Grubu");
+        columns.AddFor(m => m.VarlikGroup.VarlikGroupName).AllowSorting(true).Caption("Varlık Grubu");
 
-        columns.AddFor(m => m.DetayGroup.DetayGroupName).Caption("Varlık Kategorisi");
+        columns.AddFor(m => m.DetayGroup.DetayGroupName).AllowSorting(true).Caption("Varlık Kategorisi");
 
-        columns.AddFor(m => m.VarlikName).Caption("Varlık Adı");
+        columns.AddFor(m => m.VarlikName).AllowSorting(true).Caption("Varlık Adı");
 
-        columns.AddFor(m => m.VarlikCode).Caption("Varlık Kodu");
+        columns.AddFor(m => m.VarlikCode).AllowSorting(true).Caption("Varlık Kodu");
 
-        columns.AddFor(m=>m.VarlikId).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("editbutton")).Caption("").Alignment(HorizontalAlignment.Left).Width(150);
+        columns.AddFor(m=>m.UploadDate).Caption("Eklenme Tarihi").DataType(GridColumnDataType.DateTime).Format("dd-MM-yyyy HH:mm").SortOrder(SortOrder.Desc);
 
-        columns.AddFor(m=>m.VarlikId).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detayButon")).Caption("Detay").Alignment(HorizontalAlignment.Left).Width(150); 
+        columns.AddFor(m=>m.VarlikId).AllowSorting(false).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("editbutton")).Caption("").Alignment(HorizontalAlignment.Left).Width(150);
 
+        columns.AddFor(m=>m.VarlikId).AllowSorting(false).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detayButon")).Caption("Detay").Alignment(HorizontalAlignment.Left).Width(150); 
         })
         )
-
-
-    </div>
-    <div class="d-flex justify-content-end">
-        <a asp-controller="Describing" asp-action="Varlik" class="btn btn-primary mt-4">Varlık Ekle</a>
-    </div>
+    </div>  
 </div>
 
 

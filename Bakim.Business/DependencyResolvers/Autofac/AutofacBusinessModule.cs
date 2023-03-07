@@ -106,6 +106,15 @@ namespace Bakim.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<Task_StockDal>().As<ITask_StockDal>().SingleInstance();
             builder.RegisterType<Task_StockManager>().As<ITask_StockService>().SingleInstance();
+
+            builder.RegisterType<MarkaDal>().As<IMarkaDal>().SingleInstance();
+            builder.RegisterType<MarkaManager>().As<IMarkaService>().SingleInstance();
+
+            builder.RegisterType<MarkaGrupDal>().As<IMarkaGrupDal>().SingleInstance();
+            builder.RegisterType<MarkaGrupManager>().As<IMarkaGrupService>().SingleInstance();
+
+            builder.RegisterType<MarkaKalemDal>().As<IMarkaKalemDal>().SingleInstance();
+            builder.RegisterType<MarkaKalemManager>().As<IMarkaKalemService>().SingleInstance();
         
                         
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
