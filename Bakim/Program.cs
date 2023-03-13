@@ -47,7 +47,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/erisim-reddedildi";
     options.LogoutPath = "/cikis-yap";
     options.Cookie.Name = "auth_cookie";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
     options.Cookie.HttpOnly = true;
 

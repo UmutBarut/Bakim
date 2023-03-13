@@ -14,7 +14,7 @@ namespace Bakim.Entity
         public int StockId { get; set; }
         public string? StockCode { get; set; }
         public string StockName { get; set; }
-        public string Olcu { get; set; }
+        public string? Olcu { get; set; }
         public double Price { get; set; }
         public string? ImagePath { get; set; }
         public int MinStock { get; set; }

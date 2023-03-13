@@ -157,9 +157,10 @@
         .ApplyFilter(GridApplyFilterMode.Auto)
         
         )
+        .Height("100%")
         .Sorting(s=>s.DescendingText("CreatedDate"))
         .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
-        .Paging(paging => paging.PageSize(5))
+        .Paging(paging => paging.PageSize(10))
         .Pager(p=>
         p.AllowedPageSizes(new JS("[5, 10, 20]"))
         .ShowNavigationButtons(true)
@@ -209,10 +210,6 @@
             )
             .OnExporting("selectExport")
         ) 
-    </div>
-
-    <div class="d-flex justify-content-end">
-        <a asp-controller="Talep" asp-action="TalepOlustur" class="btn btn-primary mt-4">Talep Oluştur</a>
     </div>
 </div>
 

@@ -1,62 +1,59 @@
 
 
 <div class="container">
-   
-   
-@(Html.DevExtreme().DataGrid<DetayGroup>()
-    .ID("dxContainer")
-    .DataSource(d => d.Mvc()
-    .Controller("Describing")
-    .LoadAction("GetAllDetayGroup")
-    .UpdateAction("UpdateDetayGroup")
-    .DeleteAction("DeleteDetayGroup")
-    .InsertAction("AddDetayGroup")
-    .Key("DetayGroupId")
+   <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Varlık Kategorisi Tanımlayın</h3>
+        </div>
+        <div class="card-body py-5">
+                        
+            @(Html.DevExtreme().DataGrid<DetayGroup>()
+                .ID("dxContainer")
+                .DataSource(d => d.Mvc()
+                .Controller("Describing")
+                .LoadAction("GetAllDetayGroup")
+                .UpdateAction("UpdateDetayGroup")
+                .DeleteAction("DeleteDetayGroup")
+                .InsertAction("AddDetayGroup")
+                .Key("DetayGroupId")
 
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
+                )
+                .RemoteOperations(true)
+                .Columns(columns => {
 
-    columns.AddFor(m => m.VarlikGroupId).AllowEditing(true).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllVarlikGroup").Key("VarlikGroupId")).DisplayExpr("VarlikGroupName").ValueExpr("VarlikGroupId")).Alignment(HorizontalAlignment.Left).Caption("Grup Adı").AllowFiltering(true);
+                columns.AddFor(m => m.VarlikGroupId).AllowEditing(true).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllVarlikGroup").Key("VarlikGroupId")).DisplayExpr("VarlikGroupName").ValueExpr("VarlikGroupId")).Alignment(HorizontalAlignment.Left).Caption("Grup Adı").AllowFiltering(true);
 
-    columns.AddFor(m => m.DetayGroupName).Alignment(HorizontalAlignment.Left).Caption("Kategori Adı").AllowFiltering(true);
+                columns.AddFor(m => m.DetayGroupName).Alignment(HorizontalAlignment.Left).Caption("Kategori Adı").AllowFiltering(true);
 
-    })
-    .SearchPanel(s => s
-    .Visible(true)
-    .HighlightCaseSensitive(true)
-    .Placeholder("Ara")
-    .Width(200)
-    )
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true).EmptyPanelText("Varlik Kategorisi Tanımlayın"))
-    .Height(600)
-    .ShowBorders(true)
-    .Pager(p=>
-    p.AllowedPageSizes(new List<int>{25})
-    .ShowNavigationButtons(true)
-    .ShowPageSizeSelector(false)
-    .Visible(true)
-    .ShowNavigationButtons(true)
-
-    )
-    .Paging(p=>p.PageSize(25))
-    .Editing(e =>
-    e.AllowAdding(true)
-    .AllowDeleting(true)
-    .AllowUpdating(true)
-    .UseIcons(true)
-    .Mode(GridEditMode.Popup)
-    .Popup(p=>
-    p.Title("Kategori Ekle & Düzenle")
-    .ShowTitle(true)
-    .Width(700)
-    .Height(500)
-    )
-    )
-    .Grouping(g => g.AutoExpandAll(false))
-    )
+                })
+                .SearchPanel(s => s
+                .Visible(true)
+                .HighlightCaseSensitive(true)
+                .Placeholder("Ara")
+                .Width(200)
+                )
+                .FilterRow(f => f.Visible(true))
+                .HeaderFilter(f => f.Visible(true))
+                .GroupPanel(p => p.Visible(true).EmptyPanelText("Varlik Kategorisi Tanımlayın"))
+                .ShowBorders(true)
+                .Height("100%")
+                .Paging(paging => paging.PageSize(10))
+                .Pager(p=>
+                p.AllowedPageSizes(new JS("[5, 10, 20]"))
+                .ShowNavigationButtons(true)
+                .ShowPageSizeSelector(true)
+                .Visible(true)
+                .ShowNavigationButtons(true) 
+                .ShowInfo(true)
+                .DisplayMode(GridPagerDisplayMode.Full)
+                )
+                .Grouping(g => g.AutoExpandAll(false))
+                )
+        </div>
+        <div class="card-footer">
+           
+        </div>
+    </div>
 </div>
 
 

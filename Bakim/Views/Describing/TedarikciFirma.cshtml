@@ -1,59 +1,58 @@
 
 
 <div class="container">
-    @(Html.DevExtreme().DataGrid<TedarikciFirma>()
-    .ID("dxContainer")
-    .DataSource(d => d.Mvc()
-    .Controller("Describing")
-    .LoadAction("GetAllFirma")
-    .UpdateAction("UpdateFirma")
-    .DeleteAction("DeleteFirma")
-    .InsertAction("AddFirma")
-    .Key("FirmaId")
 
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
+    <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Tedarikçi Firma Tanımlayın</h3>
+            
+        </div>
+        <div class="card-body py-5">
+                    
+        @(Html.DevExtreme().DataGrid<TedarikciFirma>()
+        .ID("dxContainer")
+        .DataSource(d => d.Mvc()
+        .Controller("Describing")
+        .LoadAction("GetAllFirma")
+        .UpdateAction("UpdateFirma")
+        .DeleteAction("DeleteFirma")
+        .InsertAction("AddFirma")
+        .Key("FirmaId")
 
-    columns.AddFor(m => m.FirmaAdi).Alignment(HorizontalAlignment.Left).Caption("Firma Adı").AllowFiltering(true);
-    
+        )
+        .RemoteOperations(true)
+        .Columns(columns => {
 
+        columns.AddFor(m => m.FirmaAdi).Alignment(HorizontalAlignment.Left).Caption("Firma Adı").AllowFiltering(true);
+        
+        })
+        .SearchPanel(s => s
+        .Visible(true)
+        .HighlightCaseSensitive(true)
+        .Placeholder("Ara")
+        )
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(f => f.Visible(true))
+        .GroupPanel(p => p.Visible(true).EmptyPanelText("Tedarikçi Firmalar"))
+        .Height("100%")
+        .ShowBorders(true)
+        .Paging(paging => paging.PageSize(10))
+            .Pager(p=>
+            p.AllowedPageSizes(new JS("[5, 10, 20]"))
+            .ShowNavigationButtons(true)
+            .ShowPageSizeSelector(true)
+            .Visible(true)
+            .ShowNavigationButtons(true)
+            .ShowInfo(true)
+            .DisplayMode(GridPagerDisplayMode.Full)
+            )
+        .Grouping(g => g.AutoExpandAll(false))
 
+        )
+        </div>
+        <div class="card-footer">
 
-    })
-    .SearchPanel(s => s
-    .Visible(true)
-    .HighlightCaseSensitive(true)
-    .Placeholder("Ara")
-    )
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true).EmptyPanelText("Tedarikçi Firmalar"))
-    .Height(600)
-    .ShowBorders(true)
-    .Pager(p=>
-    p.AllowedPageSizes(new List<int>{25})
-    .ShowNavigationButtons(true)
-    .ShowPageSizeSelector(false)
-    .Visible(true)
-    .ShowNavigationButtons(true)
-
-    )
-    .Paging(p=>p.PageSize(25))
-    .Editing(e =>
-    e.AllowAdding(true)
-    .AllowDeleting(true)
-    .AllowUpdating(true)
-    .UseIcons(true)
-    .Mode(GridEditMode.Batch)
-    .Popup(p=>
-    p.Title("Firma Ekle & Düzenle")
-    .ShowTitle(true)
-    .Width(700)
-    .Height(500)
-    )
-    )
-    .Grouping(g => g.AutoExpandAll(false))
-
-    )
+        </div>
+       
+    </div>
 </div>

@@ -12,7 +12,7 @@
                     <div class="staticon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                      <div class="statinfo varlikinfo">Toplam Kayıt</div>
                      <div class="statsubinfo varliksubinfo">Bu gün içindeki toplam kayıt</div>
-                     <div class="statlink">@Model.WorkTasks.Where(m=>m.CreatedDate.Day == DateTime.Now.Day).Count()</div>
+                     <div class="statlink">@Model.WorkTasks.Where(c=>c.CreatedDate.Day == DateTime.Now.Day && c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year).Count()</div>
                 </div>
                     
         </div>

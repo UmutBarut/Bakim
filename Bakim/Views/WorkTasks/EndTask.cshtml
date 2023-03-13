@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="card card-flush shadow-sm">
-        <form asp-controller="WorkTasks" asp-action="EndTask" asp-route-id="@Model.Task.TaskId" method="POST">
+        <form id="formid" asp-controller="WorkTasks" asp-action="EndTask" asp-route-id="@Model.Task.TaskId" method="POST">
             <div class="card-header">
                 <h3 class="card-title">@Model.Task.TaskTitle</h3>
 
@@ -23,7 +23,7 @@
                     <div class="col-md-4">
                         <div class="mt-10 mb-10">
                                 <label for="exampleFormControlInput1" class="form-label">Stok</label>
-                                <select id="stockselect" class="form-select form-select-sm form-select-solid"
+                                <select id="stockselect" required class="form-select form-select-sm form-select-solid"
                                     data-control="select2" name="StokKategoriId" data-placeholder="Stok Seçiniz">
                                     <option value=""></option>
                                     @foreach (var item in Model.stock)
@@ -36,7 +36,7 @@
                     <div class="col-md-4">
                         <div class="mt-10 mb-10">
                             <label for="exampleFormControlInput1" class="form-label">Miktar</label>
-                            <input id="miktar" type="number" class="form-control form-control-sm form-control-solid"
+                            <input id="miktar" type="number" required class="form-control form-control-sm form-control-solid"
                                 placeholder="Stok Miktarı Yazınız" name="StockAmount" />
                         </div>   
                     </div>
@@ -93,7 +93,8 @@
                             .AllowUpdating(true)
                             .UseIcons(true)
                             )
-                            .Paging(p=>p.PageSize(5))
+                            .Height("100%")
+                            .Paging(p=>p.PageSize(10))
                             .Pager(p=>
                             p.AllowedPageSizes(new JS("[5, 10, 20]"))
                             .ShowNavigationButtons(true)
@@ -115,20 +116,17 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-                  
                         @if(Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !Model.Task.IsCompleted && Model.Task.InProcess)
                         {
                             if(Model.WorkTaskUsers.Where(c=>c.InProcess == true && c.WorkTaskId == Model.Task.TaskId).Count() > 1)
                             {
-                                <button class="btn btn-danger" type="submit">Kendi Kaydını Sonlandır</button>
+                                <button id="closebutton" class="btn btn-danger" type="submit">Kendi Kaydını Sonlandır</button>
                             }
                             else
                             {
-                                <button class="btn btn-danger" type="submit">Tüm Kaydı Sonlandır</button>
+                                <button id="closebutton" class="btn btn-danger" type="submit">Tüm Kaydı Sonlandır</button>
                             }
                         }
-                   
-                   
                 </div>
             </div>
         </form>
@@ -138,15 +136,17 @@
 
 <script>
 
-
-    
-
-    
-
      $(document).ready(function(){
-
-        $("#addbutton").click(function()
+        $("#closebutton").click(function(e){
+          e.preventDefault();
+          $('#formid .required').each().removeAttr("required");
+          $('#formid').submit();
+        });
+        $("#addbutton").click(function(e)
         {          
+            e.preventDefault();
+            if(!checkInputs("formid"))
+                return false;
             var stok =   $("#stockselect").val();
             var miktar =   $("#miktar").val();
 
@@ -174,25 +174,52 @@
                 $("#miktar").val("");
                 }
               
-            },
-             error: function () {
-                if(stok === null && miktar === null)
-                {
-                    Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Stok Ekleme Başarısız',
-                showConfirmButton: false,
-                timer: 1100
-                })
-                }
-                
             }
         })
         })
 
     })
-    
 
+     $(document).on('click','#submitbtn', function(e){
+        e.preventDefault();
+        if(checkInputs("formid"))
+            $('#formid').submit();
+    });
+
+    function checkInputs(formName) {
+  const getform = "#" + formName;
+  var result = true;
+  $(getform)
+    .find("input:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("select:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("textarea:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  if (result === false) {
+    Swal.fire({
+      text: "Stok Ekleme Başarısız.",
+      icon: "error",
+      timer: 1200,
+      showConfirmButton: false,
+    });
+    return result;
+  }
+  return true;
+}
 
 </script>

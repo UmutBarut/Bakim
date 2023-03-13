@@ -7,6 +7,7 @@ using Bakim.Business.Abstracts;
 using Bakim.Dataaccess.Concrete.Contexts;
 using Bakim.Entity;
 using Bakim.Entity.Dto;
+using Bakim.Entity.Views;
 using Bakim.ViewModels;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
@@ -88,7 +89,7 @@ namespace Bakim.Controllers
             //         worktaskuser.User = await _userManager.FindByIdAsync(worktaskuser.UserId);
             //     }
             // }
-
+           
             TaskViewModel model = new()
             {
                 AllUsers = users,
@@ -97,13 +98,9 @@ namespace Bakim.Controllers
                 Dtos = dtos,
                 WorkTasks = tasks
             };
+           
 
-            using( var Contexts = new ApplicationDbContext())
-            {
-                var query = Contexts.atanankullanicilars.ToList();
-
-                return View(model);
-            }
+            return View(model);
         }
 
        
@@ -148,11 +145,29 @@ namespace Bakim.Controllers
 
         public object WorkTaskTable(DataSourceLoadOptions loadOptions)
         {
+            using var context = new ApplicationDbContext();
+            var query = context.atanankullanicilars.ToList();
+
+            query = query.GroupBy(d => d.TaskId).Select(s=> new atanankullanicilar
+            {
+                TaskId = s.Key,
+                TaskTitle = s.First().TaskTitle.Replace("ı", "i").Replace("İ", "I").Replace("Ğ", "G").Replace("ğ", "g").Replace("ş", "s").Replace("Ü", "U").Replace("Ş", "S").Replace("ç","c").Replace("Ç","C"),
+                CreatedDate = s.First().CreatedDate,
+                Durum = s.First().Durum,
+                InProcess = s.First().InProcess,
+                IsActive = s.First().IsActive,
+                IsCompleted = s.First().IsCompleted,
+                ReceiverId = s.First().ReceiverId,
+                StarterId = s.First().StarterId,
+                TaskDescription = s.First().TaskDescription?.Replace("ı", "i").Replace("İ", "I").Replace("Ğ", "G").Replace("ğ", "g").Replace("ş", "s").Replace("Ü", "U").Replace("Ş", "S").Replace("ç","c").Replace("Ç","C")
+            }).ToList();
+            return DataSourceLoader.Load(query,loadOptions);
+
             using(var Contexts = new ApplicationDbContext())
             {
-                var query = Contexts.atanankullanicilars.ToList();
+                var queryy = Contexts.atanankullanicilars.ToList();
 
-                return DataSourceLoader.Load(query,loadOptions);
+                return DataSourceLoader.Load(queryy,loadOptions);
 
             }
         }
@@ -178,57 +193,57 @@ namespace Bakim.Controllers
         }
        
         
-        public async Task<IActionResult> IsEmirleri()
-        {
-            var tasks = _workTaskService.GetTasks().Data;
-            List<WorkTaskDto> dtos = new();
-            var sections = _sectionService.GetAll().Data;
-            var sectionFaults = _sectionFaultService.GetAll().Data;
-            SectionDto sectionDto = new SectionDto()
-            {
-                Sections = sections,
-                SectionFaults = sectionFaults
-            };
+        // public async Task<IActionResult> IsEmirleri()
+        // {
+        //     var tasks = _workTaskService.GetTasks().Data;
+        //     List<WorkTaskDto> dtos = new();
+        //     var sections = _sectionService.GetAll().Data;
+        //     var sectionFaults = _sectionFaultService.GetAll().Data;
+        //     SectionDto sectionDto = new SectionDto()
+        //     {
+        //         Sections = sections,
+        //         SectionFaults = sectionFaults
+        //     };
             
-            foreach (var item in tasks)
-            {
-                item.Creator = await _userManager.FindByIdAsync(item.CreatorId);
-                item.Receiver = await _userManager.FindByIdAsync(item.ReceiverId);
-                item.Starter = await _userManager.FindByIdAsync(item.StarterId);
+        //     foreach (var item in tasks)
+        //     {
+        //         item.Creator = await _userManager.FindByIdAsync(item.CreatorId);
+        //         item.Receiver = await _userManager.FindByIdAsync(item.ReceiverId);
+        //         item.Starter = await _userManager.FindByIdAsync(item.StarterId);
  
-                List<WorkTaskTransfer> workTaskTransfers = _workTaskTransferService.GetAll(item.TaskId).Data;
-                foreach (var worktransfer in workTaskTransfers)
-                {
-                    worktransfer.TransferredUser = await _userManager.FindByIdAsync(worktransfer.TransferredUserId);
-                }
+        //         List<WorkTaskTransfer> workTaskTransfers = _workTaskTransferService.GetAll(item.TaskId).Data;
+        //         foreach (var worktransfer in workTaskTransfers)
+        //         {
+        //             worktransfer.TransferredUser = await _userManager.FindByIdAsync(worktransfer.TransferredUserId);
+        //         }
                 
-                var dto = new WorkTaskDto()
-                {
-                    WorkTask = item,
-                    WorkTaskTransfers = workTaskTransfers,
-                    WorkTaskUsers = _workTaskUserService.GetTaskUsers(item.TaskId).Data,
-                    SectionDto = sectionDto
-                };
-                dtos.Add(dto);
-                foreach (var worktaskuser in dto.WorkTaskUsers)
-                {
-                    worktaskuser.User = await _userManager.FindByIdAsync(worktaskuser.UserId);
-                }
-            }
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            var users = _userManager.Users.ToList();
+        //         var dto = new WorkTaskDto()
+        //         {
+        //             WorkTask = item,
+        //             WorkTaskTransfers = workTaskTransfers,
+        //             WorkTaskUsers = _workTaskUserService.GetTaskUsers(item.TaskId).Data,
+        //             SectionDto = sectionDto
+        //         };
+        //         dtos.Add(dto);
+        //         foreach (var worktaskuser in dto.WorkTaskUsers)
+        //         {
+        //             worktaskuser.User = await _userManager.FindByIdAsync(worktaskuser.UserId);
+        //         }
+        //     }
+        //     var user = await _userManager.GetUserAsync(HttpContext.User);
+        //     var users = _userManager.Users.ToList();
            
-            var result = new WorkTaskViewModel() 
-            { 
-                User = user, 
-                WorkTasks = tasks,
-                AllUsers = users,
-                Dtos = dtos,
-                SectionDto = sectionDto 
+        //     var result = new WorkTaskViewModel() 
+        //     { 
+        //         User = user, 
+        //         WorkTasks = tasks,
+        //         AllUsers = users,
+        //         Dtos = dtos,
+        //         SectionDto = sectionDto 
 
-                };
-            return View("is-emirleri",result);
-        }
+        //         };
+        //     return View("is-emirleri",result);
+        // }
 
 
          public IActionResult Index()
@@ -588,7 +603,6 @@ namespace Bakim.Controllers
             var varlik = _varlikService.GetAll().Data.FirstOrDefault();
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var users = _userManager.Users.ToList();
-            
 
             if (task.ReceiverId != null)
             {
@@ -615,7 +629,6 @@ namespace Bakim.Controllers
                 varlik = varlik,
                 User = currentUser,
                 AllUsers = users
-               
             };
             return View(model);
         }

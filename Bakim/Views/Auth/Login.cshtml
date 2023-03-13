@@ -22,73 +22,83 @@
                 <div class="py-20">
                     <!--begin::Form-->
                     <form class="form w-100" method="post">
-                        <!--begin::Body-->
-                        <div class="card-body">
-                            <!--begin::Heading-->
-                            <div class="text-start mb-10">
-                                <!--begin::Title-->
-                                <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">Hoşgeldiniz</h1>
-                                <!--end::Title-->
-                                <!--begin::Text-->
-                                <div class="text-gray-400 fw-semibold fs-6" data-kt-translate="general-desc">Giriş Yapın
-                                </div>
-                                <!--end::Link-->
-                            </div>
-                            <!--begin::Heading-->
-
-                            <!--begin::Input group=-->
-                            <div class="fv-row mb-8">
-                                <!--begin::Email-->
-                                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
-                                <input type="text" placeholder="Kullanıcı Adı" class="form-control form-control-solid"
-                                    asp-for="@Model.UserName" />
-                                <!--end::Email-->
-                            </div>
-                            <!--end::Input group=-->
-
-                            <div class="fv-row mb-8">
-                                <!--begin::Password-->
-                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
-                                <input type="password" placeholder="Şifre"
-                                    class="form-control form-control-solid mb-6 bg-grey-900"
-                                    asp-for="@Model.Password" />
-                                <!--end::Password-->
-                            </div>
-
-                            <span class="text-danger">@ViewData["LoginResult"]</span>
-                            <div class="row">
-                                <div class="col-md-6 mb-6">
-                                    <!-- Checkbox -->
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="form 1Example3" checked
-                                            asp-for="@Model.RememberMe" />
-                                        <label class="form-check-label" for="form1Example3"> Beni Hatırla </label>
+                        <div class="card card-flush shadow-sm"> 
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <!--begin::Heading-->
+                                <div class="text-start mb-10">
+                                    <!--begin::Title-->
+                                    <h1 class="text-dark mb-3 fs-3x" data-kt-translate="sign-in-title">Hoşgeldiniz</h1>
+                                    <!--end::Title-->
+                                    <!--begin::Text-->
+                                    <div class="text-gray-400 fw-semibold fs-6" data-kt-translate="general-desc">Giriş Yapın
                                     </div>
+                                    <!--end::Link-->
                                 </div>
-                                <div class="col-md-6"><a href="#!">Şifremi unuttum</a></div>
-                            </div>
+                                <!--begin::Heading-->
 
-                            <!--end::Input group=-->
-                            <!--begin::Actions-->
-                            <div class="d-flex flex-stack">
-                                <!--begin::Submit-->
-                                <button type="submit" class="btn btn-primary me-2 flex-shrink-0">
-                                    <!--begin::Indicator label-->
-                                    <span class="indicator-label" data-kt-translate="sign-in-submit">Giriş Yap</span>
-                                    <!--end::Indicator label-->
-                                </button>
-                                <!--end::Submit-->
+                                <!--begin::Input group=-->
+                                <div class="fv-row mb-8">
+                                    <!--begin::Email-->
+                                    <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                                    <input type="text" placeholder="Kullanıcı Adı" class="form-control form-control-solid"
+                                        asp-for="@Model.UserName" />
+                                    <!--end::Email-->
+                                </div>
+                                <!--end::Input group=-->
 
+                                <div class="fv-row mb-8">
+                                    <!--begin::Password-->
+                                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                                    <input type="password" placeholder="Şifre"
+                                        class="form-control form-control-solid mb-6 bg-grey-900"
+                                        asp-for="@Model.Password" />
+                                    <!--end::Password-->
+                                </div>
+
+                                <span class="text-danger">@ViewData["LoginResult"]</span>
+                                <div class="row">
+                                    <div class="col-md-6 mb-6">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="form 1Example3" 
+                                                asp-for="@Model.RememberMe" />
+                                            <label class="form-check-label" for="form1Example3"> Beni Hatırla </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"><a href="#!">Şifremi unuttum</a></div>
+                                </div>
+
+                                <!--end::Input group=-->
+                                <!--begin::Actions-->
+                                <div class="d-flex justify-content-end flex-stack mt-4">
+                                    <!--begin::Submit-->
+                                    <button type="submit" class="btn btn-primary flex-shrink-0">
+                                        <!--begin::Indicator label-->
+                                        <span class="indicator-label" data-kt-translate="sign-in-submit">Giriş Yap</span>
+                                        <!--end::Indicator label-->
+                                    </button>
+                                    <!--end::Submit-->
+
+                                </div>
+
+                                
+                                <!--end::Actions-->
                             </div>
-                            <!--end::Actions-->
+                            <!--begin::Body-->
                         </div>
-                        <!--begin::Body-->
                     </form>
                     <!--end::Form-->
                 </div>
                 <!--end::Body-->
                 <!--begin::Footer-->
                 <div class="m-0">
+                   
+                    <div class="d-flex justify-content-center mt-10">
+                        <h3 class="float-right text-muted me-4">Developed By -</h3>
+                        <h2>HHT Bilişim</h2>
+                    </div>    
+                           
                 </div>
                 <!--end::Footer-->
             </div>

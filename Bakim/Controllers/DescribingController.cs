@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Bakim.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DescribingController : Controller
     {
         private readonly IStockService _stockService;

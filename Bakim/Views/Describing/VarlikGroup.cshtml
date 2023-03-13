@@ -1,72 +1,84 @@
 
 <div class="container">
-@(Html.DevExtreme().DataGrid<VarlikGroup>()
-    .ID("dxContainer")
-    .DataSource(d => d.Mvc()
-    .Controller("Describing")
-    .LoadAction("GetAllVarlikGroup")
-    .UpdateAction("UpdateVarlikGroup")
-    .DeleteAction("DeleteVarlikGroup")
-    .InsertAction("AddVarlikGroup")
-    .Key("VarlikGroupId")
+    <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Varlık Grubu Tanımlayın</h3>
+        
+        </div>
+        <div class="card-body py-5">
+                    @(Html.DevExtreme().DataGrid<VarlikGroup>()
+                .ID("dxContainer")
+                .DataSource(d => d.Mvc()
+                .Controller("Describing")
+                .LoadAction("GetAllVarlikGroup")
+                .UpdateAction("UpdateVarlikGroup")
+                .DeleteAction("DeleteVarlikGroup")
+                .InsertAction("AddVarlikGroup")
+                .Key("VarlikGroupId")
 
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
-    
+                )
+                .RemoteOperations(true)
+                .Columns(columns => {
+                
+                columns.AddFor(m => m.VarlikGroupName).Alignment(HorizontalAlignment.Left).Caption("Grup Adı").AllowFiltering(true);
 
-    columns.AddFor(m => m.VarlikGroupName).Alignment(HorizontalAlignment.Left).Caption("Grup Adı").AllowFiltering(true);
+                })
+                .SearchPanel(s => s
+                .Visible(true)
+                .HighlightCaseSensitive(true)
+                .Placeholder("Ara")
+                )
+                .FilterRow(f => f.Visible(true))
+                .HeaderFilter(f => f.Visible(true))
+                .GroupPanel(p => p.Visible(true).EmptyPanelText("Varlık Grubu Tanımlayın"))
+                .Height("100%")
+                .ShowBorders(true)
+                
+                 .Paging(paging => paging.PageSize(10))
+            .Pager(p=>
+            p.AllowedPageSizes(new JS("[5, 10, 20]"))
+            .ShowNavigationButtons(true)
+            .ShowPageSizeSelector(true)
+            .Visible(true)
+            .ShowNavigationButtons(true)
+            .ShowInfo(true)
+            .DisplayMode(GridPagerDisplayMode.Full)
+            )
 
-    })
-    .SearchPanel(s => s
-    .Visible(true)
-    .HighlightCaseSensitive(true)
-    .Placeholder("Ara")
-    )
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true).EmptyPanelText("Varlık Grubu Tanımlayın"))
-    .Height(600)
-    .ShowBorders(true)
-    .Pager(p=>
-    p.AllowedPageSizes(new List<int>{25})
-    .ShowNavigationButtons(true)
-    .ShowPageSizeSelector(false)
-    .Visible(true)
-    .ShowNavigationButtons(true)
+                            @*.MasterDetail(md => md
+                .Enabled(true)
+                .Template(@<text>
 
-    )
-    .Paging(p=>p.PageSize(25))
+                @(Html.DevExtreme().DataGrid()
+                .DataSource(d => d.Mvc()
+                .Controller("VGrup")
+                .LoadAction("OrderDetails")
+                .LoadParams(new { vGrupId = new JS("data.VGrupId") })
+                )
+                .ShowBorders(true)
+                )
 
-                @*.MasterDetail(md => md
-    .Enabled(true)
-    .Template(@<text>
+                </text>)
+                )*@
+                .Editing(e =>
+                e.AllowAdding(true)
+                .AllowDeleting(true)
+                .AllowUpdating(true)
+                .UseIcons(true)
+                .Mode(GridEditMode.Batch)
+                .Popup(p=>
+                p.Title("Grup Ekle & Düzenle")
+                .ShowTitle(true)
+                .Width(700)
+                .Height(500)
+                )
+                )
+                .Grouping(g => g.AutoExpandAll(false))
 
-    @(Html.DevExtreme().DataGrid()
-    .DataSource(d => d.Mvc()
-    .Controller("VGrup")
-    .LoadAction("OrderDetails")
-    .LoadParams(new { vGrupId = new JS("data.VGrupId") })
-    )
-    .ShowBorders(true)
-    )
-
-    </text>)
-    )*@
-    .Editing(e =>
-    e.AllowAdding(true)
-    .AllowDeleting(true)
-    .AllowUpdating(true)
-    .UseIcons(true)
-    .Mode(GridEditMode.Batch)
-    .Popup(p=>
-    p.Title("Grup Ekle & Düzenle")
-    .ShowTitle(true)
-    .Width(700)
-    .Height(500)
-    )
-    )
-    .Grouping(g => g.AutoExpandAll(false))
-
-    )
+                )
+        </div>
+        <div class="card-footer">
+        
+        </div>
     </div>
+</div>

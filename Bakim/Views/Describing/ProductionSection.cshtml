@@ -1,55 +1,57 @@
 <div class="container">
-    @(Html.DevExtreme().DataGrid<ProductionSection>()
-    .ID("dxContainer")
-    .DataSource(d => d.Mvc()
-    .Controller("Describing")
-    .LoadAction("GetAllProductionSection")
-    .UpdateAction("UpdateProductionSection")
-    .DeleteAction("DeleteProductionSection")
-    .InsertAction("AddProductionSection")
-    .Key("ProductionSectionId")
 
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
+    <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Üretim Bölümü Tanımlayın</h3>
+        </div>
+        <div class="card-body py-5">
+                @(Html.DevExtreme().DataGrid<ProductionSection>()
+            .ID("dxContainer")
+            .DataSource(d => d.Mvc()
+            .Controller("Describing")
+            .LoadAction("GetAllProductionSection")
+            .UpdateAction("UpdateProductionSection")
+            .DeleteAction("DeleteProductionSection")
+            .InsertAction("AddProductionSection")
+            .Key("ProductionSectionId")
 
-    columns.AddFor(m => m.ProductionSectionName).Alignment(HorizontalAlignment.Left).Caption("Üretim Bölümü").AllowFiltering(true);
+            )
+            .RemoteOperations(true)
+            .Columns(columns => {
 
-    })
-    .SearchPanel(s => s
-    .Visible(true)
-    .HighlightCaseSensitive(true)
-    .Placeholder("Ara")
-    .Width(200)
-    )
-    .FilterRow(f => f.Visible(true))
-    .HeaderFilter(f => f.Visible(true))
-    .GroupPanel(p => p.Visible(true).EmptyPanelText("Üretim Bölümü Tanımlayın"))
-    .Height(600)
-    .ShowBorders(true)
-    .Pager(p=>
-    p.AllowedPageSizes(new List<int>{25})
-    .ShowNavigationButtons(true)
-    .ShowPageSizeSelector(false)
-    .Visible(true)
-    .ShowNavigationButtons(true)
+            columns.AddFor(m => m.ProductionSectionName).Alignment(HorizontalAlignment.Left).Caption("Üretim Bölümü").AllowFiltering(true);
 
-    )
-    .Paging(p=>p.PageSize(25))
-    .Editing(e =>
-    e.AllowAdding(true)
-    .AllowDeleting(true)
-    .AllowUpdating(true)
-    .UseIcons(true)
-    .Mode(GridEditMode.Batch)
-    .Popup(p=>
-    p.Title("Üretim Bölümü Ekle & Düzenle")
-    .ShowTitle(true)
-    .Width(700)
-    .Height(500)
-    )
-    )
-    .Grouping(g => g.AutoExpandAll(false))
+            })
+            .SearchPanel(s => s
+            .Visible(true)
+            .HighlightCaseSensitive(true)
+            .Placeholder("Ara")
+            .Width(200)
+            )
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(f => f.Visible(true))
+        
+            .Height("100%")
+            .ShowBorders(true)
+            
+            .Paging(paging => paging.PageSize(10))
+            .Pager(p=>
+            p.AllowedPageSizes(new JS("[5, 10, 20]"))
+            .ShowNavigationButtons(true)
+            .ShowPageSizeSelector(true)
+            .Visible(true)
+            .ShowNavigationButtons(true)
+            .ShowInfo(true)
+            .DisplayMode(GridPagerDisplayMode.Full)
+            )
+            .Grouping(g => g.AutoExpandAll(false))
 
-    )
+            )
+        </div>
+        <div class="card-footer">
+          
+        </div>
+    </div>
+
+    
 </div>

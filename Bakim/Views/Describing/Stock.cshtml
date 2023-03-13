@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="card card-flush shadow-sm">
-        <form asp-controller="Describing" asp-action="Stock" method="post" enctype="multipart/form-data">
+        <form id="formid" asp-controller="Describing" asp-action="Stock" method="post" enctype="multipart/form-data">
             <div class="card-header">
                 <h3 class="card-title">Stok Tanımlayın</h3>
             </div>
@@ -62,7 +62,7 @@
                     <div class="col-md-6 row">
                         <div class="col-md-12">
                             <label for="exampleFormControlInput1" class="required form-label">Stok Grubu</label>
-                            <select onchange="kategorigetir($(this).val())"
+                            <select required onchange="kategorigetir($(this).val())"
                                 class="form-select form-select-sm form-select-solid" data-control="select2"
                                 name="StockGroupId" data-placeholder="Stok Grubu Seçiniz">
                                 <option></option>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="exampleFormControlInput1" class="required form-label">Stok Kategorisi</label>
-                            <select id="skategoriselect" class="form-select form-select-sm form-select-solid"
+                            <select required id="skategoriselect" class="form-select form-select-sm form-select-solid"
                                 data-control="select2" name="StokKategoriId" data-placeholder="Kategori Seçiniz">
                                 <option value=""></option>
                             </select>
@@ -83,14 +83,14 @@
                     <div class="col-md-3">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">Stok Kodu</label>
-                            <input type="text" class="form-control form-control-sm form-control-solid"
+                            <input required type="text" class="form-control form-control-sm form-control-solid"
                                 placeholder="Stok Kodu Yazınız" name="StockCode" />
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">Stok Adı</label>
-                            <input type="text" class="form-control form-control-sm form-control-solid"
+                            <input required type="text" class="form-control form-control-sm form-control-solid"
                                 placeholder="Stok Adı Yazınız" name="StockName" />
                         </div>
                     </div>
@@ -111,28 +111,28 @@
                     <div class="col-md-3">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">Fiyat</label>
-                            <input type="number" class="form-control form-control-sm form-control-solid"
+                            <input required type="number" class="form-control form-control-sm form-control-solid"
                                 placeholder="Fiyat Yazınız" name="Price" />
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">Miktar</label>
-                            <input type="number" class="form-control form-control-sm form-control-solid"
+                            <input required type="number" class="form-control form-control-sm form-control-solid"
                                 placeholder="Stok Miktarı Yazınız" name="StockAmount" />
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">Minimum Stok</label>
-                            <input type="number" class="form-control form-control-sm form-control-solid"
+                            <input required type="number" class="form-control form-control-sm form-control-solid"
                                 placeholder="Min Stok Yazınız" name="MinStock" />
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">Maksimum Stok</label>
-                            <input type="number" class="form-control form-control-sm form-control-solid"
+                            <input required type="number" class="form-control form-control-sm form-control-solid"
                                 placeholder="Max Stok Yazınız" name="MaxStock" />
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary mb-4" style="float: right;">Stok Ekle</button>
+                <button id="formsubmitbtn" type="button" class="btn btn-primary mb-4" style="float: right;">Stok Ekle</button>
             </div>
         </form>
     </div>
@@ -174,4 +174,47 @@
             }
         });
     }
+
+    $(document).on('click','#formsubmitbtn', function(e){
+        e.preventDefault();
+        if(checkInputs("formid"))
+            $('#formid').submit();
+    });
+
+
+    function checkInputs(formName) {
+  const getform = "#" + formName;
+  var result = true;
+  $(getform)
+    .find("input:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("select:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("textarea:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  if (result === false) {
+    Swal.fire({
+      text: "Zorunlu Alanları Doldurun.",
+      icon: "error",
+      timer: 1200,
+      showConfirmButton: false,
+    });
+    return result;
+  }
+  return true;
+}
 </script>

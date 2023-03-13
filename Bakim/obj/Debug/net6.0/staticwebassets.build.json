@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZICA/QWllYdT1vlOcz8H7hQxDqF8YhBuZQpuNa6SoJY=",
+  "Hash": "NCfINaFJz5jwwnHAJwwhV9SK9b4IjIBPLtA70g9I4rE=",
   "Source": "Bakim",
   "BasePath": "_content/Bakim",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\avatars\\2f34ee4e-bc34-47e5-8b68-668e131221dc.jpg",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/avatars/2f34ee4e-bc34-47e5-8b68-668e131221dc.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\avatars\\2f34ee4e-bc34-47e5-8b68-668e131221dc.jpg"
+    },
     {
       "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\avatars\\d8371a98-29ed-4a6a-83b1-95c636730e69.jpg",
       "SourceId": "Bakim",
@@ -459,6 +476,40 @@
       "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\8fec8b50-d055-4f5d-abf2-1581f733793c.png"
     },
     {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\938b8405-0caf-4f5a-85e4-39e5922d7dc5.png",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/worktasks/938b8405-0caf-4f5a-85e4-39e5922d7dc5.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\938b8405-0caf-4f5a-85e4-39e5922d7dc5.png"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\965ba1ff-9da9-4c7b-9aa6-349a72078388.png",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/worktasks/965ba1ff-9da9-4c7b-9aa6-349a72078388.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\965ba1ff-9da9-4c7b-9aa6-349a72078388.png"
+    },
+    {
       "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\9fc6e976-f8cf-4d0a-8347-df6df6b5e984.png",
       "SourceId": "Bakim",
       "SourceType": "Discovered",
@@ -542,6 +593,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\c1c18f19-8ec8-4042-90a3-7376edc87e99.png"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\c8632bc1-6218-40ba-ab1c-e3ce77df4445.png",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/worktasks/c8632bc1-6218-40ba-ab1c-e3ce77df4445.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\c8632bc1-6218-40ba-ab1c-e3ce77df4445.png"
     },
     {
       "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\d63eb0f4-60d8-4357-bca1-64e972937628.png",

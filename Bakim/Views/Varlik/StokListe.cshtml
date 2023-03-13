@@ -30,8 +30,9 @@
         .Visible(true)
         .ApplyFilter(GridApplyFilterMode.Auto)
         )
+        .Height("100%")
         .SearchPanel(searchPanel => searchPanel.Visible(true).Width(300))
-        .Paging(paging => paging.PageSize(5))
+        .Paging(paging => paging.PageSize(10))
         .Pager(p=>
         p.AllowedPageSizes(new JS("[5, 10, 20]"))
         .ShowNavigationButtons(true)

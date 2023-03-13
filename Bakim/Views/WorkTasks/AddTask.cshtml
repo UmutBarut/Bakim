@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="card card-flush shadow-sm">
-        <form  asp-controller="WorkTasks" asp-action="AddTask" enctype="multipart/form-data">
+        <form id="formid"  asp-controller="WorkTasks" asp-action="AddTask" enctype="multipart/form-data">
             <div class="card-header">
                 <h3 class="card-title">Yeni İş Emri</h3>
             </div>
@@ -60,7 +60,7 @@
                     <div class="col-md-6 row">
                         <div class="col-md-12">
                             <label for="exampleFormControlInput1" class="required form-label">Birim</label>
-                            <select class="form-select form-select-sm form-select-solid" asp-for="Task.SectionId" data-control="select2"
+                            <select required class="form-select form-select-sm form-select-solid" asp-for="Task.SectionId" data-control="select2"
                                 data-placeholder="Birim Seçiniz">
                                 <option value=""></option>
                                 @foreach (var item in Model.SectionDto.Sections)
@@ -73,7 +73,7 @@
                         
                         <div class="col-md-12">
                             <label for="exampleFormControlInput1" class="required form-label">Arıza</label>
-                            <select class="form-select form-select-sm form-select-solid"  asp-for="Task.SectionFaultId"
+                            <select required class="form-select form-select-sm form-select-solid"  asp-for="Task.SectionFaultId"
                                 data-control="select2" data-placeholder="Arıza Seçiniz">
                                 <option value=""></option>
                                 @foreach(var item in Model.SectionDto.SectionFaults)
@@ -122,9 +122,53 @@
 
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-                    <button type="submit"  class="btn btn-primary">Oluştur</button>
+                    <button id="submitbtn" type="button"  class="btn btn-primary">Oluştur</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+      $(document).on('click','#submitbtn', function(e){
+        e.preventDefault();
+        if(checkInputs("formid"))
+            $('#formid').submit();
+    });
+
+    function checkInputs(formName) {
+  const getform = "#" + formName;
+  var result = true;
+  $(getform)
+    .find("input:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("select:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("textarea:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  if (result === false) {
+    Swal.fire({
+      text: "Zorunlu Alanları Doldurun.",
+      icon: "error",
+      timer: 1200,
+      showConfirmButton: false,
+    });
+    return result;
+  }
+  return true;
+}
+</script>

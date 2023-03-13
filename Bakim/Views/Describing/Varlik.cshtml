@@ -11,7 +11,7 @@
         <div class="card-body">
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="kt_tab_pane_7" role="tabpanel">
-                    <form asp-controller="Describing" asp-action="Varlik" method="post" enctype="multipart/form-data">
+                    <form id="formid" asp-controller="Describing" asp-action="Varlik" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 mb-10">
                                 <label for="exampleFormControlInput1" class="form-label">Varlık Resmi</label>
@@ -62,8 +62,8 @@
 
                             </div>
                             <div class="col-md-6">
-                                <label for="exampleFormControlInput1" class="form-label">Üretim Bölümü</label>
-                                <select class="form-select form-select-sm form-select-solid mb-4" data-control="select2"
+                                <label for="exampleFormControlInput1" class="required form-label">Üretim Bölümü</label>
+                                <select required class="form-select form-select-sm form-select-solid mb-4" data-control="select2"
                                     name="ProductionSectionId" data-placeholder="Üretim Bölümü Seçiniz">
                                     <option></option>
                                     @foreach (var item in Model.UretimBolumu)
@@ -73,8 +73,8 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="exampleFormControlInput1" class="form-label">Varlık Grubu</label>
-                                <select onchange="kategorigetiren($(this).val())"
+                                <label for="exampleFormControlInput1" class="required form-label">Varlık Grubu</label>
+                                <select required onchange="kategorigetiren($(this).val())"
                                     class="form-select form-select-sm form-select-solid mb-4" data-control="select2"
                                     name="VarlikGroupId" data-placeholder="Varlık Grubu Seçiniz">
                                     <option></option>
@@ -85,8 +85,8 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="exampleFormControlInput1" class="form-label">Varlık Kategorisi</label>
-                                <select id="detaygrup" class="form-select form-select-sm form-select-solid mb-4"
+                                <label for="exampleFormControlInput1" class="required form-label">Varlık Kategorisi</label>
+                                <select required id="detaygrup" class="form-select form-select-sm form-select-solid mb-4"
                                     data-control="select2" data-placeholder="Kategori Seçiniz" name="DetayGroupId">
                                     <option value=""></option>
 
@@ -96,23 +96,22 @@
 
                             <div class="col-md-4 p-0">
                                 <div class="mb-10">
-                                    <label for="exampleFormControlInput1" class="form-label">Varlık Kodu</label>
-                                    <input type="text" class="form-control form-control-sm form-control-solid mb-4"
+                                    <label for="exampleFormControlInput1" class="required form-label">Varlık Kodu</label>
+                                    <input required type="text" class="form-control form-control-sm form-control-solid mb-4"
                                         placeholder="Varlık Kodu Yazınız" name="VarlikCode" />
                                 </div>
                             </div>
                             <div class="col-md-6 ps-3 pe-0">
                                 <div class="mb-10">
-                                    <label for="exampleFormControlInput1" class="form-label">Varlık Adı</label>
-                                    <input type="text" class="form-control form-control-sm form-control-solid mb-4"
+                                    <label for="exampleFormControlInput1" class="required form-label">Varlık Adı</label>
+                                    <input required type="text" class="form-control form-control-sm form-control-solid mb-4"
                                         placeholder="Varlık Adı Yazınız" name="VarlikName" />
                                 </div>
                             </div>
                             </div>
 
                         </div>
-                        <button id="submitbtn" type="submit" class=" btn btn-primary float-right mb-2">Varlık
-                            Ekle</button>
+                        <button id="submitbtn" type="button" class=" btn btn-primary float-right mb-2">Varlık Ekle</button>
                     </form>
                 </div>
             </div>
@@ -121,6 +120,7 @@
 </div>
 
 <script>
+    
     function kategorigetiren(value) {
         console.log(value);
         $('#detaygrup').html("");
@@ -139,4 +139,46 @@
             }
         });
     }
+
+     $(document).on('click','#submitbtn', function(e){
+        e.preventDefault();
+        if(checkInputs("formid"))
+            $('#formid').submit();
+    });
+
+    function checkInputs(formName) {
+  const getform = "#" + formName;
+  var result = true;
+  $(getform)
+    .find("input:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("select:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  $(getform)
+    .find("textarea:required")
+    .each(function () {
+      if ($(this).val() === "") {
+        result = false;
+      }
+    });
+  if (result === false) {
+    Swal.fire({
+      text: "Zorunlu Alanları Doldurun.",
+      icon: "error",
+      timer: 1200,
+      showConfirmButton: false,
+    });
+    return result;
+  }
+  return true;
+}
 </script>
