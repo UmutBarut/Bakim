@@ -31,6 +31,17 @@
             .Width(200)
             )
             .FilterRow(f => f.Visible(true))
+            .Editing(e =>
+            e.AllowAdding(true)
+            .AllowDeleting(true)
+            .AllowUpdating(true)
+            .UseIcons(true)
+            .Mode(GridEditMode.Popup)
+            .Popup(p=>
+            p.Title("Birim Ekle & Güncelle")
+            .ShowTitle(true)
+            .Width(700)
+            ))
             .HeaderFilter(f => f.Visible(true))
         
             .Height("%100")

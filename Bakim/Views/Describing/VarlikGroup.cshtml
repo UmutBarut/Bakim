@@ -35,15 +35,15 @@
                 .ShowBorders(true)
                 
                  .Paging(paging => paging.PageSize(10))
-            .Pager(p=>
-            p.AllowedPageSizes(new JS("[5, 10, 20]"))
-            .ShowNavigationButtons(true)
-            .ShowPageSizeSelector(true)
-            .Visible(true)
-            .ShowNavigationButtons(true)
-            .ShowInfo(true)
-            .DisplayMode(GridPagerDisplayMode.Full)
-            )
+                .Pager(p=>
+                p.AllowedPageSizes(new JS("[5, 10, 20]"))
+                .ShowNavigationButtons(true)
+                .ShowPageSizeSelector(true)
+                .Visible(true)
+                .ShowNavigationButtons(true)
+                .ShowInfo(true)
+                .DisplayMode(GridPagerDisplayMode.Full)
+                )
 
                             @*.MasterDetail(md => md
                 .Enabled(true)
@@ -65,7 +65,7 @@
                 .AllowDeleting(true)
                 .AllowUpdating(true)
                 .UseIcons(true)
-                .Mode(GridEditMode.Batch)
+                .Mode(GridEditMode.Popup)
                 .Popup(p=>
                 p.Title("Grup Ekle & Düzenle")
                 .ShowTitle(true)

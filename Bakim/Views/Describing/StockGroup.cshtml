@@ -19,10 +19,8 @@
                 )
                 .RemoteOperations(true)
                 .Columns(columns => {
-                
-                columns.AddFor(m => m.StockGroupId).AllowEditing(false).Alignment(HorizontalAlignment.Left).Caption("Grup Adı").AllowFiltering(true);
 
-                columns.AddFor(m => m.StockGroupName).Alignment(HorizontalAlignment.Left).Caption("Kategori Adı").AllowFiltering(true);
+                columns.AddFor(m => m.StockGroupName).Alignment(HorizontalAlignment.Left).Caption("Grup Adı").AllowFiltering(true);
 
                 })
                 .SearchPanel(s => s
@@ -65,7 +63,7 @@
                 .AllowDeleting(true)
                 .AllowUpdating(true)
                 .UseIcons(true)
-                .Mode(GridEditMode.Batch)
+                .Mode(GridEditMode.Popup)
                 .Popup(p=>
                 p.Title("Grup Ekle & Düzenle")
                 .ShowTitle(true)

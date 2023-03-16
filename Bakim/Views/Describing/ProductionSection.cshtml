@@ -35,6 +35,17 @@
             .ShowBorders(true)
             
             .Paging(paging => paging.PageSize(10))
+            .Editing(e =>
+                e.AllowAdding(true)
+                .AllowDeleting(true)
+                .AllowUpdating(true)
+                .UseIcons(true)
+                .Mode(GridEditMode.Popup)
+                .Popup(p=>
+                p.Title("Üretim Bölümü Ekle & Güncelle")
+                .ShowTitle(true)
+                .Width(700)
+                ))
             .Pager(p=>
             p.AllowedPageSizes(new JS("[5, 10, 20]"))
             .ShowNavigationButtons(true)
