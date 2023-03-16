@@ -16,6 +16,7 @@ namespace Bakim.Entity.Views
         public bool InProcess { get; set; }
         public string? ReceiverId { get; set; }
         public string? StarterId { get; set; }
+        public string İlerleme { get; set; }
         public string Durum { get; set; }
     }
 }

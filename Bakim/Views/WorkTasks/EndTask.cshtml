@@ -110,12 +110,15 @@
 
                     <div class="d-flex flex-column mt-10 mb-10">
                         <label for="exampleFormControlTextarea1" class="form-label">Yapılan İş Açıklaması</label>
-                        <textarea asp-for="taskuser.Description" name="Description" class="form-control form-control-sm form-control-solid"  id="exampleFormControlTextarea1" rows="5"></textarea>
+                        <textarea id="aciklama" name="Description" class="form-control form-control-sm form-control-solid" rows="5">@Model.WorkTaskUsers.Where(c=>c.UserId == Model.User.Id).First().Description</textarea>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
+
+                  <button class="btn btn-primary me-4" type="button" onclick="savebutton()" >Kaydet</button>
+
                         @if(Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !Model.Task.IsCompleted && Model.Task.InProcess)
                         {
                             if(Model.WorkTaskUsers.Where(c=>c.InProcess == true && c.WorkTaskId == Model.Task.TaskId).Count() > 1)
@@ -124,7 +127,7 @@
                             }
                             else
                             {
-                                <button id="closebutton" class="btn btn-danger" type="submit">Tüm Kaydı Sonlandır</button>
+                                <button id="closebutton" class="btn btn-danger" type="submit">Kaydet ve Sonlandır</button>
                             }
                         }
                 </div>
@@ -135,6 +138,32 @@
 
 
 <script>
+
+  function savebutton()
+  {
+    var id = @Model.Task.TaskId;
+    var data = $('#aciklama').val();
+    $.ajax({
+      url:"/WorkTasks/EndTaskSaveButton",
+      async: true,
+      type:"POST",
+      data: {
+        id: id,
+        aciklama: data,
+      },
+    }).then(function(result){
+      if(result){
+        Swal.fire({
+          text:"Açıklama Kaydedildi",
+          icon:"success",
+          timer:1100,
+          showConfirmButton: false,
+        });
+        
+      }
+    });
+  }
+
 
      $(document).ready(function(){
         $("#closebutton").click(function(e){

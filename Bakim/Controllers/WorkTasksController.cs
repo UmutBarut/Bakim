@@ -62,6 +62,7 @@ namespace Bakim.Controllers
             {
                 Sections = sections,
                 SectionFaults = sectionFaults
+                
             };
 
             // foreach(var item in tasks)
@@ -96,15 +97,13 @@ namespace Bakim.Controllers
                 SectionDto = sectionDto,
                 Task = task,
                 Dtos = dtos,
-                WorkTasks = tasks
+                WorkTasks = tasks,
+                User = await _userManager.GetUserAsync(HttpContext.User)
             };
            
 
             return View(model);
         }
-
-       
-
        
 
         [HttpGet]
@@ -154,6 +153,7 @@ namespace Bakim.Controllers
                 TaskTitle = s.First().TaskTitle.Replace("ı", "i").Replace("İ", "I").Replace("Ğ", "G").Replace("ğ", "g").Replace("ş", "s").Replace("Ü", "U").Replace("Ş", "S").Replace("ç","c").Replace("Ç","C"),
                 CreatedDate = s.First().CreatedDate,
                 Durum = s.First().Durum,
+                İlerleme = s.First().İlerleme,
                 InProcess = s.First().InProcess,
                 IsActive = s.First().IsActive,
                 IsCompleted = s.First().IsCompleted,
@@ -163,13 +163,6 @@ namespace Bakim.Controllers
             }).ToList();
             return DataSourceLoader.Load(query,loadOptions);
 
-            using(var Contexts = new ApplicationDbContext())
-            {
-                var queryy = Contexts.atanankullanicilars.ToList();
-
-                return DataSourceLoader.Load(queryy,loadOptions);
-
-            }
         }
 
         public object Durum(DataSourceLoadOptions loadOptions)
@@ -632,5 +625,21 @@ namespace Bakim.Controllers
             };
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<bool> EndTaskSaveButton(int id, string aciklama)
+        {
+            var task = _workTaskService.GetSingle(c=>c.TaskId == id).Data;
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var userTask = _workTaskUserService.GetTaskUsers(task.TaskId).Data.Where(c => c.UserId == user.Id).FirstOrDefault();
+            
+            userTask.Description = aciklama;
+
+           _workTaskUserService.Update(userTask);
+
+            return true;
+        }
+
+        
     }
 }

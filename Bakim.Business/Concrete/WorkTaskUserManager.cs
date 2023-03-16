@@ -1,4 +1,5 @@
-﻿using Bakim.Business.Abstracts;
+﻿using System.Linq.Expressions;
+using Bakim.Business.Abstracts;
 using Bakim.Core.Utilities.Results;
 using Bakim.Dataaccess.Abstracts;
 using Bakim.Entity;
@@ -26,9 +27,9 @@ namespace Bakim.Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<WorkTaskUser> GetTaskUser(string userId)
+        public IDataResult<WorkTaskUser> GetTaskUser(Expression<Func<WorkTaskUser, bool>> expression = null)
         {
-            return new SuccessDataResult<WorkTaskUser>(_workTaskUserDal.GetAll(c => c.UserId == userId).First());
+            return new SuccessDataResult<WorkTaskUser>(_workTaskUserDal.GetAll(expression).FirstOrDefault());
         }
 
         public IDataResult<List<WorkTaskUser>> GetTaskUsers(int workTaskId)
