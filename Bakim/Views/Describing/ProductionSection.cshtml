@@ -1,5 +1,7 @@
-<div class="container">
+@using Bakim.ViewModels;
+@model DescribeViewModel
 
+<div class="container">
     <div class="card card-flush shadow-sm">
         <div class="card-header">
             <h3 class="card-title">Üretim Bölümü Tanımlayın</h3>
@@ -26,7 +28,7 @@
             .Visible(true)
             .HighlightCaseSensitive(true)
             .Placeholder("Ara")
-            .Width(200)
+            .Width(250)
             )
             .FilterRow(f => f.Visible(true))
             .HeaderFilter(f => f.Visible(true))
@@ -42,7 +44,7 @@
                 .UseIcons(true)
                 .Mode(GridEditMode.Popup)
                 .Popup(p=>
-                p.Title("Üretim Bölümü Ekle & Güncelle")
+                p.Title("Üretim Bölümü Ekle & Düzenle")
                 .ShowTitle(true)
                 .Width(700)
                 ))

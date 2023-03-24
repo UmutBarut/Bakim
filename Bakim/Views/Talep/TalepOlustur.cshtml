@@ -2,12 +2,13 @@
 
 @model TalepViewModel;
 
+
 <div class="container">
    <div class="card card-flush shadow-sm">
         <div class="card-header">
             <h3 class="card-title">Satın Alım Talebi Oluşturun</h3>
         </div>
-        <form asp-controller="Talep" asp-action="TalepOlustur" method="post">
+        <form id="formid" asp-controller="Talep" asp-action="TalepOlustur" method="post">
             <div class="card-body py-5">
                 <div class="row">
                     <div class="col-md-6">
@@ -19,7 +20,7 @@
                     <div class="col-md-6">
                         <label for="exampleFormControlInput1" class="form-label">Varlık Seçiniz</label>
                         <select class="form-select form-select-sm form-select-solid" data-control="select2"
-                            name="VarlikId" data-placeholder="Varlık Seçiniz">
+                            name="VarlikId" data-placeholder="Varlık Seçiniz" data-allow-clear="true">
                             <option value=""></option>
                             <option>Genel</option>
                             @foreach (var item in Model.varliklar)
@@ -31,8 +32,8 @@
                     <div class="col-md-6">
                         <label for="exampleFormControlInput1" class="form-label">Stok Kalemi Seçiniz</label>
                         <select class="form-select form-select-sm form-select-solid" data-control="select2"
-                            name="StockId" data-placeholder="Stok Seçiniz">
-                            <option value=""></option>
+                            name="StockId" data-placeholder="Stok Seçiniz" data-allow-clear="true">
+                            <option ></option>
                             @foreach (var item in Model.stoklar)
                             {
                                 <option value="@item.StockId">@item.StockName</option>
@@ -42,7 +43,8 @@
                     <div class="col-md-6">
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="form-label">Miktar</label>
-                            <input type="number" class="form-control form-control-sm form-control-solid" name="Miktar" placeholder="Miktar Yazınız"/>
+                            <input type="text" id="miktar" class="form-control form-control-sm form-control-solid" name="Miktar" placeholder="Miktar Yazınız"/>
+                            @* <input type="hidden" name="Miktar"> *@
                         </div>
                     </div>     
                     <div class="rounded border d-flex flex-column p-5 mt-10">
@@ -53,10 +55,73 @@
             </div>
             
             <div class="card-footer d-flex justify-content-end">
-               <button type="submit" class="btn btn-primary">Talebi Oluştur</button>
+               <button id="submitBtn" type="submit" class="btn btn-primary">Talebi Oluştur</button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+
+
+    @* $(document).ready(function(){
+
+        var numberMask = Inputmask(
+        document.getElementById('Miktar'),
+        {
+            mask: Number,
+            min: -10000,
+            max: 10000,
+            thousandsSeparator: ' '
+        });
+    }) *@
+
+
+    @* $(document).ready(function(){
+        Inputmask({
+            "mask": "9.999.999,99",
+            "placeholder": " ",
+            "showMaskOnHover": false,
+            "showMaskOnFocus": false
+        }).mask("#miktar");
+
+        $("#submitBtn").click(function(e){
+            e.preventDefault();
+            var miktar = $("#miktar").val();
+                console.log(miktar); 
+            miktar = miktar.replace(".","");
+                console.log(miktar); 
+            $('[name="Miktar"]').val(miktar);
+            $('#formid').submit();
+                console.log($('[name="Miktar"]').val()); 
+        });
+       
+    }) *@
+
+
+   @* $(document).ready(function(){
+    Inputmask({
+        "mask": "999.999,99", 
+        "numericInput": false,
+        "radixPoint": ",",
+        "groupSeparator": ".",
+        "autoGroup": true,
+        "digits": 2,
+        "digitsOptional": false,
+        "placeholder": "0"
+    }).mask("#miktar");
+
+    $("#submitBtn").click(function(){
+        var miktar = $("#miktar").val();
+        miktar = miktar.replace(".", ",");
+        $("#miktar").val(miktar);
+    });
+    console.log(miktar); 
+}) *@ 
+
+   
+
+</script>
+
 
                     

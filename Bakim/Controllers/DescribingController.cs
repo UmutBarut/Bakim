@@ -458,9 +458,6 @@ namespace Bakim.Controllers
 
 
 
-
-
-
         public IActionResult BirimTanimlama()
         {
             return View();

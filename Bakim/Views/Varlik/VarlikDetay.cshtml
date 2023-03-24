@@ -11,18 +11,18 @@
         <div class="card-body"> 
             <div class="row">
                 <div class="col-md-6 mb-10">
-                    <label for="exampleFormControlInput1" class="form-label">Varlık Fotoğrafı</label> 
-                    <br>
-                    @if(Model.varlik.ImagePath == null)
-                    {
-                        <img src="/media/avatars/blank.png" height="150" width="150" class="img-responsive object-fit-cover border border-5">   
-
-                    }
-                    else
-                    {
-                     <img src="/app/images/varliks/@Model.varlik.ImagePath" height="150" width="150" class="img-responsive object-fit-cover border border-5">   
-                    }
-
+                    <div class="ms-8">
+                        <label for="exampleFormControlInput1" class="form-label">Varlık Fotoğrafı</label> 
+                        <br>
+                        @if(Model.varlik.ImagePath == null)
+                        {
+                            <img src="/app/images/HHT/Locha.jpeg" height="150" width="150" style="object-fit: cover;" class="img-responsive border border-5">   
+                        }
+                        else
+                        {
+                            <img src="/app/images/varliks/@Model.varlik.ImagePath" height="150" width="150" style="object-fit:cover;" class="img-responsive border border-5">   
+                        }
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-10">

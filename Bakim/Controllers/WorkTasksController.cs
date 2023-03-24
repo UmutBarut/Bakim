@@ -561,8 +561,6 @@ namespace Bakim.Controllers
                 TransferredUserId = userToTransfer.Id,
                 WorkTaskId = task.TaskId,
                 WorkTask = task,
-                
-                
             };
             _workTaskService.Update(task);
             _workTaskTransferService.Add(transfer);

@@ -1,6 +1,16 @@
 ﻿@model ApplicationUser
-<!--begin::Aside menu-->
 
+
+<style>
+
+.activeClass {
+
+	color:primary;
+}
+</style>
+
+
+<!--begin::Aside menu-->
 <div class="aside-menu aside-menu-active flex-column-fluid">
 	<!--begin::Aside Menu-->
 	<div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
@@ -31,7 +41,7 @@
 						</span>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">Anasayfa</span>
+					<span onclick="activate()" class="menu-title">Anasayfa</span>
 				</a>
 			</div>
 
@@ -46,7 +56,7 @@
 						<i class="fa fa-bullhorn" aria-hidden="true"></i>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">Duyurular</span>
+					<span onclick="activate()" class="menu-title">Duyurular</span>
 				</a>
 			</div>
 			<div class="menu-item">
@@ -57,7 +67,7 @@
 						<i class="fa fa-signal" aria-hidden="true"></i>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">İstatistiksel Veriler</span>
+					<span onclick="activate()" class="menu-title">İstatistiksel Veriler</span>
 				</a>
 			</div>
 
@@ -66,10 +76,8 @@
 					id="isemirleri">
 					<span class="menu-icon">
 						<i style="font-size:1.4rem;" class='bx bxs-hand-right'></i>
-						
-						
 					</span>
-					<span class="menu-title">İş Emirleri</span>
+					<span onclick="activate()" class="menu-title">İş Emirleri</span>
 				</a>
 			</div>
 
@@ -86,11 +94,9 @@
 							</svg>
 						</span>
 					</span>
-					<span class="menu-title">Satın Alım Talepleri</span>
+					<span onclick="activate()" class="menu-title">Satın Alım Talepleri</span>
 				</a>
 			</div>
-
-
 
 			<div class="menu-item">
 				<div class="menu-content pt-8 pb-2">
@@ -98,18 +104,15 @@
 				</div>
 			</div>
 
-
-
 			<div class="menu-item">
 				<a class="menu-link" asp-controller="Varlik" asp-action="VarlikListe" onclick="setmenu('varlikliste')"
 					id="isemirleri">
 					<span class="menu-icon">
 						<span class="bullet bullet-dot"></span>
 					</span>
-					<span class="menu-title">Varlık Listesi</span>
+					<span onclick="activate()" class="menu-title">Varlık Listesi</span>
 				</a>
 			</div>
-
 
 			<div class="menu-item">
 				<a class="menu-link" asp-controller="Varlik" asp-action="StokListe" onclick="setmenu('stokliste')"
@@ -117,22 +120,15 @@
 					<span class="menu-icon">
 						<span class="bullet bullet-dot"></span>
 					</span>
-					<span class="menu-title">Stok Listesi</span>
+					<span onclick="activate()" class="menu-title">Stok Listesi</span>
 				</a>
 			</div>
 			
-			
-
-
-
-
 			<div class="menu-item">
 				<div class="menu-content pt-8 pb-2">
 					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Tanımlamalar</span>
 				</div>
 			</div>
-
-
 
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="tanimlamaBase">
 				<span class="menu-link">
@@ -156,7 +152,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Birim Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Birim Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -171,7 +167,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Üretim Bölümü Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Üretim Bölümü Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -186,7 +182,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Tedarikçi Firma Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Tedarikçi Firma Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -200,7 +196,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Varlık Grubu Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Varlık Grubu Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -214,7 +210,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Varlık Kategorisi Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Varlık Kategorisi Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -229,7 +225,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Varlık Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Varlık Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -243,7 +239,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Stok Grubu Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Stok Grubu Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -258,7 +254,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Stok Kategorisi Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Stok Kategorisi Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -274,7 +270,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Stok Tanımlama</span>
+									<span onclick="activate()" class="menu-title">Stok Tanımlama</span>
 								</a>
 							</div>
 						</div>
@@ -307,7 +303,7 @@
 								<span class="menu-bullet">
 									<span class="bullet bullet-dot"></span>
 								</span>
-								<span class="menu-title">Varlık Raporlama</span>
+								<span onclick="activate()" class="menu-title">Varlık Raporlama</span>
 							</a>
 						</div>
 					</div>
@@ -321,7 +317,7 @@
 								<span class="menu-bullet">
 									<span class="bullet bullet-dot"></span>
 								</span>
-								<span class="menu-title">Kullanıcı Raporlama</span>
+								<span onclick="activate()" class="menu-title">Kullanıcı Raporlama</span>
 							</a>
 						</div>
 					</div>
@@ -335,7 +331,7 @@
 								<span class="menu-bullet">
 									<span class="bullet bullet-dot"></span>
 								</span>
-								<span class="menu-title">Veri Raporlama</span>
+								<span onclick="activate()" class="menu-title">Veri Raporlama</span>
 							</a>
 						</div>
 					</div>
@@ -349,7 +345,7 @@
 								<span class="menu-bullet">
 									<span class="bullet bullet-dot"></span>
 								</span>
-								<span class="menu-title">Bakım Raporlama</span>
+								<span onclick="activate()" class="menu-title">Bakım Raporlama</span>
 							</a>
 						</div>
 					</div>
@@ -363,7 +359,7 @@
 								<span class="menu-bullet">
 									<span class="bullet bullet-dot"></span>
 								</span>
-								<span class="menu-title">Makine Arıza Raporlama</span>
+								<span onclick="activate()" class="menu-title">Makine Arıza Raporlama</span>
 							</a>
 						</div>
 					</div>
@@ -384,7 +380,7 @@
 						<i class="fa fa-bars" aria-hidden="true"></i>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">Kullanıcı Listele</span>
+					<span onclick="activate()" class="menu-title">Kullanıcı Listele</span>
 				</a>
 			</div>
 
@@ -590,7 +586,7 @@
 								<span class="menu-bullet">
 									<span class="bullet bullet-dot"></span>
 								</span>
-								<span class="menu-title">Rutin Bakım Listele</span>
+								<span onclick="activate()" class="menu-title">Rutin Bakım Listele</span>
 							</a>
 						</div>
 					</div>
@@ -604,7 +600,7 @@
 									<span class="menu-bullet">
 										<span class="bullet bullet-dot"></span>
 									</span>
-									<span class="menu-title">Rutin Bakım Planla</span>
+									<span onclick="activate()" class="menu-title">Rutin Bakım Planla</span>
 								</a>
 							</div>
 						</div>
@@ -627,7 +623,7 @@
 							src="~/app/images/avatars/@Model.ImagePath" alt="" />
 						<!--end::Svg Icon-->
 					</span>
-					<span class="pl-2 menu-title">@Model.UserName</span>
+					<span onclick="activate()" class="pl-2 menu-title">@Model.UserName</span>
 				</a>
 			</div>
 			<div class="menu-item">
@@ -637,7 +633,7 @@
 						<i class="fa fa-cog" aria-hidden="true"></i>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-title">Ayarlar</span>
+					<span onclick="activate()" class="menu-title">Ayarlar</span>
 				</a>
 			</div>
 
@@ -680,4 +676,16 @@
 		localStorage.setItem("basesub", basesub);
 		localStorage.setItem("basemenu", basemenu);
 	}
+
+
+	$(document).ready(function(){
+
+		function activate()
+		{
+			var a = document.getElementsByClassName("menu-title");
+
+			a.classList.add("activeClass")
+		}
+	})
+
 </script>

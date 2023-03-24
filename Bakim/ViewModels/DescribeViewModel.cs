@@ -12,6 +12,7 @@ namespace Bakim.ViewModels
         public List<VarlikGroup> VarlikGrubu { get; set; }
         public List<ProductionSection> UretimBolumu { get; set; }
         public List<DetayGroup> VarlikKategori { get; set; }
+        public int filter { get; set; }
 
         
     }

@@ -73,6 +73,27 @@ namespace Bakim.Controllers
         {
             List<Talep> model = new List<Talep>();
 
+            model = model.GroupBy(g=>g.TalepId).Select(s=> new Talep
+            {
+                TalepId = s.Key,
+                TalepAdi = s.First().TalepAdi.Replace("ı", "i").Replace("İ", "I").Replace("Ğ", "G").Replace("ğ", "g").Replace("ş", "s").Replace("Ü", "U").Replace("Ş", "S").Replace("ç","c").Replace("Ç","C"),
+                CreatorId = s.First().CreatorId?.Replace("ı", "i").Replace("İ", "I").Replace("Ğ", "G").Replace("ğ", "g").Replace("ş", "s").Replace("Ü", "U").Replace("Ş", "S").Replace("ç","c").Replace("Ç","C"),
+                StockId = s.First().StockId,
+                VarlikId = s.First().VarlikId,
+                Miktar = s.First().Miktar, 
+                Olcu = s.First().Olcu,
+                BirimId = s.First().BirimId,
+                Aciklama = s.First().Aciklama?.Replace("ı", "i").Replace("İ", "I").Replace("Ğ", "G").Replace("ğ", "g").Replace("ş", "s").Replace("Ü", "U").Replace("Ş", "S").Replace("ç","c").Replace("Ç","C"),
+                FirmaId = s.First().FirmaId,
+                CreatedDate = s.First().CreatedDate,
+                IsApproved = s.First().IsApproved,
+                ApproveDate = s.First().ApproveDate,
+                IsFinished = s.First().IsFinished,
+                FinishDate = s.First().FinishDate
+
+            }).ToList();
+
+
 
             if(id == 2 || id == null || id == 0)
             {   

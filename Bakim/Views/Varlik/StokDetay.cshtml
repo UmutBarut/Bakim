@@ -8,19 +8,21 @@
                 <h3 class="card-title">@Model.stok.StockName</h3>
             </div>
             <div class="card-body py-5">
-                    <div class="row">
-                        <div class="col-md-6 mb-10">
-                        <label for="exampleFormControlInput1" class="form-label">Stok Fotoğrafı</label> 
-                        <br>
-                        @if(Model.stok.ImagePath == null)
-                        {
-                            <img src="/media/avatars/blank.png" height="150" width="150" class="img-responsive object-fit-cover border border-5">   
-
-                        }
-                        else
-                        {
-                        <img src="/app/images/stocks/@Model.stok.ImagePath" height="150" width="150" class="img-responsive object-fit-cover border border-5">   
-                        }
+                <div class="row">
+                    <div class="col-md-6 mb-10">
+                        <div class="ms-8">
+                            <label for="exampleFormControlInput1" class="form-label">Stok Fotoğrafı</label> 
+                            <br>
+                            @if(Model.stok.ImagePath == null)
+                            {
+                                <img src="/app/images/HHT/Locha.jpeg" height="150" width="150" style="object-fit: cover;" class="img-responsive border border-5">
+                            }
+                            else
+                            {
+                                <img src="/app/images/stocks/@Model.stok.ImagePath" height="150" width="150" style="object-fit: cover;" class="img-responsive border border-5">   
+                            }
+                        </div>
+                    
                     </div>
 
                     <div class="col-md-6 row">

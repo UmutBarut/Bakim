@@ -14,57 +14,58 @@
                     <form id="formid" asp-controller="Describing" asp-action="Varlik" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6 mb-10">
-                                <label for="exampleFormControlInput1" class="form-label">Varlık Resmi</label>
-                                <br>
-                                <br>
-                                <!--begin::Image input-->
-                                <div class="image-input image-input-outline" data-kt-image-input="true"
-                                    style="background-image: url(/app/images/varliks)">
-                                    <!--begin::Image preview wrapper-->
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url(/app/images/varliks)"></div>
-                                    <!--end::Image preview wrapper-->
+                                <div class="ms-8">
+                                    <label for="exampleFormControlInput1" class="form-label">Varlık Resmi</label>
+                                    <br>
+                                    <br>
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true"
+                                        style="background-image: url(/app/images/varliks)">
+                                        <!--begin::Image preview wrapper-->
+                                        <div class="image-input-wrapper w-150px h-150px"
+                                            style="background-image: url(/app/images/HHT/Locha.jpeg)"></div>
+                                        <!--end::Image preview wrapper-->
 
-                                    <!--begin::Edit button-->
-                                    <label
-                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                        data-bs-dismiss="click" title="Change avatar">
-                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Edit button-->
+                                        <label
+                                            class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                            data-bs-dismiss="click" title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
 
-                                        <!--begin::Inputs-->
-                                        <input type="file" name="file" accept=".png, .jpg, .jpeg"
-                                            style="object-fit:cover;" />
-                                        <input type="hidden" name="avatar_remove" />
-                                        <!--end::Inputs-->
-                                    </label>
-                                    <!--end::Edit button-->
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="file" accept=".png, .jpg, .jpeg"
+                                                style="object-fit:cover;" />
+                                            <input type="hidden" name="avatar_remove" />
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Edit button-->
 
-                                    <!--begin::Cancel button-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                        data-bs-dismiss="click" title="Cancel avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Cancel button-->
+                                        <!--begin::Cancel button-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                            data-bs-dismiss="click" title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel button-->
 
-                                    <!--begin::Remove button-->
-                                    <span
-                                        class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                        data-bs-dismiss="click" title="Remove avatar">
-                                        <i class="bi bi-x fs-2"></i>
-                                    </span>
-                                    <!--end::Remove button-->
+                                        <!--begin::Remove button-->
+                                        <span
+                                            class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                            data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                            data-bs-dismiss="click" title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove button-->
+                                    </div>
+                                    <!--end::Image input-->
                                 </div>
-                                <!--end::Image input-->
-
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleFormControlInput1" class="required form-label">Üretim Bölümü</label>
                                 <select required class="form-select form-select-sm form-select-solid mb-4" data-control="select2"
-                                    name="ProductionSectionId" data-placeholder="Üretim Bölümü Seçiniz">
+                                    name="ProductionSectionId" data-placeholder="Üretim Bölümü Seçiniz" data-allow-clear="true">
                                     <option></option>
                                     @foreach (var item in Model.UretimBolumu)
                                     {
@@ -76,7 +77,7 @@
                                 <label for="exampleFormControlInput1" class="required form-label">Varlık Grubu</label>
                                 <select required onchange="kategorigetiren($(this).val())"
                                     class="form-select form-select-sm form-select-solid mb-4" data-control="select2"
-                                    name="VarlikGroupId" data-placeholder="Varlık Grubu Seçiniz">
+                                    name="VarlikGroupId" data-placeholder="Varlık Grubu Seçiniz" data-allow-clear="true">
                                     <option></option>
                                     @foreach (var item in Model.VarlikGrubu)
                                     {
@@ -87,7 +88,7 @@
                             <div class="col-md-6">
                                 <label for="exampleFormControlInput1" class="required form-label">Varlık Kategorisi</label>
                                 <select required id="detaygrup" class="form-select form-select-sm form-select-solid mb-4"
-                                    data-control="select2" data-placeholder="Kategori Seçiniz" name="DetayGroupId">
+                                    data-control="select2" data-placeholder="Kategori Seçiniz" name="DetayGroupId" data-allow-clear="true">
                                     <option value=""></option>
 
                                 </select>

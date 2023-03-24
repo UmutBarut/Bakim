@@ -8,13 +8,10 @@
             data-tns-items="1" data-tns-center="false" data-tns-dots="false"
             data-tns-prev-button="#kt_team_slider_prev1" data-tns-next-button="#kt_team_slider_next1">
 
-
             @foreach (var item in Model.WorkTasks)
             {
-
                 @if (item.Acil)
-                {
-                                                   
+                {                           
                     <div class="text-center px-5 py-4">
                         <div class='alert alert-dismissible text-center @(item.Acil ? "bg-danger" : "bg-success") d-flex flex-column flex-sm-row p-5' style="text-align:center !important;">
                             <div class="d-flex flex-column text-light pe-0 pe-sm-10 w-100 text-center"   >
@@ -45,7 +42,6 @@
                     <i class="fs-2x fa fa-arrow-right" aria-hidden="true"></i>
                 </span>
             </button>
-
     </div>
 
     <div class="row g-5 g-xl-10 mb-5 mb-xl-10">

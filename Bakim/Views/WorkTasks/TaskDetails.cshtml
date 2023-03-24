@@ -27,19 +27,23 @@
         <div class="card-body mt-4 py-5">
             @if(Model.Task.Acil == true)
             {
-                <div class="d-flex justify-content-center align-items-center mb-4"><h2 class="text-danger">Acil İş Emri</h2></div>
+                <div class="d-flex justify-content-center align-items-center mb-6"><h2 class="text-danger">Acil İş Emri</h2></div>
             }
            
             <div class="row">
                 <div class="col-md-6">
-                    @if(Model.Task.ImagePath != null)
-                    {
-                        <img src="/app/images/worktasks/@Model.Task.ImagePath" height="200" width="200" class="img-responsive object-fit-cover border border-5">
-                    }
-                    else
-                    {
-                        <img src="/media/avatars/blank.png" height="200" width="200" class="img-responsive object-fit-cover border border-5">
-                    }
+                    <div class="ms-8">
+                        @if(Model.Task.ImagePath != null)
+                        {   <label class="form-label">İş Emri Resmi</label>
+                            <br>
+                            <img src="/app/images/worktasks/@Model.Task.ImagePath" height="200" width="200" style="object-fit: cover;" class="img-responsive border border-5">
+                        }
+                        else
+                        {
+                            <img src="/app/images/HHT/Locha.jpeg" height="200" width="200" style="object-fit: cover;" class="img-responsive border border-5">
+                        }
+                    </div>
+                    
                 </div>
 
                 <div class="col-md-6 row">

@@ -138,24 +138,22 @@
                     </div>
                     </text>).Caption("IsEmri Resmi"); *@
 
-            columns.AddFor(m => m.TaskTitle).Caption("Is Emri").Alignment(HorizontalAlignment.Left).Width(250);
+            columns.AddFor(m => m.TaskTitle).Caption("Is Emri").Alignment(HorizontalAlignment.Left).Width(250).AllowExporting(false);
 
             columns.AddFor(m=> m.TaskDescription).Caption("Aciklama").Alignment(HorizontalAlignment.Center);
 
             columns.AddFor(m => m.CreatedDate).SortOrder(SortOrder.Desc).Caption("Olusturma Tarihi").Alignment(HorizontalAlignment.Center).Width(200);
 
-            columns.AddFor(m=>m.İlerleme).Alignment(HorizontalAlignment.Center).Caption("Ilerleme").AllowEditing(false).AllowFiltering(false).AllowSearch(false).Width(200);
-
-            columns.AddFor(m=>m.Durum).Alignment(HorizontalAlignment.Center).Caption("Durum").AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(@<text>
+            columns.AddFor(m=>m.Durum).Alignment(HorizontalAlignment.Center).AllowExporting(false).Caption("Durum").Width(100).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(@<text>
 
                 <span class="badge badge-lg <%- data.Durum == 'Normal' ? 'badge-light' : 'badge-danger' %>"><%- data.Durum %></span>
-
-
             </text>);
 
             columns.AddFor(m=>m.ReceiverId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("usergetir").Key("Id")).DisplayExpr("UserName").ValueExpr("Id")).Caption("Kullanici").Alignment(HorizontalAlignment.Center);
 
-            columns.AddFor(m=>m.TaskId).Alignment(HorizontalAlignment.Center).Caption("").AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detailbutton")); 
+            columns.AddFor(m=>m.İlerleme).Alignment(HorizontalAlignment.Center).Caption("Ilerleme").AllowEditing(false).AllowFiltering(true).AllowSearch(true);
+
+            columns.AddFor(m=>m.TaskId).AllowExporting(false).Alignment(HorizontalAlignment.Center).Caption("").AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("detailbutton")); 
 
             })
                 .Selection(s=> s.Mode(SelectionMode.Multiple))
@@ -169,92 +167,9 @@
         <div class="card-footer">
         </div>    
     </div>
-
-    
 </div>
 
 <script>
-
-    @* function filterbutton(button)
-    {
-       let element = document.getElementById("taleplistesi");
-        let instance = DevExpress.ui.dxDataGrid.getInstance(element);
-        instance.filter(['ReceiverId', '=', "@Model.User.Id"]);
-        console.log(button);
-
-    } *@
-
-    @* function clearfilterbutton()
-    {
-        let element = document.getElementById("taleplistesi");
-         let instance = Devexpress.ui.dcDataGrid.getInstance(element);
-         instance.clearFilter();
-         this.option("text","Tümü")
-    } *@
-
-
-    let isFilterApplied = false;
-
-    function filterbutton(button)
-    {
-        let element = document.getElementById("taleplistesi");
-        let instance = DevExpress.ui.dxDataGrid.getInstance(element);
-
-        if (isFilterApplied) {
-            instance.clearFilter();
-            isFilterApplied = false;
-            button.option("text", "Bana özel");
-        } else {
-            instance.filter(['ReceiverId', '=', "@Model.User.Id"]);
-            isFilterApplied = true;
-            button.option("text", "Tümü");
-        }
-
-        isFilterApplied = instance.filter().length > 0;
-
-        // Tümü butonuna tıklandığında mevcut filtreyi temizle
-        if (!isFilterApplied) {
-            showAllData();
-        } else {
-            instance.filter(['ReceiverId', '=', "@Model.User.Id"]);
-        }
-    }
-
-    function showAllData() 
-    {
-        let element = document.getElementById("taleplistesi");
-        let instance = DevExpress.ui.dxDataGrid.getInstance(element);
-
-        // Filtreyi temizle
-        instance.clearFilter();
-
-        // Tümü butonunu Bana Özel olarak değiştir
-        let filterButton = instance.getToolbar().getItemWidget("filterButton");
-        filterButton.option("text", "Bana Özel");
-
-        // Filtrenin uygulandığını belirtmek için isFilterApplied değişkenini güncelle
-        isFilterApplied = false;
-        }
-
-        function initFilterButton(e) 
-        {
-        let filterButton = e.component;
-        filterButton.showAllData = showAllData;
-        filterButton.option("onClick", function() {
-            filterbutton(filterButton);
-        });
-    }
-
-    // Tümü butonuna ait özellikleri tanımlamak için initFilterButton fonksiyonunu çağır
-    initFilterButton({
-        component: DevExpress.ui.dxButton.getInstance(document.getElementById("filterButton"))
-    });
-
-
-
-
-
-
 
     function detailbutton(container, options)
     {
@@ -276,7 +191,7 @@
 
         if(options.data.IsActive == false && options.data.InProcess ==  false && options.data.IsCompleted == true)
         {
-            $('<a href="" class="btn btn-icon btn-success ms-4">\
+            $('<a href="/WorkTasks/TaskDetails?id=' + options.data.TaskId + '" class="btn btn-icon btn-success ms-4">\
                     <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
                     <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
                 </a>').appendTo(container);
@@ -337,6 +252,62 @@
         e.cancel = true;
     }
 
+    let isFilterApplied = false;
+
+    function filterbutton(button)
+    {
+        let element = document.getElementById("taleplistesi");
+        let instance = DevExpress.ui.dxDataGrid.getInstance(element);
+
+        if (isFilterApplied) {
+            instance.clearFilter();
+            isFilterApplied = false;
+            button.option("text", "Bana özel");
+        } else {
+            instance.filter(['ReceiverId', '=', "@Model.User.Id"]);
+            isFilterApplied = true;
+            button.option("text", "Tümü");
+        }
+
+        isFilterApplied = instance.filter().length > 0;
+
+        // Tümü butonuna tıklandığında mevcut filtreyi temizle
+        if (!isFilterApplied) {
+            showAllData();
+        } else {
+            instance.filter(['ReceiverId', '=', "@Model.User.Id"]);
+        }
+    }
+
+    function showAllData() 
+    {
+        let element = document.getElementById("taleplistesi");
+        let instance = DevExpress.ui.dxDataGrid.getInstance(element);
+
+        // Filtreyi temizle
+        instance.clearFilter();
+
+        // Tümü butonunu Bana Özel olarak değiştir
+        let filterButton = instance.getToolbar().getItemWidget("filterButton");
+        filterButton.option("text", "Bana Özel");
+
+        // Filtrenin uygulandığını belirtmek için isFilterApplied değişkenini güncelle
+        isFilterApplied = false;
+        }
+
+        function initFilterButton(e) 
+        {
+        let filterButton = e.component;
+        filterButton.showAllData = showAllData;
+        filterButton.option("onClick", function() {
+            filterbutton(filterButton);
+        });
+    }
+
+    // Tümü butonuna ait özellikleri tanımlamak için initFilterButton fonksiyonunu çağır
+    initFilterButton({
+        component: DevExpress.ui.dxButton.getInstance(document.getElementById("filterButton"))
+    });
 
 </script>
 

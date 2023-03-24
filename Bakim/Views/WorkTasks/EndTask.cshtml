@@ -24,8 +24,8 @@
                         <div class="mt-10 mb-10">
                                 <label for="exampleFormControlInput1" class="form-label">Stok</label>
                                 <select id="stockselect" required class="form-select form-select-sm form-select-solid"
-                                    data-control="select2" name="StokKategoriId" data-placeholder="Stok Seçiniz">
-                                    <option value=""></option>
+                                    data-control="select2" name="StokKategoriId" data-placeholder="Stok Seçiniz" data-allow-clear="true">
+                                    <option></option>
                                     @foreach (var item in Model.stock)
                                     {
                                         <option value="@item.StockId">@item.StockName</option>

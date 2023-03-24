@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
 Author: Keenthemes
 Product Name: Metronic - Bootstrap 5 HTML, VueJS, React, Angular & Laravel Admin Dashboard Theme
@@ -37,14 +36,13 @@ License: For each use you must have a valid license purchased only from above li
 	<script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
 	<link href="~/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<script src="~/js/devextreme/localization/dx.messages.tr.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	
+	<link rel="stylesheet" href="~/css/fontawesome/all.min.css" type="text/css">
 
-
+	@* cdn i var lokalde çalışmıyor  *@
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="/css/boxicons/boxicons.min.css" type="text/css">
 
-
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<link rel="stylesheet" href="/css/font/fontfamily.css" type="text/css">
 		<!--end::Fonts-->
 		<!--begin::Page Vendor Stylesheets(used by this page)-->
 		<link href="~/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -56,6 +54,7 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Global Stylesheets Bundle-->
 	</head>
 	<!--end::Head-->
+
 	<!--begin::Body-->
 	<body id="kt_app_body" data-kt-app-layout="light-sidebar"  class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
@@ -111,8 +110,8 @@ License: For each use you must have a valid license purchased only from above li
 							<!--end::Aside mobile toggle-->
 							<!--begin::Mobile logo-->
 							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-								<a href="../../demo1/dist/index.html" class="d-lg-none">
-									<img alt="Logo" src="~/media/logos/logo-2.svg" class="h-30px" />
+								<a asp-controller="Home" asp-action="Index" class="d-lg-none">
+									<img alt="Logo" src="~/app/images/logo/HHT.png" class="h-50px logo"/>
 								</a>
 							</div>
 							<!--end::Mobile logo-->
@@ -171,6 +170,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="~/js/custom/apps/chat/chat.js"></script>
 		<script src="~/js/custom/modals/create-app.js"></script>
 		<script src="~/js/custom/modals/upgrade-plan.js"></script>
+		
 		<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
 		<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
 		<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
@@ -186,6 +186,8 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
 		
 
+		
+
 		<script src="/js/jsPDF/jspdf.plugin.min.js"></script>
 
 		<script>
@@ -193,10 +195,14 @@ License: For each use you must have a valid license purchased only from above li
 		</script>
 
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" integrity="sha512-03CCNkeosDFN2zCCu4vLpu3pJfZcrL48F3yB8k87ejT+OVMwco7IH3FW02vtbGhdncS6gyYZ/duYaC/K62xQPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		@* <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script> *@
+		<script src="~/js/forExport/polyfill.min.js"></script>
+		@* <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script> *@
+		<script src="~/js/forExport/exceljs.min.js"></script>
+		@* <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> *@
+		<script src="~/js/forExport/FileSaver.min.js"></script>
+		@* <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" integrity="sha512-03CCNkeosDFN2zCCu4vLpu3pJfZcrL48F3yB8k87ejT+OVMwco7IH3FW02vtbGhdncS6gyYZ/duYaC/K62xQPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> *@
+		<script src="~/js/forExport/jspdf.plugin.autotable.min.js"></script>
 
 		
 

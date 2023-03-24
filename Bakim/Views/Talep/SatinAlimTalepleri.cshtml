@@ -185,25 +185,22 @@
 
         columns.AddFor(m=> m.VarlikId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepVarlik").Key("VarlikId")).DisplayExpr("VarlikName").ValueExpr("VarlikId")).Alignment(HorizontalAlignment.Left).Caption("Varlık Kalemi").CellTemplate(@<text><%- displayValue == null ? "Genel" : displayValue %></text>);
 
-        columns.AddFor(m => m.Miktar).Caption("Talep Miktarı").Alignment(HorizontalAlignment.Left);
+        columns.AddFor(m => m.Miktar).Caption("Talep Miktarı").Alignment(HorizontalAlignment.Left).Format("#,##0.##");
 
-        columns.AddFor(m => m.Olcu).Caption("Ölçü").Alignment(HorizontalAlignment.Left);
+        @* columns.AddFor(m => m.Olcu).Caption("Ölçü").Alignment(HorizontalAlignment.Left);
 
-        columns.AddFor(m => m.BirimId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepBirim").Key("BirimId")).DisplayExpr("BirimAdi").ValueExpr("BirimId")).Alignment(HorizontalAlignment.Left).Caption("Birim");
+        columns.AddFor(m => m.BirimId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("GetAllTalepBirim").Key("BirimId")).DisplayExpr("BirimAdi").ValueExpr("BirimId")).Alignment(HorizontalAlignment.Left).Caption("Birim"); *@
 
         columns.AddFor(m => m.CreatedDate).Caption("Talep Tarihi").DataType(GridColumnDataType.DateTime).Format("dd.MM.yyyy HH:mm").SortOrder(SortOrder.Desc).Alignment(HorizontalAlignment.Left);
 
-        columns.AddFor(m=>m.IsApproved).Alignment(HorizontalAlignment.Center).AllowEditing(false).AllowFiltering(false).AllowSearch(false).Caption("İlerleme").CellTemplate(@<text>
+        columns.AddFor(m=>m.IsApproved).Alignment(HorizontalAlignment.Center).AllowExporting(false).AllowEditing(false).AllowFiltering(false).AllowSearch(false).Caption("İlerleme").CellTemplate(@<text>
            
             <div class=""><%- (data.IsApproved == false) ? 'Onay bekliyor' : (data.IsApproved == true && data.IsFinished == false) ?  'Ürün bekliyor' : 'Tamamlandı' %></div>
         </text>);
 
-        columns.AddFor(m=>m.TalepId).Alignment(HorizontalAlignment.Left).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("onaybutton")).Caption("").Width(150);  
-
-       
+        columns.AddFor(m=>m.TalepId).Alignment(HorizontalAlignment.Left).AllowExporting(false).AllowEditing(false).AllowFiltering(false).AllowSearch(false).CellTemplate(new JS("onaybutton")).Caption("").Width(150);  
 
         })
-            
             .Selection(s=> s.Mode(SelectionMode.Multiple))
             .Export(e=> e.Enabled(true)
             .AllowExportSelectedData(true)
@@ -213,13 +210,37 @@
     </div>
 </div>
 
+    
+
 <script>
+
+
+     @* $(document).ready(function(){
+        Inputmask({
+            "mask": "9.999.999,99",
+            "placeholder": " ",
+            "showMaskOnHover": false,
+            "showMaskOnFocus": false
+        
+        }).mask("#miktar");
+
+        $("#submitBtn").click(function(e){
+            e.preventDefault();
+            var miktar = $("#miktar").val();
+                console.log(miktar); 
+            miktar = miktar.replace(".","");
+                console.log(miktar); 
+            $('[name="Miktar"]').val(miktar);
+            $('#formid').submit();
+                console.log($('[name="Miktar"]').val()); 
+        });
+       
+    }) *@
+
     var degisken = '@User.IsInRole("Admin")';
 
     function onaybutton(container, options) 
     {
-       
-
         if(degisken != "True")
         {
                 if(options.data.IsApproved == true && options.data.IsFinished == false)
@@ -267,7 +288,6 @@
         <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
         <!--end::Svg Icon--></button>').appendTo(container);
        }
-
     }
 
     $(document).ready(function(){
@@ -382,10 +402,12 @@
         }).then(function(result){
             if(result.isConfirmed){
                 exportToPDF(e);
+                console.log(result);
             }
-            else{
+            else if(result.dismiss == "cancel"){
                 exporting(e);
             }
+                console.log(result);
         });
     }
 

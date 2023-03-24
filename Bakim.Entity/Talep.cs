@@ -15,7 +15,7 @@ namespace Bakim.Entity
         public string? CreatorId { get; set; }
         public int StockId { get; set; }   
         public int VarlikId { get; set; }
-        public int? Miktar { get; set; }
+        public double? Miktar { get; set; }
         public int? Olcu { get; set; }
         public int? BirimId { get; set; }
         public string? Aciklama { get; set; }
