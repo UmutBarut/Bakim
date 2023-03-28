@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QyO16sJ6BTqoDPR/E+bPJj3T2+4DGrF+7ayb0v7WuUA=",
+  "Hash": "EDP77BQV+A2wj9c41Sr46hFgeEey//9gt0wvYY/cxhU=",
   "Source": "Bakim",
   "BasePath": "_content/Bakim",
   "Mode": "Default",
@@ -8906,6 +8906,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\media\\auth\\bg11.png"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\media\\auth\\bgforlogin.jpeg",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "media/auth/bgforlogin.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\auth\\bgforlogin.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\media\\auth\\forlogin.png",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "media/auth/forlogin.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\auth\\forlogin.png"
     },
     {
       "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\media\\avatars\\150-1.jpg",

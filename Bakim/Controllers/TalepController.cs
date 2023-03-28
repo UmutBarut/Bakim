@@ -120,24 +120,25 @@ namespace Bakim.Controllers
         [Authorize(Roles = "Admin")]
 
         [HttpPost]
-        public IActionResult Confirmation( Talep talep, bool durum=false){
-                var taleptoupdate = _talepService.GetById(c=>c.TalepId == talep.TalepId).Data;
-                
-                taleptoupdate.TalepAdi = talep.TalepAdi;
-                taleptoupdate.StockId = talep.StockId;
-                taleptoupdate.VarlikId = talep.VarlikId;
-                taleptoupdate.Miktar = talep.Miktar;
-                taleptoupdate.Olcu = talep.Olcu;
-                taleptoupdate.BirimId = talep.BirimId;
-                taleptoupdate.Aciklama = talep.Aciklama;
-                taleptoupdate.FirmaId = talep.FirmaId;
-                taleptoupdate.IsApproved = talep.IsApproved;
-                taleptoupdate.ApproveDate = talep.ApproveDate;
-              
-
+        public IActionResult Confirmation( Talep talep,string descriminator, bool durum=false){
+            var taleptoupdate = _talepService.GetById(c=>c.TalepId == talep.TalepId).Data;
+            
+            taleptoupdate.TalepAdi = talep.TalepAdi;
+            taleptoupdate.StockId = talep.StockId;
+            taleptoupdate.VarlikId = talep.VarlikId;
+            taleptoupdate.Miktar = talep.Miktar;
+            taleptoupdate.Olcu = talep.Olcu;
+            taleptoupdate.BirimId = talep.BirimId;
+            taleptoupdate.Aciklama = talep.Aciklama;
+            taleptoupdate.FirmaId = talep.FirmaId;
+            taleptoupdate.IsApproved = talep.IsApproved;
+            taleptoupdate.ApproveDate = talep.ApproveDate;
+            
+            if(descriminator != "edit"){
                 taleptoupdate.IsApproved = true;
                 taleptoupdate.ApproveDate = DateTime.Now;
-                _talepService.Update(taleptoupdate);
+            }
+            _talepService.Update(taleptoupdate);
             return RedirectToAction("SatinAlimTalepleri");
         }
 

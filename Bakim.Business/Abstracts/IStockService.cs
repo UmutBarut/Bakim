@@ -12,9 +12,7 @@ namespace Bakim.Business.Abstracts
     public interface IStockService
     {
         public IDataResult<List<Stock>> StockList(Expression<Func<Stock, bool>> expression = null);
-
         public IDataResult<Stock> GetById(Expression<Func<Stock,bool>> expression);
-
         public IResult Add(Stock stock);
         public IResult Delete(Stock stock);
         public IResult Update(Stock stock);

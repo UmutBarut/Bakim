@@ -16,6 +16,7 @@
         </div> 
             <div class="modal-body">
                 <form asp-controller="Talep" asp-action="Confirmation"  method="POST">
+                    <input type="hidden" name="descriminator"/>
                     <input type="hidden" id="talepidd" name="TalepId">
                     <div class="card-body py-5">
                         <div class="row">
@@ -86,8 +87,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex float-right">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
-                            <button type="submit" class="btn btn-primary ms-4">Onayla</button>
+                            <button type="button" id="closebutton" class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
+                            <button type="submit" id="confirmbutton" class="btn btn-primary ms-4">Onayla</button>
                         </div>
                     </div>
                 </form>
@@ -108,9 +109,7 @@
                     <input type="hidden" id="talepids" name="TalepId">
                     <div class="card-body py-5">
                         <div class="row">
-                            
                             <h1>Mal Elime Ulaştı</h1>
-                            
                         </div>
                     </div>
                     <div class="card-footer">
@@ -214,29 +213,6 @@
 
 <script>
 
-
-     @* $(document).ready(function(){
-        Inputmask({
-            "mask": "9.999.999,99",
-            "placeholder": " ",
-            "showMaskOnHover": false,
-            "showMaskOnFocus": false
-        
-        }).mask("#miktar");
-
-        $("#submitBtn").click(function(e){
-            e.preventDefault();
-            var miktar = $("#miktar").val();
-                console.log(miktar); 
-            miktar = miktar.replace(".","");
-                console.log(miktar); 
-            $('[name="Miktar"]').val(miktar);
-            $('#formid').submit();
-                console.log($('[name="Miktar"]').val()); 
-        });
-       
-    }) *@
-
     var degisken = '@User.IsInRole("Admin")';
 
     function onaybutton(container, options) 
@@ -245,7 +221,7 @@
         {
                 if(options.data.IsApproved == true && options.data.IsFinished == false)
             {
-                    $('<button class="btn btn-icon btn-warning ms-4"  onclick="closeModal('+options.data.TalepId+','+options.data.IsApproved+')">\
+                    $('<button class="btn btn-icon btn-warning ms-4"  onclick="closeModal('+options.data.TalepId+','+options.data.IsApproved+',false)">\
                 <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
                 <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
                 <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
@@ -253,18 +229,20 @@
             } 
                 return;
         }
-        
-        $('<button class="btn btn-icon btn-primary"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+')">\
+
+        //Düzenle Butonu
+        $('<button class="btn btn-icon btn-primary" onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+',false,true)">\
         <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2022-12-26-231111/core/html/src/media/icons/duotune/art/art005.svg-->\
         <span class="svg-icon svg-icon-muted svg-icon- 2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
         <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.08251.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.99626.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.0639920.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.79342.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor"/>\
         <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.378921.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.69618.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor"/></svg></span></button>\
         ').appendTo(container);
+        
 
 
          if(options.data.IsApproved == true && options.data.IsFinished == false)
        {
-            $('<button class="btn btn-icon btn-warning ms-4"  onclick="closeModal('+options.data.TalepId+','+options.data.IsApproved+')">\
+            $('<button class="btn btn-icon btn-warning ms-4"  onclick="closeModal('+options.data.TalepId+','+options.data.IsApproved+',false)">\
         <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
         <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
         <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
@@ -273,7 +251,7 @@
        
         if(options.data.IsApproved == false && options.data.IsFinished == false)
        {
-             $('<button class="btn btn-icon btn-primary ms-4"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+' )">\
+             $('<button class="btn btn-icon btn-primary ms-4"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+',false )">\
         <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
         <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
         <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
@@ -282,7 +260,7 @@
         if(options.data.IsFinished == true)
        {
         
-            $('<button class="btn btn-icon btn-success ms-4"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+' )">\
+            $('<button class="btn btn-icon btn-success ms-4"  onclick="setModal('+options.data.TalepId+','+options.data.IsApproved+','+options.data.IsFinished+',false )">\
         <!--begin::Svg Icon | path: /var/www/preview.keenthemes.com/kt-products/docs/metronic/html/releases/2023-01-26-051612/core/html/src/media/icons/duotune/arrows/arr027.svg-->\
         <span class="svg-icon svg-icon-muted svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
         <path d="M16.9 10.7L7 5V19L16.9 13.3C17.9 12.7 17.9 11.3 16.9 10.7Z" fill="currentColor"/></svg></span>\
@@ -295,8 +273,42 @@
     })
     
     $('#stok').trigger("change");
+
        
-    function setModal(id,isApproved){
+    function setModal(id,isApproved,IsFinished,editButtonClicked){
+        console.log(editButtonClicked);
+        if (IsFinished) 
+        {
+            $('#confirmbutton').addClass("opacity-0");
+            document.getElementById("confirmbutton").disabled = true;
+            $('#closebutton').addClass("opacity-0");
+            document.getElementById("closebutton").disabled = true;
+        } 
+        else 
+        {
+            $('#confirmbutton').removeClass("opacity-0");
+            $('#closebutton').removeClass("opacity-0");
+
+            if (editButtonClicked) 
+            {
+                $('[name="descriminator"]').val("edit");
+                $('#confirmbutton').html("Düzenle");
+
+            } 
+            else
+            {
+                $('[name="descriminator"]').val("");
+                document.getElementById("confirmbutton").disabled = false;
+                document.getElementById("closebutton").disabled = false;
+                $('#confirmbutton').text("Onayla");
+            }
+        }
+
+
+
+       
+
+
         if(!isApproved){
             $('#deleteButton').removeClass("opacity-0");
         }

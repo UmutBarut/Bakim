@@ -44,7 +44,6 @@
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="form-label">Miktar</label>
                             <input type="text" id="miktar" class="form-control form-control-sm form-control-solid" name="Miktar" placeholder="Miktar Yazınız"/>
-                            @* <input type="hidden" name="Miktar"> *@
                         </div>
                     </div>     
                     <div class="rounded border d-flex flex-column p-5 mt-10">
@@ -62,6 +61,27 @@
 </div>
 
 <script>
+
+    $(document).ready(function()
+    {
+            Inputmask({
+        mask: "*{1,20},99",
+        inputPlaceholder: "0",
+        placeholder: "0",
+        greedy: false,
+        onBeforePaste: function (pastedValue, opts) {
+        pastedValue = pastedValue.toLowerCase();
+        return pastedValue.replace("mailto:", "");
+        },
+        definitions: {
+        "*": {
+            validator: "[0-9]",
+            cardinality: 1,
+            casing: "lower",
+        },
+        },
+    }).mask("#miktar");
+    })
 
 
     @* $(document).ready(function(){

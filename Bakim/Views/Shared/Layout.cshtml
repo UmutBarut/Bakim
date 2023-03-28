@@ -37,6 +37,7 @@ License: For each use you must have a valid license purchased only from above li
 	<link href="~/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<script src="~/js/devextreme/localization/dx.messages.tr.js"></script>
 	<link rel="stylesheet" href="~/css/fontawesome/all.min.css" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/> 
 
 	@* cdn i var lokalde çalışmıyor  *@
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -170,6 +171,7 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="~/js/custom/apps/chat/chat.js"></script>
 		<script src="~/js/custom/modals/create-app.js"></script>
 		<script src="~/js/custom/modals/upgrade-plan.js"></script>
+		<script src="~/js/custom/authentication/sign-in/general.js"></script>
 		
 		<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
 		<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
@@ -184,8 +186,23 @@ License: For each use you must have a valid license purchased only from above li
 		<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 		<script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
-		
 
+
+		@* Delete Cache 
+		<script>
+			$(document).ready(function(){
+				Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1))
+				Response.Cache.SetCacheability(HttpCacheability.NoCache)
+				Response.Cache.SetNoStore()
+			})
+		</script>
+		*@
+		
+ 
+ 
+            
+            
+            
 		
 
 		<script src="/js/jsPDF/jspdf.plugin.min.js"></script>

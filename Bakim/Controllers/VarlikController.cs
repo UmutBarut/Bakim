@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using DevExtreme.AspNet.Mvc;
 using DevExtreme.AspNet.Data;
 using Bakim.Entity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bakim.Controllers
 {
+    [Authorize]
     public class VarlikController : Controller
     {
 

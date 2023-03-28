@@ -16,16 +16,10 @@
                     <div style="justify-content:center; padding:13px ;" class="modal-header">
                         <h3 class="modal-title">Bakım Planlayın</h3>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
-
-
-
                                 <div class="col-md-12 row">
-
-
                                     <div class="mt-4 col-md-6">
                                         <label for="" class="required form-label">Başlangıç Tarihi</label>
                                         <input class="form-control form-control-solid form-control-sm clear"
@@ -37,90 +31,49 @@
                                         <input class="form-control form-control-solid form-control-sm clear"
                                             name="BitisTarihi" type="date" />
                                     </div>
-
-                                    <!--begin::Input group-->
+                                
                                     <div class=" mt-4 fv-row mb-4 col-md-12">
-                                        <!--begin::Label-->
-                                        <label class="required form-label">Bakım Adı</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
+                                        <label class="required form-label">Bakım Adı</label>                                                         
                                         <input type="text" class="form-control form-control-solid form-control-sm clear"
-                                            id="bakimAdi" placeholder="" />
-                                        <!--end::Input-->
+                                            id="bakimAdi" placeholder="" />                                     
                                     </div>
-
-                                    <!--begin::Input group-->
+                                    
                                     <div class="fv-row col-md-12">
-                                        <!--begin::Label-->
                                         <label class="form-label">Bakım Açıklaması</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
                                         <textarea class="form-control form-control-solid form-control-sm clear" rows="3"
-                                            name="BakimAciklamasi" placeholder=""></textarea>
-                                        <!--end::Input-->
+                                            name="BakimAciklamasi" placeholder=""></textarea>   
                                     </div>
-                                    <!--end::Input group-->
-
-
+                                    
                                     <div class=" col-md-12">
-
-                                        <!--begin::Input group-->
                                         <div class="fv-row py-6">
-                                            <!--begin::Label-->
                                             <label class="required form-label">Bakım Türü</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-
                                             <select class="form-select form-select-solid form-select-sm clear"
                                                 id="bakimturusec" onchange="BakimTuruSec()" data-control="select2"
                                                 name="BakimTuruId" data-placeholder="Bakım Türü Seçiniz">
                                                 <option selected></option>
                                                 @foreach (var birim in Model.RoutineBakimTuruListele)
                                                 {
-                                                    <option value="@birim.RoutineBakimTuruId">
-                                                        @birim.RoutineBakimTurAdi</option>
+                                                    <option value="@birim.RoutineBakimTuruId">@birim.RoutineBakimTurAdi</option> 
                                                 }
-                                            </select>
-                                            <!--end::Input-->
+                                            </select>  
                                         </div>
-
                                         <div id="birimsecmeyeri"></div>
-
-
-
-                                        <!--end::Input group-->
-
-
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
 
                         <div class="col-md-6">
-
-                            <!--begin::Input group-->
                             <div class="fv-row mb-4 mt-4">
-                                <!--begin::Label-->
                                 <label class="form-label">Tekrar</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-
                                 <select class="form-select form-select-solid form-select-sm clear" 
                                     data-placeholder="Tekrar Seçiniz"  data-control="select2" name="">
                                     <option selected>Günlük</option>
                                     <option>Haftalık</option>
                                     <option>Aylık</option>
-
-                                </select>
-                                <!--end::Input-->
+                                </select>                            
                             </div>
-                            <!--end::Input group-->
-
-
+                                
                             <div class="row mb-10">
                                 <div class="col-md-6">
                                     <label class="form-label">Aralık</label>
@@ -133,17 +86,16 @@
                                         class="d-flex h-100 w-100 justify-content-center align-items-center mt-5">Gün(ler)
                                     </span>
                                 </label>
-
                             </div>
 
                             <label class="form-label mt-2 mb-6">Tekrarı Sonlandır</label>
                             <div class="form-group ">
-                                <div class="form-check">
-                                    <input class="form-check-input clear" type="radio" name="flexRadioDefault" id="kontrol">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Hiçbir Zaman
-                                    </label>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input clear" type="radio" name="flexRadioDefault" id="kontrol">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Hiçbir Zaman
+                                        </label>
+                                    </div>
 
                                 <div class="row  py-10 px-3">
                                     <div class="form-check col-md-4 d-flex align-items-center">
@@ -155,56 +107,33 @@
                                     </div>
                                     <div class="col-md-8">
                                             <input class="form-control form-control-solid form-control-sm clear"
-                                                 placeholder="Bir Tarih Seçiniz" type="date" />
+                                                placeholder="Bir Tarih Seçiniz" type="date" />
+                                    </div>
+                                </div>
+
+                                <div class="row mb-10 px-3">
+                                    <div class="form-check col-md-4">
+                                        <input class="form-check-input clear" type="radio" name="flexRadioDefault" id="kontrol3"
+                                            checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Tekrardan Sonra
+                                        </label> 
                                     </div>
 
+                                    <div class="col-md-5">
+                                        <input type="number" class="form-control form-control-solid clear"
+                                            placeholder="Aralık Seçiniz" />
+                                    </div>
+
+                                    <label class="form-label col-md-3 ">
+                                        <span
+                                            class="d-flex h-100 w-100 justify-content-center align-items-center ">Gün(ler)
+                                        </span>
+                                    </label>
                                 </div>
-
-                            
-
-                            <div class="row mb-10 px-3">
-
-                                 <div class="form-check col-md-4">
-                                    <input class="form-check-input clear" type="radio" name="flexRadioDefault" id="kontrol3"
-                                        checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Tekrardan Sonra
-                                    </label> 
-                                </div>
-
-                                <div class="col-md-5">
-                                   
-                                    <input type="number" class="form-control form-control-solid clear"
-                                        placeholder="Aralık Seçiniz" />
-                                </div>
-
-                                
-
-                                <label class="form-label col-md-3 ">
-                                    <span
-                                        class="d-flex h-100 w-100 justify-content-center align-items-center ">Gün(ler)
-                                    </span>
-                                </label>
-
                             </div>
-
-                               
-
-                            </div>
-
-
                         </div>
-
-
-
-
-
-
                     </div>
-
-
-
-
                     <div style="padding:13px ;" class="modal-footer">
                         <button type="button" class="btn btn-light" onclick="planlanmadi()"
                             data-bs-dismiss="modal">Kapat</button>
@@ -213,7 +142,6 @@
                          class="btn btn-primary">Planı 
                             Tamamla</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -221,12 +149,10 @@
 </div>
 
 
-
-
 <script>
 
-
     function BakimTuruSec() {
+
         var x = document.getElementById("bakimturusec").value;
 
         if (x == 0) {
@@ -250,9 +176,6 @@
             </div>\
                 <!--end::Input group-->'
 
-
-
-
             selectedDiv.append(label2,select2,varliklar);
             console.log(selectedDiv.html());
              $('#birimsecmeyeri').html("");
@@ -265,7 +188,6 @@
                     vgolustur(result);
                 }
             })
-
 
             function vgolustur(model){
                 $('#vgselect').empty();
@@ -280,10 +202,6 @@
                 $('#varlikselect').select2();
                 
             }
-
-
-
-
 
             $('#birimsec').addClass("d-none");
             $('#makinesec').addClass("d-none");
@@ -321,32 +239,28 @@
                     birimOlustur(result);
                 }
             });
-
-
-
         }
     }
-      function vgGetir(id){
-          console.log(id);
-            $.ajax({
 
-                type: "GET",
-                url: "/Describing/GetVarliks",
-                data: {varlikGroupId : id},
+    function vgGetir(id){
+        console.log(id);
+        $.ajax({
+        type: "GET",
+        url: "/Describing/GetVarliks",
+        data: {varlikGroupId : id},
 
 
-            }).done(function(result){
-                 $('#varlikselect').html("");
-                console.log(result);
-                     let option = $('<option value="0">Tümünü Seçiniz</option>');
-                     $('#varlikselect').append(option);
-                     for(let i = 0; i < result.length; i++){
-                        let option2 = $('<option value = "' + result[i].VarlikId + '"> '+ result[i].VarlikName +'</option> ');
-                        $('#varlikselect').append(option2);
-                     }
-            });
-
-        }
+        }).done(function(result){
+                $('#varlikselect').html("");
+            console.log(result);
+                    let option = $('<option value="0">Tümünü Seçiniz</option>');
+                    $('#varlikselect').append(option);
+                    for(let i = 0; i < result.length; i++){
+                    let option2 = $('<option value = "' + result[i].VarlikId + '"> '+ result[i].VarlikName +'</option> ');
+                    $('#varlikselect').append(option2);
+                    }
+        });
+    }
 
     function birimOlustur(birimler) {
         $('#birimSelect').empty();
@@ -359,8 +273,6 @@
         }
         $('#birimSelect').select2();
         $('#machineSelect').select2();
-
-
     }
 
     function makinesec() {
@@ -383,9 +295,6 @@
         });
     }
 
-
-
-
     function planlanmadi() {
 
         Swal.fire({
@@ -399,21 +308,11 @@
         }).then(function(){
         $('.clear').val("");
         $(".clear").trigger("change");
-
         });
-
     }
 
 
-
-
-
-
     $(document).ready(function () {
-
-
-
-
 
         var calendarEl = document.getElementById("kt_docs_fullcalendar_selectable");
 
@@ -536,8 +435,6 @@
                             }
                         });
                     }
-
-
                 });
             },
             editable: true,
@@ -601,13 +498,7 @@
         });
 
         calendar.render();
-
-
-        
     });
-
-
-    
 </script>
 
 <script src="~/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
