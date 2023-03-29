@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Bakim.Core.Entity;
@@ -8,6 +9,7 @@ namespace Bakim.Entity
 {
     public class RutinBakim : IEntity
     {
+        [Key]
         public int RutinBakimId { get; set; }
         public string RutinBakimAdi { get; set; }
         public string Aciklama { get; set; }

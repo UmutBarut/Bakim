@@ -117,13 +117,13 @@ namespace Bakim.Business.DependencyResolvers.Autofac
             builder.RegisterType<MarkaKalemManager>().As<IMarkaKalemService>().SingleInstance();
             
             builder.RegisterType<RutinBakimGrubuDal>().As<IRutinBakimGrubuDal>().SingleInstance();
-            builder.RegisterType<RutinBakimGrubuManager>().As<IRutinBakimGrubuDal>().SingleInstance();
+            builder.RegisterType<RutinBakimGrubuManager>().As<IRutinBakimGrubuService>().SingleInstance();
 
             builder.RegisterType<RutinBakimKategorisiDal>().As<IRutinBakimKategorisiDal>().SingleInstance();
-            builder.RegisterType<RutinBakimKategorisiManager>().As<IRutinBakimKategorisiDal>().SingleInstance();
+            builder.RegisterType<RutinBakimKategorisiManager>().As<IRutinBakimKategorisiService>().SingleInstance();
 
             builder.RegisterType<RutinBakimDal>().As<IRutinBakimDal>().SingleInstance();
-            builder.RegisterType<RutinBakimManager>().As<IRutinBakimDal>().SingleInstance();
+            builder.RegisterType<RutinBakimManager>().As<IRutinBakimService>().SingleInstance();
 
              builder.RegisterType<RutinBakim_StockDal>().As<IRutinBakim_StockDal>().SingleInstance();
             builder.RegisterType<RutinBakim_StockManager>().As<IRutinBakim_StockService>().SingleInstance();
