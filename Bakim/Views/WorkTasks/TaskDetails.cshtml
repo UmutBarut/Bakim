@@ -1,4 +1,4 @@
-@using Bakim.ViewModels();
+@using Bakim.ViewModels;
 
 @model TaskViewModel;
 
@@ -35,7 +35,6 @@
             {
                 <div class="d-flex justify-content-center align-items-center mb-6"><h2 class="text-danger">Acil İş Emri</h2></div>
             }
-           
             <div class="row">
                 <div class="col-md-6">
                     <div class="ms-8">
@@ -51,33 +50,41 @@
                     </div>
                     
                 </div>
-
                 <div class="col-md-6 row">
                     <div class="col-md-12">
-                        <label for="SectionId" class="form-label">Birim</label>
+                        <label for="ProductionSectionId" class="form-label">Üretim Bölümü</label>
+                        <input type="text" class="form-control form-control-sm form-control-solid"
+                            name="ProductionSectionName" value="@Model.productionSection.ProductionSectionName" disabled/>
+                    </div>    
+                    <div class="col-md-12">
+                        <label for="SectionId" class="form-label">Üretim Birimi</label>
                         <input type="text" class="form-control form-control-sm form-control-solid"
                             name="SectionName" value="@Model.Section.SectionName" disabled/>
-                    </div>        
-                    <div class="col-md-12">
-                        <label for="VarlikName" class="form-label">Varlık</label>
-                        <input type="text" class="form-control form-control-sm form-control-solid"
-                            name="VarlikName" value="@Model.varlik.VarlikName" disabled/>
-                    </div>
-                </div>   
-                
-                    <div class="mt-10 mb-10">
-                        <fieldset disabled>
-                        <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
-                        @if(Model.Task.TaskDescription != null)
-                        {
-                        <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">@Model.Task.TaskDescription</textarea>
-                            
-                        }
-                        else{
-                            <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">Açıklama Girilmemiş.</textarea>
-                        }
-                        </fieldset>
-                    </div>
+                    </div>     
+                </div>  
+                <div class="col-md-6 mt-10"> 
+                    <label for="FaultCategoryName" class="form-label">Arıza Kategorisi</label>
+                    <input type="text" class="form-control form-control-sm form-control-solid"
+                        name="FaultCategoryName" value="@Model.sectionFaultCategory.FaultCategoryName" disabled/>
+                </div>
+                <div class="col-md-6 mt-10">  
+                    <label for="VarlikName" class="form-label">Varlık</label>
+                    <input type="text" class="form-control form-control-sm form-control-solid"
+                        name="VarlikName" value="@Model.varlik.VarlikName" disabled/>
+                </div>
+                <div class="mt-10 mb-10">
+                    <fieldset disabled>
+                    <label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+                    @if(Model.Task.TaskDescription != null)
+                    {
+                    <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">@Model.Task.TaskDescription</textarea>
+                        
+                    }
+                    else{
+                        <textarea  class="form-control" id="exampleFormControlTextarea1" rows="3">Açıklama Girilmemiş.</textarea>
+                    }
+                    </fieldset>
+                </div>
             </div>
 
             <div class="d-flex justify-content-center align-items-center mt-6 mb-10"><h1 class="text-decoration-underline text-primary">İşlem Geçmişi</h1></div>

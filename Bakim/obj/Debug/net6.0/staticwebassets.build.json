@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "H1amkBLNc6NzGZJ8rXOAZhXb59wiNuFcVQNeP6DBUaM=",
+  "Hash": "4tF7VxnAPh4Jfp0B1zBA6T31ClCuIyU84aJ8JUv7Caw=",
   "Source": "Bakim",
   "BasePath": "_content/Bakim",
   "Mode": "Default",
@@ -527,6 +527,23 @@
       "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\31b59696-ad7a-4096-8868-f33fcc4e243c.jpeg"
     },
     {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\364c393b-ecfd-4acf-8e3d-a321829178a4.jpeg",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/worktasks/364c393b-ecfd-4acf-8e3d-a321829178a4.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\364c393b-ecfd-4acf-8e3d-a321829178a4.jpeg"
+    },
+    {
       "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\51766f84-ffdd-4672-a4ac-52985bac9ee6.jpeg",
       "SourceId": "Bakim",
       "SourceType": "Discovered",
@@ -610,6 +627,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\5d5e0e61-c388-404d-9d91-466fdbb0796d.png"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\65137749-2ef1-4203-b77f-b9831ad7a7be.jpeg",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/worktasks/65137749-2ef1-4203-b77f-b9831ad7a7be.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\65137749-2ef1-4203-b77f-b9831ad7a7be.jpeg"
     },
     {
       "Identity": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\wwwroot\\app\\images\\worktasks\\70cba85d-a2db-4176-8ea0-a0b810531b41.png",

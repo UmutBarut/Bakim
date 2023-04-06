@@ -32,8 +32,10 @@ namespace Bakim.ViewModels
         public List<WorkTaskDto> Dtos { get; set; }
         public SectionDto SectionDto { get; set; }
         public SectionDtoViewModel SectionDtoViewModel { get; set; }
+        public ProductionSection productionSection { get; set; }
         public Section Section { get; set; }
         public SectionFault SectionFault { get; set; }
+        public SectionFaultCategory sectionFaultCategory { get; set; }
         public List<Varlik> varliks { get; set; }
         public Varlik varlik { get; set; }
         public List<Stock> stock { get; set; }

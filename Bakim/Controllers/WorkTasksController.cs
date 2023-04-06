@@ -609,8 +609,10 @@ namespace Bakim.Controllers
         public async Task<IActionResult> TaskDetails(int id)
         {
             var task = _workTaskService.GetSingle(c=>c.TaskId == id).Data;
+            var ps = _productionSectionService.GetAll().Data.FirstOrDefault();
             var section = _sectionService.GetAll().Data.FirstOrDefault();
             var sectionFault = _sectionFaultService.GetAll().Data.FirstOrDefault();
+            var sectionFaultCategory = _sectionFaultCategoryService.GetAll().Data.FirstOrDefault();
             var varlik = _varlikService.GetAll().Data.FirstOrDefault();
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
             var users = _userManager.Users.ToList();
@@ -637,9 +639,11 @@ namespace Bakim.Controllers
                 WorkTaskUsers = taskUsers,
                 Section = section,
                 SectionFault = sectionFault,
+                sectionFaultCategory = sectionFaultCategory,
                 varlik = varlik,
                 User = currentUser,
-                AllUsers = users
+                AllUsers = users,
+                productionSection = ps
             };
             return View(model);
         }
