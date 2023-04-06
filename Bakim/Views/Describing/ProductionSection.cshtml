@@ -35,7 +35,7 @@
         
             .Height("100%")
             .ShowBorders(true)
-            
+            .GroupPanel(p => p.Visible(true).EmptyPanelText("Üretim Bölümleri"))
             .Paging(paging => paging.PageSize(10))
             .Editing(e =>
                 e.AllowAdding(true)

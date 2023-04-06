@@ -1,8 +1,5 @@
 @model RoutineMakineBakimPViewModel
 
-<link href="~/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-
-
 
 <div class="container">
     <div class="card bg-white p-8">
@@ -14,7 +11,7 @@
             <div  class="modal-dialog modal-xl" > 
                 <div class="modal-content container" >
                     <div style="justify-content:center; padding:13px ;" class="modal-header">
-                        <h3 class="modal-title">Bakım Planlayın</h3>
+                        <h3 class="modal-title">Rutin Bakım Planlayın</h3>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -136,11 +133,12 @@
                     </div>
                     <div style="padding:13px ;" class="modal-footer">
                         <button type="button" class="btn btn-light" onclick="planlanmadi()"
-                            data-bs-dismiss="modal">Kapat</button>
+                            data-bs-dismiss="modal">Kapat
+                        </button>
 
                         <button type="button" id="bakimPlanlaBtn" 
-                         class="btn btn-primary">Planı 
-                            Tamamla</button>
+                            class="btn btn-primary">Planı Tamamla
+                        </button>
                     </div>
                 </div>
             </div>
@@ -501,4 +499,3 @@
     });
 </script>
 
-<script src="~/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>

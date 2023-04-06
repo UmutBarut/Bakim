@@ -124,12 +124,12 @@
 				</a>
 			</div>
 			
-			<div class="menu-item">
+			 <div class="menu-item">
 				<div class="menu-content pt-8 pb-2">
 					<span class="menu-section text-muted text-uppercase fs-8 ls-1">Tanımlamalar</span>
 				</div>
 			</div>
-
+		@*
 			<div data-kt-menu-trigger="click" class="menu-item menu-accordion" id="tanimlamaBase">
 				<span class="menu-link">
 					<span class="menu-icon">
@@ -260,8 +260,6 @@
 						</div>
 					</div>
 
-
-
 					<div class="menu-sub menu-sub-accordion menu-active-bg">
 						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 							<div class="menu-item">
@@ -276,7 +274,233 @@
 						</div>
 					</div>
 				</div>
+			</div> *@
+
+			<div data-kt-menu-trigger="click" class="menu-item  menu-accordion">
+				<span class="menu-link">
+					<span class="menu-icon">
+						<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+						<i class="fa fa-cube" aria-hidden="true"></i>
+						<!--end::Svg Icon-->
+					</span>
+					<span class="menu-title">Tanımlama</span>
+					<span class="menu-arrow"></span>
+				</span>
+				<div class="menu-sub menu-sub-accordion menu-active-bg">
+
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link"  onclick="activate()">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span onclick="activate()" class="menu-title">Varlık</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="VarlikGroup"
+								onclick="setacordionmenu('varlikgrubu','tanimlamaBase','basesub')" id="varlikgrubu">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Varlık Grubu</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="DetayGroup"
+									onclick="setacordionmenu('detaygroup','tanimlamaBase','basesub')" id="detaygroup">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Varlık Kategorisi</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="Varlik"
+									onclick="setacordionmenu('varliktanimlama','tanimlamaBase','basesub')"
+									id="varliktanimlama">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Varlık</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span onclick="activate()" class="menu-title">Stok</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link"  asp-controller="Describing" asp-action="StockGroup"
+									onclick="setacordionmenu('stockgrubu','tanimlamaBase','basesub')" id="stockgrubu">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Stok Grubu</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link"  asp-controller="Describing" asp-action="StokKategori"
+									onclick="setacordionmenu('stokkategori','tanimlamaBase','basesub')"
+									id="stokkategori">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Stok Kategorisi</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="Stock"
+									onclick="setacordionmenu('stock','tanimlamaBase','basesub')" id="stock">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Stok</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span onclick="activate()" class="menu-title">Rutin Bakım</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="RutinBakimKategorisi"
+									onclick="setacordionmenu('RutinBakimKategorisi','tanimlamaBase','basesub')" id="RutinBakimKategorisi">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Rutin Bakım Kategorisi</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="RutinBakim"
+									onclick="setacordionmenu('RutinBakim','tanimlamaBase','basesub')" id="RutinBakim">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Rutin Bakım</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+						<span class="menu-link">
+							<span class="menu-bullet">
+								<span class="bullet bullet-dot"></span>
+							</span>
+							<span onclick="activate()" class="menu-title">Arıza</span>
+							<span class="menu-arrow"></span>
+						</span>
+						<div class="menu-sub menu-sub-accordion menu-active-bg">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="SectionFaultCategory"
+									onclick="setacordionmenu('SectionFaultCategory','tanimlamaBase','basesub')" id="SectionFaultCategory">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Arıza Kategorisi</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="SectionFault"
+									onclick="setacordionmenu('SectionFault','tanimlamaBase','basesub')" id="SectionFault">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Arıza</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="BirimTanimlama"
+									onclick="setacordionmenu('birimtanimlama','tanimlamaBase','birimtanimlama')"
+									id="birimtanimlama">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Birim</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="ProductionSection"
+									onclick="setacordionmenu('productionsection','tanimlamaBase','productionsection')"
+									id="productionsection">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Üretim Bölümü</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="Section"
+									onclick="setacordionmenu('Section','tanimlamaBase','Section')"
+									id="section">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Üretim Birimi</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="menu-sub menu-sub-accordion menu-active-bg">
+						<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+							<div class="menu-item">
+								<a class="menu-link" asp-controller="Describing" asp-action="TedarikciFirma"
+									onclick="setacordionmenu('tedarikcifirma','tanimlamaBase','basesub')"
+									id="tedarikcifirma">
+									<span class="menu-bullet">
+										<span class="bullet bullet-dot"></span>
+									</span>
+									<span onclick="activate()" class="menu-title">Tedarikçi Firma</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			<div class="menu-item">
 				<div class="menu-content pt-8 pb-2">
@@ -687,5 +911,7 @@
 			a.classList.add("activeClass")
 		}
 	})
+
+	
 
 </script>

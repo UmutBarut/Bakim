@@ -1,0 +1,72 @@
+
+
+
+<div class="container">
+   <div class="card card-flush shadow-sm">
+        <div class="card-header">
+            <h3 class="card-title">Rutin Bakım Kategorisi Tanımlayın</h3>
+        </div>
+        <div class="card-body py-5">
+                        
+            @(Html.DevExtreme().DataGrid<RutinBakimKategorisi>()
+                .ID("dxContainer")
+                .DataSource(d => d.Mvc()
+                .Controller("Describing")
+                .LoadAction("GetAllRutinBakimKategori")
+                .UpdateAction("UpdateRutinBakimKategori")
+                .DeleteAction("DeleteRutinBakimKategori")
+                .InsertAction("AddRutinBakimKategori")
+                .Key("KategoriId")
+
+                )
+                .RemoteOperations(true)
+                .Columns(columns => {
+
+                columns.AddFor(m => m.KategoriAdi).AllowEditing(true).Alignment(HorizontalAlignment.Left).Caption("Kategori Adı").AllowFiltering(true);
+
+                columns.AddFor(m => m.UploadDate).AllowEditing(false).Alignment(HorizontalAlignment.Left).Caption("Eklenme Tarihi").AllowFiltering(true);
+
+                })
+                .SearchPanel(s => s
+                .Visible(true)
+                .HighlightCaseSensitive(true)
+                .Placeholder("Ara")
+                .Width(200)
+                )
+                .FilterRow(f => f.Visible(true))
+                .HeaderFilter(f => f.Visible(true))
+                .ShowBorders(true)
+                .GroupPanel(p => p.Visible(true).EmptyPanelText("Rutin Bakım Kategorileri"))
+                .Height("100%")
+                .Paging(paging => paging.PageSize(10))
+                 .Editing(e =>
+                e.AllowAdding(true)
+                .AllowDeleting(true)
+                .AllowUpdating(true)
+                .UseIcons(true)
+                .Mode(GridEditMode.Popup)
+                .Popup(p=>
+                p.Title("Kategori Ekle & Düzenle")
+                .ShowTitle(true)
+                .Width(700)
+                ))
+                .Pager(p=>
+                p.AllowedPageSizes(new JS("[5, 10, 20]"))
+                .ShowNavigationButtons(true)
+                .ShowPageSizeSelector(true)
+                .Visible(true)
+                .ShowNavigationButtons(true) 
+                .ShowInfo(true)
+                .DisplayMode(GridPagerDisplayMode.Full)
+                )
+                .Grouping(g => g.AutoExpandAll(false))
+                )
+        </div>
+        <div class="card-footer">
+           
+        </div>
+    </div>
+</div>
+
+
+

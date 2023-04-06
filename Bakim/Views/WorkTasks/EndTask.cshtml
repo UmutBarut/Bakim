@@ -1,5 +1,4 @@
 @using Bakim.Entity.Views;
-
 @model TaskViewModel
 
 
@@ -9,7 +8,6 @@
         <form id="formid" asp-controller="WorkTasks" asp-action="EndTask" asp-route-id="@Model.Task.TaskId" method="POST">
             <div class="card-header">
                 <h3 class="card-title">@Model.Task.TaskTitle</h3>
-
                 <a asp-controller="WorkTasks" asp-action="TaskDetails" asp-route-id="@Model.Task.TaskId" class="btn btn-icon btn-warning mt-4">
                     <span class="svg-icon svg-icon-white svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/><rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/>
@@ -19,18 +17,17 @@
             <div class="card-body py-5">
                 <div class="row">
                     <div class="d-flex justify-content-center mt-4 mb-10"><h4>İş Emrini Kapatıyorsunuz</h4></div>         
-
                     <div class="col-md-4">
                         <div class="mt-10 mb-10">
-                                <label for="exampleFormControlInput1" class="form-label">Stok</label>
-                                <select id="stockselect" required class="form-select form-select-sm form-select-solid"
-                                    data-control="select2" name="StokKategoriId" data-placeholder="Stok Seçiniz" data-allow-clear="true">
-                                    <option></option>
-                                    @foreach (var item in Model.stock)
-                                    {
-                                        <option value="@item.StockId">@item.StockName</option>
-                                    }
-                                </select>
+                          <label for="exampleFormControlInput1" class="form-label">Stok</label>
+                          <select id="stockselect" required class="form-select form-select-sm form-select-solid"
+                              data-control="select2" name="StokKategoriId" data-placeholder="Stok Seçiniz" data-allow-clear="true">
+                              <option></option>
+                              @foreach (var item in Model.stock)
+                              {
+                                <option value="@item.StockId">@item.StockName</option>
+                              }
+                          </select>
                         </div> 
                     </div>
                     <div class="col-md-4">
@@ -58,7 +55,6 @@
                             .InsertAction("AddStockForTask")
                             .Key("Task_StockId")
                             .LoadParams(new{id = Model.Task.TaskId })
-
                             )
                             .RemoteOperations(true)
                             .Columns(columns => {
@@ -85,7 +81,6 @@
                             .ShowPageSizeSelector(false)
                             .Visible(true)
                             .ShowNavigationButtons(true)
-
                             )
                              .Editing(e =>
                             e.AllowAdding(false) 
@@ -107,10 +102,9 @@
                             .Grouping(g => g.AutoExpandAll(false))
                             )
                     </div>
-
                     <div class="d-flex flex-column mt-10 mb-10">
                         <label for="exampleFormControlTextarea1" class="form-label">Yapılan İş Açıklaması</label>
-                        <textarea id="aciklama" name="Description" class="form-control form-control-sm form-control-solid" rows="5">@Model.WorkTaskUsers.Where(c=>c.UserId == Model.User.Id).First().Description</textarea>
+                        <textarea id="aciklama" name="Description" class="form-control form-control-sm form-control-solid" rows="5">@Model.WorkTaskUsers.Where(c=>c.UserId == Model.User.Id).FirstOrDefault().Description</textarea>
                     </div>
                 </div>
             </div>

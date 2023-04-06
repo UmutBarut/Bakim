@@ -36,6 +36,7 @@
                 .HeaderFilter(f => f.Visible(true))
                 .Height("100%")
                 .ShowBorders(true)
+                .GroupPanel(p => p.Visible(true).EmptyPanelText("Stok Kategorileri"))
                 .Paging(paging => paging.PageSize(10))
                  .Editing(e =>
                 e.AllowAdding(true)

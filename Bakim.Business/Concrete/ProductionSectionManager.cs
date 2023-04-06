@@ -21,12 +21,12 @@ namespace Bakim.Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<ProductionSection> GetMachineGroup(int sectionId)
+        public IDataResult<ProductionSection> GetById(Expression<Func<ProductionSection, bool>> expression = null)
         {
-            return new SuccessDataResult<ProductionSection>(_productionSectionDal.GetAll(g => g.ProductionSectionId == sectionId).First());
+            return new SuccessDataResult<ProductionSection>(_productionSectionDal.GetAll(expression).FirstOrDefault());
         }
 
-        public IDataResult<List<ProductionSection>> GetMachineGroups(Expression<Func<ProductionSection, bool>> expression = null)
+        public IDataResult<List<ProductionSection>> GetAll(Expression<Func<ProductionSection, bool>> expression = null)
         {
             if (expression == null)
             {

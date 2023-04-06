@@ -45,10 +45,10 @@ namespace Bakim.Dataaccess.Concrete.Contexts
         public DbSet<Marka> markalar { get; set; }
         public DbSet<MarkaGrup> markaGrup { get; set; }
         public DbSet<MarkaKalem> markaKalem { get; set; }
-        public DbSet<RutinBakimGrubu> RutinBakimGrup { get; set; }
         public DbSet<RutinBakimKategorisi> RutinBakimKategori { get; set; }
         public DbSet<RutinBakim> RutinBakim { get; set; }
         public DbSet<RutinBakim_Stock> RutinBakim_Stock { get; set; }
+        public DbSet<SectionFaultCategory> SectionFaultCategories { get; set; }
         
 
         

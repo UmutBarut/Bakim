@@ -93,7 +93,7 @@
             
 
 
-        .Toolbar(toolbar => {
+            .Toolbar(toolbar => {
 
                 toolbar.Items(items => {
 
@@ -101,7 +101,7 @@
 
                         .Name("exportButton");
 
-                     items.Add()
+                    items.Add()
                     
                         .Widget(w=>w
                         .Button()
@@ -112,7 +112,7 @@
                         .OnInitialized("initFilterButton")
                         .ID("filterButton")
                     );       
-                                     
+                                    
                     items.Add()
                     
                         .Name("searchPanel");  
@@ -149,7 +149,7 @@
                 <span class="badge badge-lg <%- data.Durum == 'Normal' ? 'badge-light' : 'badge-danger' %>"><%- data.Durum %></span>
             </text>);
 
-            columns.AddFor(m=>m.ReceiverId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("usergetir").Key("Id")).DisplayExpr("UserName").ValueExpr("Id")).Caption("Kullanici").Alignment(HorizontalAlignment.Center);
+            columns.AddFor(m=>m.ReceiverId).Lookup(l=>l.DataSource(d=>d.Mvc().LoadAction("usergetir").Key("Id")).DisplayExpr("UserName").ValueExpr("Id")).Caption("Kullanici").Alignment(HorizontalAlignment.Center).CellTemplate(@<text><%- displayValue == null ? "Tümü" : displayValue %></text>);
 
             columns.AddFor(m=>m.İlerleme).Alignment(HorizontalAlignment.Center).Caption("Ilerleme").AllowEditing(false).AllowFiltering(true).AllowSearch(true);
 
@@ -173,13 +173,20 @@
 
     function detailbutton(container, options)
     {
-        if(options.data.IsActive == true && options.data.InProcess == false && options.data.IsCompleted == false)
-        {
-            $('<a href="/Worktasks/StartTask?id=' + options.data.TaskId + '"  class="btn btn-icon btn-primary ms-4">\
-                    <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
-                    <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
-                </a>').appendTo(container);
-        }
+        
+        
+            if(options.data.IsActive == true && options.data.InProcess == false && options.data.IsCompleted == false)
+            {
+                // kişi işemrinde çalışmıyorsa button disabled olsun
+               
+                
+                    $('<a href="/Worktasks/StartTask?id=' + options.data.TaskId + '"  class="btn btn-icon btn-primary ms-4">\
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/>\
+                            <rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/><rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>\
+                        </a>').appendTo(container);
+            }
+       
+        
 
          if(options.data.IsActive == true && options.data.InProcess ==  true && options.data.IsCompleted == false)
         {

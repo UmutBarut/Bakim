@@ -1,3 +1,5 @@
+@using Bakim.ViewModels();
+
 @model TaskViewModel;
 
 <div class="container">
@@ -19,9 +21,13 @@
     </div>
     <div class="card card-bordered shadow-sm">
         <div class="card-header d-flex justify-content-center">
-                @if(!String.IsNullOrEmpty(@Model.Task.ReceiverId))
+                @if(!String.IsNullOrEmpty(Model.Task.ReceiverId))
                 {
                 <h1 class="mt-6">@Model.Task.TaskTitle - @Model.Task.Receiver.UserName ' e Atandı</h1>
+                }
+                else{
+                <h1 class="mt-6">@Model.Task.TaskTitle - Havuza Atandı</h1>
+
                 }
         </div> 
         <div class="card-body mt-4 py-5">

@@ -115,9 +115,6 @@ namespace Bakim.Business.DependencyResolvers.Autofac
 
             builder.RegisterType<MarkaKalemDal>().As<IMarkaKalemDal>().SingleInstance();
             builder.RegisterType<MarkaKalemManager>().As<IMarkaKalemService>().SingleInstance();
-            
-            builder.RegisterType<RutinBakimGrubuDal>().As<IRutinBakimGrubuDal>().SingleInstance();
-            builder.RegisterType<RutinBakimGrubuManager>().As<IRutinBakimGrubuService>().SingleInstance();
 
             builder.RegisterType<RutinBakimKategorisiDal>().As<IRutinBakimKategorisiDal>().SingleInstance();
             builder.RegisterType<RutinBakimKategorisiManager>().As<IRutinBakimKategorisiService>().SingleInstance();
@@ -125,8 +122,11 @@ namespace Bakim.Business.DependencyResolvers.Autofac
             builder.RegisterType<RutinBakimDal>().As<IRutinBakimDal>().SingleInstance();
             builder.RegisterType<RutinBakimManager>().As<IRutinBakimService>().SingleInstance();
 
-             builder.RegisterType<RutinBakim_StockDal>().As<IRutinBakim_StockDal>().SingleInstance();
+            builder.RegisterType<RutinBakim_StockDal>().As<IRutinBakim_StockDal>().SingleInstance();
             builder.RegisterType<RutinBakim_StockManager>().As<IRutinBakim_StockService>().SingleInstance();
+
+            builder.RegisterType<SectionFaultCategoryDal>().As<ISectionFaultCategoryDal>().SingleInstance();
+            builder.RegisterType<SectionFaultCategoryManager>().As<ISectionFaultCategoryService>().SingleInstance();
         
                         
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

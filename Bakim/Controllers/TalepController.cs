@@ -205,13 +205,10 @@ namespace Bakim.Controllers
         [HttpPost]
         public async Task<IActionResult> TalepOlustur(Talep talep)
         {
-            
-
            var user = await _userManager.GetUserAsync(HttpContext.User);
 
            talep.CreatorId = user.Id; 
            talep.CreatedDate = DateTime.Now;
-            
 
             _talepService.Add(talep);
             

@@ -8,20 +8,17 @@
         <form asp-controller="WorkTasks" asp-action="StartTask" asp-route-id="@Model.Task.TaskId" method="POST">
             <div class="card-header">
                 <h2 class="card-title">@Model.Task.TaskTitle</h2>
-
-                    <a asp-controller="WorkTasks" asp-action="TaskDetails" asp-route-id="@Model.Task.TaskId" class="btn btn-icon btn-warning mt-4">
+                <a asp-controller="WorkTasks" asp-action="TaskDetails" asp-route-id="@Model.Task.TaskId" class="btn btn-icon btn-warning mt-4">
                     <span class="svg-icon svg-icon-white svg-icon-2x"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor"/><rect x="11" y="17" width="7" height="2" rx="1" transform="rotate(-90 11 17)" fill="currentColor"/>
                     <rect x="11" y="9" width="2" height="2" rx="1" transform="rotate(-90 11 9)" fill="currentColor"/></svg></span>
-                    </a>
+                </a>
             </div>
-
             <div class="card-body">
                 <div class="d-flex justify-content-center">
                     <h3>İş Emrine Başlayın</h3>
                 </div>  
                 <div class="d-flex">
-
                     @if(Model.Dtos != null)
                     {
                         @foreach(var item in Model.Dtos.OrderByDescending(d=>d.WorkTask.CreatedDate))
@@ -40,12 +37,12 @@
                                     @* if (dto.WorkTaskUsers.Count() > 1)
                                         {
                                             foreach(var involve in dto.WorkTaskUsers.Where(c=>c.WorkTaskId == dto.WorkTask.TaskId).OrderByDescending(c=>c.StartedDate))
-                                        {
-                                            if(involve.UserId != dto.WorkTask.StarterId){
-                                                <p class="text-primary">@(involve.StartedDate + " tarihinde " + involve.User.UserName + " dahil oldu.")</p>
+                                            {
+                                                if(involve.UserId != dto.WorkTask.StarterId){
+                                                    <p class="text-primary">@(involve.StartedDate + " tarihinde " + involve.User.UserName + " dahil oldu.")</p>
+                                                }
+                                                
                                             }
-                                            
-                                        }
                                         }*@
                                         
                                         if (dto.WorkTask.IsCompleted)
@@ -53,7 +50,6 @@
                                         <p class="text-danger">@(dto.WorkTask.CompletedDate +" tarihinde tamamlandı.")</p>
                                         }
                                     }
-                                    
                                 }
                                 else if(!dto.WorkTask.InProcess && !dto.WorkTask.IsCompleted)
                                 {
@@ -62,17 +58,23 @@
                                 <a asp-action="TaskDetails" asp-route-taskId="@item.WorkTask.TaskId">Detayları Gör</a>
                             }
                         }
-                    }
-                     
+                    } 
                 </div>
                 <div class="row">
+                    <div class="col-md-6 mb-6 mt-10">
+                            <label for="exampleFormControlInput1" class="form-label">Üretim Bölümü</label>
+                            <input type="text" class="form-control form-control-sm form-control-solid" value="@Model.productionSections.Where(c=>c.ProductionSectionId == Model.Task.ProductionSectionId).First().ProductionSectionName" disabled/>
+                        </div>
+                        <div class="col-md-6 mb-6 mt-10">
+                            <label for="exampleFormControlInput1" class="form-label">Üretim Birimi</label>
+                            <input type="text" class="form-control form-control-sm form-control-solid" value="@Model.Sections.Where(c=>c.SectionId == Model.Task.SectionId).First().SectionName" disabled/>
+                        </div>
                     <div class="d-flex flex-column mt-10 mb-10">
                         <label for="exampleFormControlTextarea1" class="form-label">İş Açıklaması</label>
                         <textarea asp-for="Task.TaskDescription" class="form-control form-control-sm form-control-solid"  id="exampleFormControlTextarea1" rows="5" disabled></textarea>
                     </div>
-                </div>
+                </div> 
             </div>
-
             <div class="card-footer">
                 <div class="d-flex justify-content-end align-items-center">
                     <div class="me-10">
@@ -84,9 +86,9 @@
                         </div>
                     </div>  
                
-                    @if (Model.Task.ReceiverId == null ? true : Model.Task.ReceiverId == Model.User.Id)
-                    {
-                        <button type="submit" class="btn btn-primary">Başla</button>
+                    @if (Model.Task.ReceiverId == null || Model.Task.ReceiverId =="1" || Model.Task.ReceiverId == Model.User.Id)
+                    { 
+                        <button type="submit" class="btn btn-primary">Başla</button>  
                     }
 
                 </div>

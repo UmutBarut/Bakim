@@ -1,4 +1,5 @@
 ﻿
+using System.Linq.Expressions;
 using Bakim.Business.Abstracts;
 using Bakim.Core.Utilities.Results;
 using Bakim.Dataaccess.Abstracts;
@@ -30,18 +31,18 @@ namespace Bakim.Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<List<SectionFault>> GetAll(int? sectionId = null)
+        public IDataResult<List<SectionFault>> GetAll(Expression<Func<SectionFault, bool>> expression = null)
         {
-            if (sectionId == null)
+            if (expression == null)
             {
                 return new SuccessDataResult<List<SectionFault>>(_sectionFaultDal.GetAll());
             }
-            return new SuccessDataResult<List<SectionFault>>(_sectionFaultDal.GetAll());
+            return new SuccessDataResult<List<SectionFault>>(_sectionFaultDal.GetAll(expression));
         }
 
-        public IDataResult<SectionFault> GetById(int sectionFaultId)
+        public IDataResult<SectionFault> GetById(Expression<Func<SectionFault, bool>> expression)
         {
-            return new SuccessDataResult<SectionFault>(_sectionFaultDal.GetAll(c => c.SectionFaultId == sectionFaultId).FirstOrDefault());
+            return new SuccessDataResult<SectionFault>(_sectionFaultDal.GetAll(expression).FirstOrDefault());
         }
 
         public IResult Update(SectionFault sectionFault)

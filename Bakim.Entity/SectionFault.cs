@@ -1,6 +1,4 @@
-﻿
-
-using Bakim.Core.Entity;
+﻿using Bakim.Core.Entity;
 
 namespace Bakim.Entity
 {
@@ -8,6 +6,7 @@ namespace Bakim.Entity
     {
         public int SectionFaultId { get; set; }
         public string SectionFaultName { get; set; }
+        public int FaultCategoryId { get; set; }
         public string? SectionFaultDescription { get; set; }
 
     }

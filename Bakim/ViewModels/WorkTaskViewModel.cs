@@ -48,6 +48,8 @@ namespace Bakim.ViewModels
 
         public List<WorkTaskTransfer>? WorkTaskTransfers { get; set; }
 
+        public List<ProductionSection> productionSections { get; set; }
+
 
          
 

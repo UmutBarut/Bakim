@@ -46,6 +46,7 @@
         
             .Height("%100")
             .ShowBorders(true)
+            .GroupPanel(p => p.Visible(true).EmptyPanelText("Birimler"))
             .Paging(paging => paging.PageSize(10))
             .Pager(p=>
             p.AllowedPageSizes(new JS("[5, 10, 20]"))

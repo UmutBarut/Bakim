@@ -53,7 +53,7 @@ namespace Bakim.Controllers
             //     UserId = "12323132"
 
             // });
-            var liste = _productionsectionservice.GetMachineGroups();
+            var liste = _productionsectionservice.GetAll();
             return View(liste.Data);
         }
 
@@ -65,7 +65,7 @@ namespace Bakim.Controllers
 
         public List<ProductionSection> BirimleriGetir()
         {
-            var birimler= _productionsectionservice.GetMachineGroups();
+            var birimler= _productionsectionservice.GetAll();
             return birimler.Data;
         }
 
@@ -101,7 +101,7 @@ namespace Bakim.Controllers
 
         public IActionResult MakineBakimP()
         {
-            var birimler = _productionsectionservice.GetMachineGroups().Data;
+            var birimler = _productionsectionservice.GetAll().Data;
             return View(birimler);
         }
         public async Task<List<Bakim.Entity.Machine>> GetMachinesBySection(int sectionId)

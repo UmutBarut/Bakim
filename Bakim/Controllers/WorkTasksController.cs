@@ -34,7 +34,9 @@ namespace Bakim.Controllers
         private readonly IVarlikService _varlikService;
         private readonly IStockService _stockService;
         private readonly ITask_StockService _task_StockService;
-        public WorkTasksController(ICallService callService,IWorkTaskService workTaskService, UserManager<ApplicationUser> userManager, IWorkTaskTransferService workTaskTransferService, IWorkTaskUserService workTaskUserService, ISectionFaultService sectionFaultService, ISectionService sectionService, IFileService fileService,IVarlikService varlikService, IStockService stockService,ITask_StockService task_StockService)
+        private readonly IProductionSectionService _productionSectionService;
+        private readonly ISectionFaultCategoryService _sectionFaultCategoryService;
+        public WorkTasksController(ICallService callService,IWorkTaskService workTaskService, UserManager<ApplicationUser> userManager, IWorkTaskTransferService workTaskTransferService, IWorkTaskUserService workTaskUserService, ISectionFaultService sectionFaultService, ISectionService sectionService, IFileService fileService,IVarlikService varlikService, IStockService stockService,ITask_StockService task_StockService,IProductionSectionService productionSectionService,ISectionFaultCategoryService sectionFaultCategoryService)
         {
             _callService = callService;
             _workTaskService = workTaskService;
@@ -47,7 +49,8 @@ namespace Bakim.Controllers
             _varlikService = varlikService;
             _stockService = stockService;
             _task_StockService = task_StockService;
-            
+            _productionSectionService = productionSectionService;
+            _sectionFaultCategoryService = sectionFaultCategoryService;
         }
 
         public async Task<IActionResult> WorkTasks(int id)
@@ -325,6 +328,7 @@ namespace Bakim.Controllers
             var sectionFaults = _sectionFaultService.GetAll().Data;
             var users = _userManager.Users.ToList();
             var varliks = _varlikService.GetAll().Data;
+            var ps = _productionSectionService.GetAll().Data;
             
             SectionDto sectionDto = new SectionDto()
            {
@@ -339,7 +343,8 @@ namespace Bakim.Controllers
                 SectionFaults = _sectionFaultService.GetAll().Data,
                 SectionDto = sectionDto,
                 AllUsers = users,
-                varliks = varliks
+                varliks = varliks,
+                productionSections = ps
            }; 
             return View(model);
         }
@@ -347,12 +352,17 @@ namespace Bakim.Controllers
         public async Task<IActionResult> AddTask([FromForm]IFormFile file,WorkTask task,Varlik varlik)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            var section = _sectionService.GetById(task.SectionId).Data;
-            var sectionFault = _sectionFaultService.GetById(task.SectionFaultId).Data;
+            var ps = _productionSectionService.GetById(c=>c.ProductionSectionId == task.ProductionSectionId).Data;
+            var section = _sectionService.GetById(c=>c.SectionId == task.SectionId).Data;
+            var sectionFault = _sectionFaultService.GetById(c=>c.SectionFaultId == task.SectionFaultId).Data;
             var varlikk = _varlikService.GetById(c=>c.VarlikId == varlik.VarlikId).Data;
             
             if (task.ReceiverId != null)
             {
+                if(task.ReceiverId == "Tümü" || task.ReceiverId == "1")
+                {
+                    task.ReceiverId = null;
+                }
                 var receiver = await _userManager.FindByIdAsync(task.ReceiverId);
                 task.Receiver = receiver;
             }
@@ -380,14 +390,15 @@ namespace Bakim.Controllers
             var sections = _sectionService.GetAll().Data;
             var sectionFaults = _sectionFaultService.GetAll().Data;
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            var productionSections = _productionSectionService.GetAll(c=>c.Pasif == false).Data;
 
             var worktaskusers = _workTaskUserService.GetTaskUsers(task.TaskId).Data;
             var WorkTaskTransfer = _workTaskTransferService.GetAll(task.TaskId).Data;
 
              WorkTaskDto workTaskDto = new WorkTaskDto()
             {
-                 WorkTaskUsers = worktaskusers,
-                 WorkTask = task
+                WorkTaskUsers = worktaskusers,
+                WorkTask = task
             };
            
             SectionDto sectionDto = new SectionDto()
@@ -401,8 +412,9 @@ namespace Bakim.Controllers
                 Task = task,
                 SectionDto = sectionDto,
                 Dtos = dtos,
-                User = user
-                
+                User = user,
+                productionSections = productionSections,
+                Sections = sections  
             };
             
             return View(model);
@@ -507,17 +519,25 @@ namespace Bakim.Controllers
         public async Task<IActionResult> EndTask(TaskViewModel p, int id){
             var task = _workTaskService.GetSingle(c => c.TaskId == id).Data;
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            var userTask = _workTaskUserService.GetTaskUsers(task.TaskId).Data.Where(c => c.UserId == user.Id).FirstOrDefault();
-            userTask.Description = p.Description;
-            userTask.InProcess = false;
-            userTask.CompletedDate = DateTime.Now;
+            var userTasks = _workTaskUserService.GetTaskUsers(task.TaskId).Data.Where(c => c.UserId == user.Id).ToList();
+            // userTasks.Where(c=>c.Description == p.Description);
+            // userTasks.Where(c=>c.InProcess == false);
+            // userTasks.Where(c=>c.CompletedDate == DateTime.Now);
             var count = _workTaskUserService.GetTaskUsers(task.TaskId).Data.Where(c=>c.InProcess == true).Count();
             if (count == 1)
             {
                 await CloseTask(id,p);
             }
-            _workTaskUserService.Update(userTask);
-            
+
+            foreach(var item in userTasks)
+
+            {
+                item.Description = p.Description;
+                item.InProcess = false;
+                item.CompletedDate = DateTime.Now;
+
+                _workTaskUserService.Update(item);
+            }
             
             return RedirectToAction("WorkTasks");
         }
@@ -638,6 +658,19 @@ namespace Bakim.Controllers
             return true;
         }
 
-        
+       
+        public async Task<List<Section>> GetKategoriByAriza(int getiren)
+        {
+            var birimler = _sectionService.GetAll(c=>c.ProductionSectionId == getiren && c.Pasif == false).Data;
+
+            return birimler;
+        }
+
+        public async Task<List<SectionFaultCategory>> GetSectionFaultCategory(int getiren)
+        {
+            var arizaKategorileri = _sectionFaultCategoryService.GetAll(c=>c.FaultCategoryId == getiren && c.Pasif == false).Data;
+
+            return arizaKategorileri;
+        }
     }
 }

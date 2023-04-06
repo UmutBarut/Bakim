@@ -92,7 +92,7 @@ namespace Bakim.Controllers
                 
                 stokgrubu = _stockGroupService.GetAll(c=> c.StockGroupId == stok.StockGroupId).Data.FirstOrDefault(),
                 stokKategori = _stokKategoriService.GetAll(c=> c.StokKategoriId == stok.StokKategoriId).Data.FirstOrDefault(),
-                uretimbolumu = _productionSectionService.GetMachineGroups().Data.FirstOrDefault(),
+                uretimbolumu = _productionSectionService.GetAll().Data.FirstOrDefault(),
                 stokfirmalar = _stok_FirmaService.GetAll(c=> c.StockId == id).Data,
                 firmalar = new()
                 
@@ -114,7 +114,7 @@ namespace Bakim.Controllers
             {
                 varlik = varlik,
                 DetayGrubu = _detayGroupService.GetAll(c => c.DetayGroupId == varlik.DetayGroupId).Data.FirstOrDefault(),
-                UretimBolumu = _productionSectionService.GetMachineGroups().Data.FirstOrDefault(),
+                UretimBolumu = _productionSectionService.GetAll().Data.FirstOrDefault(),
                 varlikGrubu = _varlikGroupService.GetAll(c=>c.VarlikGroupId == varlik.VarlikGroupId).Data.FirstOrDefault()
             };
             return View(model);
@@ -126,7 +126,7 @@ namespace Bakim.Controllers
             {
                 varlik = _varlikService.GetAll(c => c.VarlikId == id).Data.FirstOrDefault(),
                 varlikkategorisi = _detayGroupService.GetAll().Data.FirstOrDefault(),
-                Uretimbolumu = _productionSectionService.GetMachineGroups().Data,
+                Uretimbolumu = _productionSectionService.GetAll().Data,
                 VarlikGruplari = _varlikGroupService.GetAll().Data,
             };
             return View(vm);

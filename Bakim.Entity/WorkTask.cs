@@ -24,6 +24,7 @@ namespace Bakim.Entity
         public DateTime? ProcessStartedDate { get; set; }
         public string? ReceiverId { get; set; }
         public string? StarterId { get; set; }
+        public int ProductionSectionId { get; set; }
         public int SectionId { get; set; }
         public int SectionFaultId { get; set; }
         public bool Acil { get; set; }

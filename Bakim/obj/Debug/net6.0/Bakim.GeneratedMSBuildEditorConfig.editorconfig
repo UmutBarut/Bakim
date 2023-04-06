@@ -63,6 +63,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xQcm9kdWN0aW9uU2VjdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Acer/Desktop/Bakim/mes-bakim/bakim/Views/Describing/RutinBakim.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xSdXRpbkJha2ltLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Acer/Desktop/Bakim/mes-bakim/bakim/Views/Describing/RutinBakimKategorisi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xSdXRpbkJha2ltS2F0ZWdvcmlzaS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Acer/Desktop/Bakim/mes-bakim/bakim/Views/Describing/Section.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xTZWN0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Acer/Desktop/Bakim/mes-bakim/bakim/Views/Describing/SectionFault.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xTZWN0aW9uRmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Acer/Desktop/Bakim/mes-bakim/bakim/Views/Describing/SectionFaultCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xTZWN0aW9uRmF1bHRDYXRlZ29yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Acer/Desktop/Bakim/mes-bakim/bakim/Views/Describing/Stock.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzY3JpYmluZ1xTdG9jay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

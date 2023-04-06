@@ -32,8 +32,13 @@ namespace Bakim.Controllers
         private readonly IVarlikService _varlikService;
         private readonly IStok_FirmaService _stok_FirmaService;
         private readonly IBirimService _birimService;
+        private readonly IRutinBakimKategorisiService _rutinBakimKategorisiService;
+        private readonly IRutinBakimService _rutinBakimService;
+        private readonly ISectionFaultCategoryService _sectionFaultCategoryService;
+        private readonly ISectionFaultService _sectionFaultService;
+        private readonly ISectionService _sectionService;
 
-        public DescribingController(IStockGroupService stockGroupService, IVarlikGroupService varlikGroupService, IStockService stockService, IDetayGroupService detayGroupService, IProductionSectionService productionSectionService, IStokKategoriService stokKategoriService, UserManager<ApplicationUser> userManager, IFileService fileService, ITedarikciFirmaService tedarikciFirmaService, IVarlikService varlikService, IStok_FirmaService stok_FirmaService,IBirimService birimService)
+        public DescribingController(IStockGroupService stockGroupService, IVarlikGroupService varlikGroupService, IStockService stockService, IDetayGroupService detayGroupService, IProductionSectionService productionSectionService, IStokKategoriService stokKategoriService, UserManager<ApplicationUser> userManager, IFileService fileService, ITedarikciFirmaService tedarikciFirmaService, IVarlikService varlikService, IStok_FirmaService stok_FirmaService,IBirimService birimService,IRutinBakimKategorisiService rutinBakimKategorisiService,IRutinBakimService rutinBakimService,ISectionFaultCategoryService sectionFaultCategoryService,ISectionFaultService sectionFaultService,ISectionService sectionService)
         {
             _stockGroupService = stockGroupService;
             _varlikGroupService = varlikGroupService;
@@ -47,6 +52,11 @@ namespace Bakim.Controllers
             _varlikService = varlikService;
             _stok_FirmaService = stok_FirmaService;
             _birimService = birimService;
+            _rutinBakimKategorisiService = rutinBakimKategorisiService;
+            _rutinBakimService = rutinBakimService;
+            _sectionFaultCategoryService = sectionFaultCategoryService;
+            _sectionFaultService = sectionFaultService;
+            _sectionService = sectionService;
         }
 
         public IActionResult VarlikGroup()
@@ -87,7 +97,7 @@ namespace Bakim.Controllers
             DescribeViewModel vm = new DescribeViewModel()
             {
                 DetayGrubu = _detayGroupService.GetAll().Data,
-                UretimBolumu = _productionSectionService.GetMachineGroups().Data,
+                UretimBolumu = _productionSectionService.GetAll().Data,
                 VarlikGrubu = _varlikGroupService.GetAll().Data
             };
             return View(vm);
@@ -424,7 +434,7 @@ namespace Bakim.Controllers
         [HttpGet]
         public object GetAllProductionSection(DataSourceLoadOptions loadOptions)
         {
-            var ps = _productionSectionService.GetMachineGroups(c=> c.Pasif == false).Data;
+            var ps = _productionSectionService.GetAll(c=> c.Pasif == false).Data;
             return DataSourceLoader.Load(ps, loadOptions);
         }
 
@@ -440,7 +450,7 @@ namespace Bakim.Controllers
         [HttpPut]
         public IActionResult UpdateProductionSection(int key, string values)
         {
-            var ps = _productionSectionService.GetMachineGroup(key).Data;
+            var ps = _productionSectionService.GetById(c=>c.ProductionSectionId == key).Data;
             JsonConvert.PopulateObject(values, ps);
             var result = _productionSectionService.Update(ps);
             return Ok(result);
@@ -449,7 +459,7 @@ namespace Bakim.Controllers
         [HttpDelete]
         public IActionResult DeleteProductionSection(int key)
         {
-            var ps = _productionSectionService.GetMachineGroups(c=> c.ProductionSectionId == key).Data.FirstOrDefault();
+            var ps = _productionSectionService.GetAll(c=> c.ProductionSectionId == key).Data.FirstOrDefault();
             ps.Pasif=true;
             var result = _productionSectionService.Update(ps);
             return Ok(result);
@@ -496,6 +506,221 @@ namespace Bakim.Controllers
             var result = _birimService.Update(birim);
             return Ok(result);
         }
+
+
+
+
+
+         public IActionResult RutinBakimKategorisi()
+        {
+            return View();
+        }
+
+         [HttpGet]
+        public object GetAllRutinBakimKategori(DataSourceLoadOptions loadOptions)
+        {
+            var kategori = _rutinBakimKategorisiService.GetAll(c=>c.Pasif == false).Data;
+            return DataSourceLoader.Load(kategori, loadOptions);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRutinBakimKategori(string values)
+        {
+            var kategori = new RutinBakimKategorisi();
+            JsonConvert.PopulateObject(values, kategori);
+            kategori.UploadDate = DateTime.Now;
+            var result = _rutinBakimKategorisiService.Add(kategori);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateRutinBakimKategori(int key, string values)
+        {
+            var kategori = _rutinBakimKategorisiService.GetById(c=> c.KategoriId == key).Data;
+            JsonConvert.PopulateObject(values, kategori);
+            var result = _rutinBakimKategorisiService.Update(kategori);
+            return Ok(result);
+        }
+ 
+         [HttpDelete]
+        public IActionResult DeleteRutinBakimKategori(int key)
+        {
+            var kategori = _rutinBakimKategorisiService.GetAll(c => c.KategoriId == key).Data.FirstOrDefault();
+            kategori.Pasif=true;
+            var result = _rutinBakimKategorisiService.Update(kategori);
+            return Ok(result);
+        }
+
+
+
+
+          public IActionResult RutinBakim()
+        {
+           RutinBakimViewModel model = new RutinBakimViewModel()
+           {
+                Kategoriler = _rutinBakimKategorisiService.GetAll().Data,
+                Bakimlar = _rutinBakimService.GetAll().Data
+           };
+
+            return View(model);
+        }
+
+         [HttpGet]
+        public object GetAllRutinBakim(DataSourceLoadOptions loadOptions)
+        {
+            var bakim = _rutinBakimService.GetAll(c=>c.Pasif == false).Data;
+            return DataSourceLoader.Load(bakim, loadOptions);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddRutinBakim(string values)
+        {
+            var bakim = new RutinBakim();
+            JsonConvert.PopulateObject(values, bakim);
+            bakim.UploadDate = DateTime.Now;
+            var result = _rutinBakimService.Add(bakim);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateRutinBakim(int key, string values)
+        {
+            var bakim = _rutinBakimService.GetById(c=> c.RutinBakimId == key).Data;
+            JsonConvert.PopulateObject(values, bakim);
+            var result = _rutinBakimService.Update(bakim);
+            return Ok(result);
+        }
+ 
+         [HttpDelete]
+        public IActionResult DeleteRutinBakim(int key)
+        {
+            var bakim = _rutinBakimService.GetAll(c => c.RutinBakimId == key).Data.FirstOrDefault();
+            bakim.Pasif=true;
+            var result = _rutinBakimService.Update(bakim);
+            return Ok(result);
+        }
+
+
+
+        public IActionResult SectionFaultCategory()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public object GetAllSectionFaultCategory(DataSourceLoadOptions loadOptions)
+        {
+            var sectionFaultCategory = _sectionFaultCategoryService.GetAll(c=>c.Pasif == false).Data.OrderByDescending(c=>c.FaultCategoryId).ToList();
+            return DataSourceLoader.Load(sectionFaultCategory, loadOptions);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSectionFaultCategory(string values)
+        {
+            var sectionFaultCategory = new SectionFaultCategory();
+            JsonConvert.PopulateObject(values, sectionFaultCategory);
+            sectionFaultCategory.UploadDate = DateTime.Now;
+            var result = _sectionFaultCategoryService.Add(sectionFaultCategory);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateSectionFaultCategory(int key, string values)
+        {
+            var sectionFaultCategory = _sectionFaultCategoryService.GetById(c=> c.FaultCategoryId == key).Data;
+            JsonConvert.PopulateObject(values, sectionFaultCategory);
+            var result = _sectionFaultCategoryService.Update(sectionFaultCategory);
+            return Ok(result);
+        }
+ 
+         [HttpDelete]
+        public IActionResult DeleteSectionFaultCategory(int key)
+        {
+            var sectionFaultCategory = _sectionFaultCategoryService.GetAll(c => c.FaultCategoryId == key).Data.FirstOrDefault();
+            sectionFaultCategory.Pasif=true;
+            var result = _sectionFaultCategoryService.Update(sectionFaultCategory);
+            return Ok(result);
+        }
+
+        
+
+        public IActionResult SectionFault()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public object GetAllSectionFault(DataSourceLoadOptions loadOptions)
+        {
+            var sectionFault = _sectionFaultService.GetAll().Data.OrderByDescending(c=>c.SectionFaultId);
+            return DataSourceLoader.Load(sectionFault, loadOptions);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSectionFault(string values)
+        {
+            var sectionFault = new SectionFault();
+            JsonConvert.PopulateObject(values, sectionFault);
+            var result = _sectionFaultService.Add(sectionFault);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateSectionFault(int key, string values)
+        {
+            var sectionFault = _sectionFaultService.GetById(c=> c.SectionFaultId == key).Data;
+            JsonConvert.PopulateObject(values, sectionFault);
+            var result = _sectionFaultService.Update(sectionFault);
+            return Ok(result);
+        }
+ 
+         [HttpDelete]
+        public IActionResult DeleteSectionFault(int key)
+        {
+            var sectionFault = _sectionFaultService.GetAll(c => c.SectionFaultId == key).Data.FirstOrDefault();
+            var result = _sectionFaultService.Update(sectionFault);
+            return Ok(result);
+        }
+
+         public IActionResult Section()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public object GetAllSection(DataSourceLoadOptions loadOptions)
+        {
+            var section = _sectionService.GetAll().Data;
+            return DataSourceLoader.Load(section, loadOptions);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSection(string values)
+        {
+            var section = new Section();
+            JsonConvert.PopulateObject(values, section);
+            var result = _sectionService.Add(section);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateSection(int key, string values)
+        {
+            var section = _sectionService.GetById(c=> c.SectionId == key).Data;
+            JsonConvert.PopulateObject(values, section);
+            var result = _sectionService.Update(section);
+            return Ok(result);
+        }
+ 
+         [HttpDelete]
+        public IActionResult DeleteSection(int key)
+        {
+            var section = _sectionService.GetAll(c => c.SectionId == key).Data.FirstOrDefault();
+            section.Pasif = true;
+            var result = _sectionService.Update(section);
+            return Ok(result);
+        }
+
 
     }
 }

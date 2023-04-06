@@ -50,7 +50,7 @@ namespace Bakim.Controllers
             RoutineMakineBakimPViewModel result = new()
             {
                 RoutineBakimTuruListele = _routineBakimTuruService.GetAll().Data,
-                ProductionSectionListele = _productionsectionservice.GetMachineGroups().Data
+                ProductionSectionListele = _productionsectionservice.GetAll().Data
             };
 
             return View(result);

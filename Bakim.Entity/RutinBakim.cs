@@ -20,7 +20,6 @@ namespace Bakim.Entity
         public DateTime BakimAraligi { get; set; }
         public int CorporationId { get; set; }
         public bool Pasif { get; set; }
-        public int GrupId { get; set; }
         public int KategoriId { get; set; }
     }
 }

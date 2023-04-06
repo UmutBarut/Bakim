@@ -469,15 +469,108 @@ namespace Bakim.Dataaccess.Migrations
                     b.ToTable("routinebakimturu");
                 });
 
+            modelBuilder.Entity("Bakim.Entity.RutinBakim", b =>
+                {
+                    b.Property<int>("RutinBakimId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Aciklama")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("BakimAraligi")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("BakimTarihi")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("CorporationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KategoriId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Pasif")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("PlanlanmaTarihi")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("RutinBakimAdi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UploadDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RutinBakimId");
+
+                    b.ToTable("RutinBakim");
+                });
+
+            modelBuilder.Entity("Bakim.Entity.RutinBakim_Stock", b =>
+                {
+                    b.Property<int>("RutinBakim_StockId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("RutinBakimId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RutinBakim_StockId");
+
+                    b.ToTable("RutinBakim_Stock");
+                });
+
+            modelBuilder.Entity("Bakim.Entity.RutinBakimKategorisi", b =>
+                {
+                    b.Property<int>("KategoriId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CorporationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KategoriAdi")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Pasif")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("UploadDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("KategoriId");
+
+                    b.ToTable("RutinBakimKategori");
+                });
+
             modelBuilder.Entity("Bakim.Entity.Section", b =>
                 {
                     b.Property<int>("SectionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Pasif")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("ProductionSectionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SectionName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UploadDate")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("SectionId");
 
@@ -490,6 +583,9 @@ namespace Bakim.Dataaccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("FaultCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SectionFaultDescription")
                         .HasColumnType("longtext");
 
@@ -500,6 +596,27 @@ namespace Bakim.Dataaccess.Migrations
                     b.HasKey("SectionFaultId");
 
                     b.ToTable("SectionFaults");
+                });
+
+            modelBuilder.Entity("Bakim.Entity.SectionFaultCategory", b =>
+                {
+                    b.Property<int>("FaultCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FaultCategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Pasif")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("UploadDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("FaultCategoryId");
+
+                    b.ToTable("SectionFaultCategories");
                 });
 
             modelBuilder.Entity("Bakim.Entity.Stock", b =>
@@ -524,7 +641,6 @@ namespace Bakim.Dataaccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Olcu")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("Pasif")
@@ -653,8 +769,8 @@ namespace Bakim.Dataaccess.Migrations
                     b.Property<bool>("IsFinished")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int?>("Miktar")
-                        .HasColumnType("int");
+                    b.Property<double?>("Miktar")
+                        .HasColumnType("double");
 
                     b.Property<int?>("Olcu")
                         .HasColumnType("int");
@@ -839,6 +955,10 @@ namespace Bakim.Dataaccess.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("İlerleme")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.ToView("atanankullanicilar");
                 });
 
@@ -875,6 +995,9 @@ namespace Bakim.Dataaccess.Migrations
 
                     b.Property<DateTime?>("ProcessStartedDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ProductionSectionId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReceiverId")
                         .HasColumnType("varchar(255)");
