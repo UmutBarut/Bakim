@@ -56,7 +56,7 @@ namespace Bakim.Dataaccess.Concrete.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             MySqlServerVersion version = new MySqlServerVersion(new Version(5, 7, 30));
-            optionsBuilder.UseMySql("Server=localhost;Port=3306;Database=Bakim.db;Uid=root;Pwd=Umut2003;", version);
+            optionsBuilder.UseMySql("Server=localhost;Port=3306;Database=Bakim.db;Uid=root;Pwd=1525354555;", version);
             //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=factory;Trusted_Connection=true;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

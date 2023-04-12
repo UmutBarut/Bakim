@@ -9385,7 +9385,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Acer\\.nuget\\packages\\": {},
+    "C:\\Users\\Umut\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages": {},
     "C:\\Program Files\\DevExpress 22.1\\Components\\Offline Packages": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
@@ -9393,11 +9393,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\Bakim.csproj",
+      "projectUniqueName": "C:\\Users\\Umut\\Desktop\\mes-bakim\\bakim\\Bakim.csproj",
       "projectName": "Bakim",
-      "projectPath": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\Bakim.csproj",
-      "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\bakim\\obj\\",
+      "projectPath": "C:\\Users\\Umut\\Desktop\\mes-bakim\\bakim\\Bakim.csproj",
+      "packagesPath": "C:\\Users\\Umut\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Umut\\Desktop\\mes-bakim\\bakim\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
@@ -9405,8 +9405,8 @@
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\NuGet.Config",
-        "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Umut\\Desktop\\mes-bakim\\NuGet.Config",
+        "C:\\Users\\Umut\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
@@ -9426,11 +9426,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\Bakim.Business\\Bakim.Business.csproj": {
-              "projectPath": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\Bakim.Business\\Bakim.Business.csproj"
+            "C:\\Users\\Umut\\Desktop\\mes-bakim\\Bakim.Business\\Bakim.Business.csproj": {
+              "projectPath": "C:\\Users\\Umut\\Desktop\\mes-bakim\\Bakim.Business\\Bakim.Business.csproj"
             },
-            "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\Bakim.Entity\\Bakim.Entity.csproj": {
-              "projectPath": "C:\\Users\\Acer\\Desktop\\Bakim\\mes-bakim\\Bakim.Entity\\Bakim.Entity.csproj"
+            "C:\\Users\\Umut\\Desktop\\mes-bakim\\Bakim.Entity\\Bakim.Entity.csproj": {
+              "projectPath": "C:\\Users\\Umut\\Desktop\\mes-bakim\\Bakim.Entity\\Bakim.Entity.csproj"
             }
           }
         }
@@ -9477,7 +9477,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },

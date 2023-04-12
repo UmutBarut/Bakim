@@ -38,16 +38,16 @@
                                         {
                                             foreach(var involve in dto.WorkTaskUsers.Where(c=>c.WorkTaskId == dto.WorkTask.TaskId).OrderByDescending(c=>c.StartedDate))
                                             {
-                                                if(involve.UserId != dto.WorkTask.StarterId){
+                                                if(involve.UserId != dto.WorkTask.StarterId)
+                                                {
                                                     <p class="text-primary">@(involve.StartedDate + " tarihinde " + involve.User.UserName + " dahil oldu.")</p>
-                                                }
-                                                
+                                                } 
                                             }
                                         }*@
                                         
                                         if (dto.WorkTask.IsCompleted)
                                         {
-                                        <p class="text-danger">@(dto.WorkTask.CompletedDate +" tarihinde tamamlandı.")</p>
+                                            <p class="text-danger">@(dto.WorkTask.CompletedDate +" tarihinde tamamlandı.")</p>
                                         }
                                     }
                                 }
@@ -85,12 +85,10 @@
                             </label>
                         </div>
                     </div>  
-               
-                    @if (Model.Task.ReceiverId == null || Model.Task.ReceiverId =="1" || Model.Task.ReceiverId == Model.User.Id)
+                    @if (Model.Task.ReceiverId == null || Model.Task.ReceiverId != Model.User.Id || Model.Task.ReceiverId == Model.User.Id)
                     { 
                         <button type="submit" class="btn btn-primary">Başla</button>  
                     }
-
                 </div>
             </div>
         </form>

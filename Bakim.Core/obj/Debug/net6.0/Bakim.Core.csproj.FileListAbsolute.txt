@@ -34,3 +34,15 @@ C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.dll
 C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Core\obj\Debug\net6.0\refint\Bakim.Core.dll
 C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.pdb
 C:\Users\Acer\Desktop\Bakim\bakim\Bakim.Core\obj\Debug\net6.0\ref\Bakim.Core.dll
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\bin\Debug\net6.0\Bakim.Core.deps.json
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\bin\Debug\net6.0\Bakim.Core.dll
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\bin\Debug\net6.0\Bakim.Core.pdb
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.csproj.AssemblyReference.cache
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.AssemblyInfoInputs.cache
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.AssemblyInfo.cs
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.csproj.CoreCompileInputs.cache
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.dll
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\refint\Bakim.Core.dll
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\Bakim.Core.pdb
+C:\Users\Umut\Desktop\mes-bakim\Bakim.Core\obj\Debug\net6.0\ref\Bakim.Core.dll

@@ -110,10 +110,8 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-
                   <button class="btn btn-primary me-4" type="button" onclick="savebutton()" >Kaydet</button>
-
-                        @if(Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !Model.Task.IsCompleted && Model.Task.InProcess)
+                        @* @if(Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !Model.Task.IsCompleted && Model.Task.InProcess)
                         {
                             if(Model.WorkTaskUsers.Where(c=>c.InProcess == true && c.WorkTaskId == Model.Task.TaskId).Count() > 1)
                             {
@@ -123,6 +121,12 @@
                             {
                                 <button id="closebutton" class="btn btn-danger" type="submit">Kaydet ve Sonlandır</button>
                             }
+                        } *@
+
+                        @if(Model.Task.InProcess && !Model.Task.IsCompleted)
+                        {
+                          <button id="closebutton" class="btn btn-danger" type="submit">Kaydet ve Sonlandır</button>
+
                         }
                 </div>
             </div>
