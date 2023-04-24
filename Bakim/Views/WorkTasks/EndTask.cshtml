@@ -1,7 +1,9 @@
 @using Bakim.Entity.Views;
 @model TaskViewModel
 
-
+@{
+  string description = Model.WorkTaskUsers.Where(c=>c.UserId == Model.User.Id).FirstOrDefault() != null ? Model.WorkTaskUsers.Where(c=>c.UserId == Model.User.Id).FirstOrDefault().Description : "";
+}
 
 <div class="container">
     <div class="card card-flush shadow-sm">
@@ -43,8 +45,7 @@
                         </div>
                     </div>
                 
-                    <div class="d-flex mt-10">
-                            
+                    <div class="d-flex mt-10">                          
                         @(Html.DevExtreme().DataGrid<Task_Stock>()
                             .ID("dxContainer")
                             .DataSource(d => d.Mvc()
@@ -104,13 +105,13 @@
                     </div>
                     <div class="d-flex flex-column mt-10 mb-10">
                         <label for="exampleFormControlTextarea1" class="form-label">Yapılan İş Açıklaması</label>
-                        <textarea id="aciklama" name="Description" class="form-control form-control-sm form-control-solid" rows="5">@Model.WorkTaskUsers.Where(c=>c.UserId == Model.User.Id).FirstOrDefault().Description</textarea>
+                        <textarea id="aciklama" name="Description" class="form-control form-control-sm form-control-solid" rows="5">@description</textarea>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-primary me-4" type="button" onclick="savebutton()" >Kaydet</button>
+                  <button class="btn btn-primary me-4" type="button" onclick="savebutton()">Kaydet</button>
                         @* @if(Model.WorkTaskUsers.Find(c=>c.UserId == Model.User.Id && c.InProcess == true) != null && !Model.Task.IsCompleted && Model.Task.InProcess)
                         {
                             if(Model.WorkTaskUsers.Where(c=>c.InProcess == true && c.WorkTaskId == Model.Task.TaskId).Count() > 1)
@@ -200,11 +201,9 @@
                 $("#stockselect").val("").trigger("change");
                 $("#miktar").val("");
                 }
-              
             }
         })
         })
-
     })
 
      $(document).on('click','#submitbtn', function(e){
