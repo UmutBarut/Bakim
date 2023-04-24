@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PGMUj+oz3KLT99hl2rSZ2dp+Dz9ncuokeih3yQvk7Lw=",
+  "Hash": "JYCwEzZMu7dlq84GFmU0SMuofLRpikTbnFtQdv8t8LU=",
   "Source": "Bakim",
   "BasePath": "_content/Bakim",
   "Mode": "Default",
@@ -899,6 +899,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\ba74eb8c-8431-43c5-aca9-3614a79041dd.png"
+    },
+    {
+      "Identity": "C:\\Users\\Acer\\Desktop\\bakim\\bakim\\wwwroot\\app\\images\\worktasks\\bc03edbe-f7aa-4f3e-aaa2-cd43ccef5cad.jpeg",
+      "SourceId": "Bakim",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Acer\\Desktop\\bakim\\bakim\\wwwroot\\",
+      "BasePath": "_content/Bakim",
+      "RelativePath": "app/images/worktasks/bc03edbe-f7aa-4f3e-aaa2-cd43ccef5cad.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app\\images\\worktasks\\bc03edbe-f7aa-4f3e-aaa2-cd43ccef5cad.jpeg"
     },
     {
       "Identity": "C:\\Users\\Acer\\Desktop\\bakim\\bakim\\wwwroot\\app\\images\\worktasks\\be7eb16d-1eb0-4adc-b476-2dcd0302e556.jpeg",

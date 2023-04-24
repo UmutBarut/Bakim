@@ -491,9 +491,10 @@ namespace Bakim.Controllers
         } 
 
         [HttpPost]
-        public async Task<bool> AddStockForTask(int stockId,int stockAmount,int taskId)
-        {
-            _task_StockService.Add(new(){StockId = stockId,StockAmount=stockAmount,TaskId=taskId}); 
+        public async Task<bool> AddStockForTask(int stockId,int stockAmount,int taskId,DateTime uploaddate)
+        {   
+           
+            _task_StockService.Add(new(){StockId = stockId,StockAmount=stockAmount,TaskId=taskId,UploadDate=uploaddate}); 
 
             return true;
         }

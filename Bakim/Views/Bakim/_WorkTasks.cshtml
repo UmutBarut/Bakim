@@ -93,7 +93,6 @@
                 )
                 .ShowBorders(true)
             )
-
         </text>)
     )*@
     .Editing(e => 
@@ -107,30 +106,25 @@
         .ShowTitle(true)
         .Width(700)
         .Height(500)
-        
         )
      .Form(f=>f.Items(items=> {
             items.AddGroup()
-                    .ColCount(2)
-                    .ColSpan(2)
-                    .Items(groupItems => {
-                        groupItems.AddSimpleFor(m => m.TaskTitle);
-                        groupItems.AddSimpleFor(m => m.TaskDescription);
-                        groupItems.AddSimpleFor(m => m.IsCompleted);
-                    });
+            .ColCount(2)
+            .ColSpan(2)
+            .Items(groupItems => {
+                groupItems.AddSimpleFor(m => m.TaskTitle);
+                groupItems.AddSimpleFor(m => m.TaskDescription);
+                groupItems.AddSimpleFor(m => m.IsCompleted);
+            });
         })) 
     )
-
     .Grouping(g => g.AutoExpandAll(false))
-    
     )
-
-
 </div>
 
 
 
-     <script>
+<script>
     function exporting(e) {
         var workbook = new ExcelJS.Workbook();
         var worksheet = workbook.addWorksheet('İş Emirleri');

@@ -44,6 +44,7 @@
                             <button  id="addbutton" class="btn btn-primary btn-sm" type="button">Stok Ekle</button>
                         </div>
                     </div>
+                    <input type="hidden" id="eklenmeTarihi">
                 
                     <div class="d-flex mt-10">                          
                         @(Html.DevExtreme().DataGrid<Task_Stock>()
@@ -123,7 +124,6 @@
                                 <button id="closebutton" class="btn btn-danger" type="submit">Kaydet ve Sonlandır</button>
                             }
                         } *@
-
                         @if(Model.Task.InProcess && !Model.Task.IsCompleted)
                         {
                           <button id="closebutton" class="btn btn-danger" type="submit">Kaydet ve Sonlandır</button>
@@ -134,7 +134,6 @@
         </form>
     </div>
 </div>
-
 
 <script>
 
@@ -158,53 +157,68 @@
           timer:1100,
           showConfirmButton: false,
         });
-        
       }
     });
   }
 
-
-     $(document).ready(function(){
-        $("#closebutton").click(function(e){
-          e.preventDefault();
-          $('#formid .required').each().removeAttr("required");
-          $('#formid').submit();
-        });
-        $("#addbutton").click(function(e)
-        {          
+     $(document).ready(function()
+     {
+          $("#closebutton").click(function(e){
             e.preventDefault();
-            if(!checkInputs("formid"))
-                return false;
-            var stok =   $("#stockselect").val();
-            var miktar =   $("#miktar").val();
+            $('#formid .required').each().removeAttr("required");
+            $('#formid').submit();
+          });
 
-            let element = document.getElementById("dxContainer");
-            let instance = DevExpress.ui.dxDataGrid.getInstance(element);
-           
-            instance.refresh();
+          function formatDate(isoDate) 
+          {
+            if (isoDate == null) return "";
+            const date = new Date(isoDate);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            const seconds = date.getSeconds();
+            return `${hours}:${minutes}:${seconds} ${day}.${month}.${year}`;
+          }
 
-            $.ajax({
-            url: "/WorkTasks/AddStockForTask",
-            async: true,
-            method: "POST",
-            data:{stockId: stok, stockAmount: miktar,taskId: @Model.Task.TaskId},
-            success: function (result) {
+          $("#addbutton").click(function(e)
+          {          
+              e.preventDefault();
+              if(!checkInputs("formid"))
+              return false;
+              var stok =   $("#stockselect").val();
+              var miktar =   $("#miktar").val();
+              var uploaddate = $("#eklenmeTarihi").html();
+
+              let element = document.getElementById("dxContainer");
+              let instance = DevExpress.ui.dxDataGrid.getInstance(element);
+              
+              instance.refresh();
+
+              $.ajax({
+              url: "/WorkTasks/AddStockForTask",
+              async: true,
+              method: "POST",
+              data:{stockId: stok, stockAmount: miktar,taskId: @Model.Task.TaskId, uploaddate: formatDate(new Date()) },
+              success: function (result) 
+              {
                 if(stok !== null && miktar !== null)
                 {
-                     Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Stok Başarıyla Eklendi',
-                showConfirmButton: false,
-                timer: 1100
-                })
-                $("#stockselect").val("").trigger("change");
-                $("#miktar").val("");
+                  Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Stok Başarıyla Eklendi',
+                  showConfirmButton: false,
+                  timer: 1100
+                  })
+                  $("#stockselect").val("").trigger("change");
+                  $("#miktar").val("");
                 }
-            }
+              }
+          })
         })
-        })
-    })
+     })
 
      $(document).on('click','#submitbtn', function(e){
         e.preventDefault();

@@ -14,6 +14,6 @@ namespace Bakim.Entity
         public int TaskId { get; set; }
         public int StockId { get; set; }
         public int StockAmount { get; set; }
-
+        public DateTime? UploadDate { get; set; }
     }
 }
