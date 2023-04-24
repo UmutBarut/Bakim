@@ -8,15 +8,14 @@
         <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
             <div class="card bg-primary hoverable h-100">
                 <div class="card-header border-0">
-                        <span class="svg-icon svg-icon-white svg-icon-4x mt-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <span class="svg-icon svg-icon-white svg-icon-4x mt-3"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.3" d="M18.4 5.59998C21.9 9.09998 21.9 14.8 18.4 18.3C14.9 21.8 9.2 21.8 5.7 18.3L18.4 5.59998Z" fill="currentColor"/>
-                        <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor"/>
-                        </svg>
-                        </span>
-                            <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(c=>c.CreatedDate.Day == DateTime.Now.Day && c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year).Count()</h1></div>
+                        <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor"/></svg>
+                    </span>
+                        <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(c=>c.CreatedDate.Day == DateTime.Now.Day && c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year).Count()</h1></div>
                 </div> 
-                <div class="card-body pt-0">
-                    <div class="text-white fw-bolder fs-2">Açılan Kayıtlar</div>
+                <div class="card-body pt-0 pe-0">
+                    <div class="text-white fw-bolder fs-2">Bugün Açılan Kayıtlar</div>
                 </div>
             </div>
         </div> 
@@ -47,7 +46,7 @@
                     <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.IsCompleted == false).Count()</h1></div>
                 </div>
                 <div class="card-body pt-0">
-                    <div class="text-white fw-bolder fs-2">Açık Kayıtlar</div>
+                    <div class="text-white fw-bolder fs-2">Bekleyen Kayıtlar</div>
                 </div>
             </div>
         </div>
@@ -62,7 +61,7 @@
                      <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.InProcess == true).Count()</h1></div>
                 </div>
                 <div class="card-body pt-0">
-                    <div class="text-white fw-bolder fs-2">Devam Eden Kayıtlar</div>
+                    <div class="text-white fw-bolder fs-2">İşlemde Olan Kayıtlar</div>
                 </div>  
             </div> 
         </div>
@@ -74,7 +73,7 @@
                         <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor"/>
                         </svg>
                         </span>
-                      <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.Receiver ==  Model.User && m.IsCompleted == false).Count()</h1></div>
+                      <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.ReceiverId ==  Model.User.Id && m.IsCompleted == false).Count()</h1></div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="text-white fw-bolder fs-2">Bana Özel İş Emirleri</div>
@@ -87,7 +86,7 @@
         <div class="card-header">
             <h3 class="card-title">İş Emirleri</h3>
             <div class="card-toolbar">
-                    <div class="d-flex justify-content-end mt-3"><a asp-controller="Worktasks" asp-action="AddTask" class="btn bg-primary btn-active-light-secondary text-white"><i class="fa fa-plus" style="color: white" aria-hidden="true"></i> Yeni İş Emri Oluştur</a></div>
+                <div class="d-flex justify-content-end mt-3"><a asp-controller="Worktasks" asp-action="AddTask" class="btn bg-primary btn-active-light-secondary text-white"><i class="fa fa-plus" style="color: white" aria-hidden="true"></i> Yeni İş Emri Oluştur</a></div>
             </div>
         </div>
         <div class="card-body py-5">
