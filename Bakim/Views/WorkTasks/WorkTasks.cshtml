@@ -13,11 +13,10 @@
                         <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2ZM19.9 11H13V8.8999C14.9 8.6999 16.7 8.00005 18.1 6.80005C19.1 8.00005 19.7 9.4 19.9 11ZM11 19.8999C9.7 19.6999 8.39999 19.2 7.39999 18.5C8.49999 17.7 9.7 17.2001 11 17.1001V19.8999ZM5.89999 6.90002C7.39999 8.10002 9.2 8.8 11 9V11.1001H4.10001C4.30001 9.4001 4.89999 8.00002 5.89999 6.90002ZM7.39999 5.5C8.49999 4.7 9.7 4.19998 11 4.09998V7C9.7 6.8 8.39999 6.3 7.39999 5.5ZM13 17.1001C14.3 17.3001 15.6 17.8 16.6 18.5C15.5 19.3 14.3 19.7999 13 19.8999V17.1001ZM13 4.09998C14.3 4.29998 15.6 4.8 16.6 5.5C15.5 6.3 14.3 6.80002 13 6.90002V4.09998ZM4.10001 13H11V15.1001C9.1 15.3001 7.29999 16 5.89999 17.2C4.89999 16 4.30001 14.6 4.10001 13ZM18.1 17.1001C16.6 15.9001 14.8 15.2 13 15V12.8999H19.9C19.7 14.5999 19.1 16.0001 18.1 17.1001Z" fill="currentColor"/>
                         </svg>
                         </span>
-                            <div class="fw-bold text-white d-flex fs-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(c=>c.CreatedDate.Day == DateTime.Now.Day && c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year).Count()</h1></div>
+                            <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(c=>c.CreatedDate.Day == DateTime.Now.Day && c.CreatedDate.Month == DateTime.Now.Month && c.CreatedDate.Year == DateTime.Now.Year).Count()</h1></div>
                 </div> 
                 <div class="card-body pt-0">
                     <div class="text-white fw-bolder fs-2">Açılan Kayıtlar</div>
-                    <div class="fw-bold text-white">Bu gün Açılan Kayıtlar</div>
                 </div>
             </div>
         </div> 
@@ -45,11 +44,10 @@
                         <path d="M19 15V18C19 18.6 18.6 19 18 19H6C5.4 19 5 18.6 5 18V15C6.1 15 7 14.1 7 13V10C7 7.6 8.7 5.6 11 5.1V3C11 2.4 11.4 2 12 2C12.6 2 13 2.4 13 3V5.1C15.3 5.6 17 7.6 17 10V13C17 14.1 17.9 15 19 15ZM11 10C11 9.4 11.4 9 12 9C12.6 9 13 8.6 13 8C13 7.4 12.6 7 12 7C10.3 7 9 8.3 9 10C9 10.6 9.4 11 10 11C10.6 11 11 10.6 11 10Z" fill="currentColor"/>
                         </svg>
                         </span>
-                    <div class="fw-bold text-white d-flex fs-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.IsCompleted == false).Count()</h1></div>
+                    <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.IsCompleted == false).Count()</h1></div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="text-white fw-bolder fs-2">Açık Kayıtlar</div>
-                    <div class="fw-bold text-white">Henüz Kapatılmamış Kayıtlar</div>
                 </div>
             </div>
         </div>
@@ -61,11 +59,10 @@
                         <path d="M21 10.7L11.1 5V19L21 13.3C22 12.7 22 11.3 21 10.7Z" fill="currentColor"/>
                         </svg>
                         </span>
-                     <div class="fw-bold text-white d-flex fs-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.InProcess == true).Count()</h1></div>
+                     <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.InProcess == true).Count()</h1></div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="text-white fw-bolder fs-2">Devam Eden Kayıtlar</div>
-                    <div class="fw-bold text-white">İşlemde olan iş emirleri</div>
                 </div>  
             </div> 
         </div>
@@ -77,11 +74,10 @@
                         <rect opacity="0.3" x="8" y="3" width="8" height="8" rx="4" fill="currentColor"/>
                         </svg>
                         </span>
-                      <div class="fw-bold text-white d-flex fs-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.Receiver ==  Model.User && m.IsCompleted == false).Count()</h1></div>
+                      <div class="fw-bold text-white d-flex fs-3 mt-3"><h1 class="fs-3x" style="color:white">@Model.WorkTasks.Where(m=>m.Receiver ==  Model.User && m.IsCompleted == false).Count()</h1></div>
                 </div>
                 <div class="card-body pt-0">
                     <div class="text-white fw-bolder fs-2">Bana Özel İş Emirleri</div>
-                    <div class="fw-bold text-white">Size özel iş emirleri</div>
                 </div>
             </div>
         </div>
